@@ -42,7 +42,7 @@ Bu sistem kullanıcı deneyimini iyileştirmeyi ve satışları artırmayı hede
 
 # Görev Açıklamaları
 
-### Sarya Su Toğyıldız
+### Sarya Su Toğyıldız (Yönetici)
 **Teknoloji Araştırması ve Seçimi**
 
 Proje için uygun olan yapay zeka algoritmalarını, veri işleme araçlarını ve diğer teknolojileri araştırmak.  
