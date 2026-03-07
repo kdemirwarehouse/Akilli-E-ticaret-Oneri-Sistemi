@@ -1,16 +1,24 @@
-# Akıllı E-Ticaret Öneri Sistemi
+# Veri Vizyonerler - Proje Akışı ve Haftalık İlerleme
 
-## Grup Adı
-Veri Vizyonerler
+Bu doküman ekip üyelerinin görev dağılımını ve haftalık proje ilerlemelerini içermektedir.
 
-## Proje Amacı
-E-ticaret platformlarında müşteri davranışlarını analiz ederek kişiselleştirilmiş ürün önerileri sunan bir yapay zeka sistemi geliştirmek.
+---
+
+# Proje Adı
+
+Akıllı E-Ticaret Öneri Sistemi
+
+---
+
+# Proje Amacı
+
+E-ticaret platformlarında müşteri davranışlarını analiz ederek kullanıcılara kişiselleştirilmiş ürün önerileri sunan bir sistem geliştirmek.
 
 Bu sistem kullanıcı deneyimini iyileştirmeyi ve satışları artırmayı hedeflemektedir.
 
 ---
 
-## Kullanılacak Teknolojiler
+# Kullanılacak Teknolojiler
 
 - Python
 - Pandas
@@ -20,19 +28,96 @@ Bu sistem kullanıcı deneyimini iyileştirmeyi ve satışları artırmayı hede
 
 ---
 
-## Grup Üyeleri ve Görevleri
+# Ekip Üyeleri ve Görevleri
 
-| Sarya Su Toğyıldız (yönetici) | Teknoloji Araştırması ve Seçimi |
-| Abbdulkadir Demir | Gereksinim Toplama ve Belgeleme |
+| Sarya Su Toğyıldız | Teknoloji Araştırması ve Seçimi |
+| AbdulKadir Demir | Gereksinim Toplama ve Belgeleme |
 | Elif Babürhan | Geliştirme Ortamı Kurulumu |
 | Sema Elmahmud | Proje Analizi ve Kapsam Tanımlama |
 | İsmail Özdemir | Veri Seti Araştırması ve Erişimi |
 
 ---
 
-## Haftalık İlerleme
+# Görev Açıklamaları
 
-### Hafta 1
-- Proje konusu belirlendi
-- GitHub deposu oluşturuldu
-- Proje dokümanı hazırlandı
+### Sarya Su Toğyıldız
+**Teknoloji Araştırması ve Seçimi**
+
+Proje için uygun olan yapay zeka algoritmalarını, veri işleme araçlarını ve diğer teknolojileri araştırmak.  
+Seçilen teknolojilerin avantaj ve dezavantajlarını karşılaştırmak.
+
+---
+
+### AbdulKadir Demir
+**Gereksinim Toplama ve Belgeleme**
+
+Müşteri davranışlarını analiz etmek ve kişiselleştirilmiş ürün önerileri sunmak için gerekli olan tüm fonksiyonel ve teknik gereksinimleri toplamak ve detaylı şekilde belgelemek.
+
+---
+
+### Elif Babürhan
+**Geliştirme Ortamı Kurulumu**
+
+Proje için gerekli yazılım ve araçları kurmak.  
+Veritabanı bağlantılarını ve temel konfigürasyonları hazırlamak.
+
+---
+
+### Sema Elmahmud
+**Proje Analizi ve Kapsam Tanımlama**
+
+Projenin hedeflerini ve kapsamını analiz etmek.  
+Rakip sistemleri inceleyerek projenin benzersiz yönlerini belirlemek.
+
+---
+
+### İsmail Özdemir
+**Veri Seti Araştırması ve Erişimi**
+
+Proje için uygun veri setlerini araştırmak.  
+Açık kaynak veri setlerine erişmek veya veri toplama stratejileri geliştirmek.
+
+---
+
+# Haftalık İlerleme
+
+## 1. Hafta
+
+**Sarya Su Toğyıldız:**  
+Proje için kullanılacak teknolojiler araştırıldı. Yapay zeka algoritmaları ve veri analizi araçları incelendi.
+
+**AbdulKadir Demir:**  
+Projenin fonksiyonel ve teknik gereksinimleri analiz edildi ve dokümantasyon çalışmaları başlatıldı.
+
+**Elif Babürhan:**  
+Geliştirme ortamı kurulumu için gerekli araçlar araştırıldı ve sistem gereksinimleri belirlendi.
+
+**Sema Elmahmud:**  
+Projenin kapsamı analiz edildi ve benzer e-ticaret öneri sistemleri incelendi.
+
+**İsmail Özdemir:**  
+Proje için kullanılabilecek açık kaynak e-ticaret veri setleri araştırıldı.
+
+---
+
+## 2. Hafta
+(İlerleyen haftalarda ekip üyeleri tarafından güncellenecek)
+
+---
+
+## 3. Hafta
+(İlerleyen haftalarda ekip üyeleri tarafından güncellenecek)
+
+---
+
+## 4. Hafta
+(İlerleyen haftalarda ekip üyeleri tarafından güncellenecek)
+
+---
+
+# Teslim Edilecekler
+
+- Ürün öneri algoritması
+- Veri analiz raporları
+- REST API
+- Kullanıcı arayüzü entegrasyonu
