@@ -30,6 +30,8 @@ Bu sistem kullanıcı deneyimini iyileştirmeyi ve satışları artırmayı hede
 
 # Ekip Üyeleri ve Görevleri
 
+| İsim | Görev |
+|------|------|
 | Sarya Su Toğyıldız | Teknoloji Araştırması ve Seçimi |
 | AbdulKadir Demir | Gereksinim Toplama ve Belgeleme |
 | Elif Babürhan | Geliştirme Ortamı Kurulumu |
