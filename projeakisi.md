@@ -33,7 +33,7 @@ Bu sistem kullanıcı deneyimini iyileştirmeyi ve satışları artırmayı hede
 | İsim | Görev |
 |------|------|
 | Sarya Su Toğyıldız | Teknoloji Araştırması ve Seçimi |
-| AbdulKadir Demir | Gereksinim Toplama ve Belgeleme |
+| AbdulKadir Demir | Gereksinim Toplama ve Belgeleme | 
 | Elif Babürhan | Geliştirme Ortamı Kurulumu |
 | Sema Elmahmud | Proje Analizi ve Kapsam Tanımlama |
 | İsmail Özdemir | Veri Seti Araştırması ve Erişimi |
@@ -89,7 +89,9 @@ Açık kaynak veri setlerine erişmek veya veri toplama stratejileri geliştirme
 Proje için kullanılacak teknolojiler araştırıldı. Yapay zeka algoritmaları ve veri analizi araçları incelendi.
 
 **AbdulKadir Demir:**  
-Projenin fonksiyonel ve teknik gereksinimleri analiz edildi ve dokümantasyon çalışmaları başlatıldı.
+Projenin fonksiyonel ve teknik gereksinimleri analiz edildi ve dokümantasyon çalışmaları başlatıldı.  
+Gereksinim toplama ve belgeleme görevi tamamlandı.
+
 
 **Elif Babürhan:**  
 Geliştirme ortamı kurulumu için gerekli araçlar araştırıldı ve sistem gereksinimleri belirlendi.
