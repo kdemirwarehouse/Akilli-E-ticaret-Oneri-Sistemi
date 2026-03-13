@@ -100,7 +100,7 @@ Geliştirme ortamı kurulumu için gerekli araçlar araştırıldı ve sistem ge
 Projenin kapsamı analiz edildi ve benzer e-ticaret öneri sistemleri incelendi.
 
 **İsmail Özdemir:**  
-Proje için kullanılabilecek açık kaynak e-ticaret veri setleri araştırıldı.
+Proje için kullanılabilecek açık kaynak e-ticaret veri setleri araştırıldı ve veri setleri indirildi.
 
 ---
 
