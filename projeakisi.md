@@ -60,7 +60,7 @@ Müşteri davranışlarını analiz etmek ve kişiselleştirilmiş ürün öneri
 ### Elif Babürhan
 **Geliştirme Ortamı Kurulumu**
 
-Proje için gerekli yazılım ve araçları kurmak.  
+Proje için gerekli yazılım ve araçları kurmak.  aaaa
 Veritabanı bağlantılarını ve temel konfigürasyonları hazırlamak.
 
 ---
