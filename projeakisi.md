@@ -60,7 +60,7 @@ Müşteri davranışlarını analiz etmek ve kişiselleştirilmiş ürün öneri
 ### Elif Babürhan
 **Geliştirme Ortamı Kurulumu**
 
-Proje için gerekli yazılım ve araçları kurmak.  
+Proje için gerekli yazılım ve araçları kurmak.
 Veritabanı bağlantılarını ve temel konfigürasyonları hazırlamak.
 
 ---
@@ -94,7 +94,7 @@ Gereksinim toplandı ve belgeleme görevi tamamlandı.
 
 
 **Elif Babürhan:**  
-Geliştirme ortamı kurulumu için gerekli araçlar araştırıldı ve sistem gereksinimleri belirlendi.
+Geliştirme ortamı kurulumu için gerekli araçlar araştırıldı ve sistem gereksinimleri belirlendi. AAAA
 
 **Sema Elmahmud:**  
 Projenin kapsamı analiz edildi ve benzer e-ticaret öneri sistemleri incelendi.
