@@ -1,4 +1,4 @@
-# Veri Vizyonerler - Proje Akışı ve Haftalık İlerleme
+# Veri Vizyonerler - Proje Akışı ve Haftalık İlerleme .
 
 Bu doküman ekip üyelerinin görev dağılımını ve haftalık proje ilerlemelerini içermektedir.
 
@@ -94,7 +94,7 @@ Gereksinim toplandı ve belgeleme görevi tamamlandı.
 
 
 **Elif Babürhan:**  
-Geliştirme ortamı kurulumu için gerekli araçlar araştırıldı ve sistem gereksinimleri belirlendi. AAAA
+Geliştirme ortamı kurulumu için gerekli araçlar araştırıldı ve sistem gereksinimleri belirlendi. 
 
 **Sema Elmahmud:**  
 Projenin kapsamı analiz edildi ve benzer e-ticaret öneri sistemleri incelendi.
