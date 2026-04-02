@@ -28,56 +28,15 @@ Bu sistem kullanıcı deneyimini iyileştirmeyi ve satışları artırmayı hede
 
 ---
 
-# Ekip Üyeleri ve Görevleri
+# Ekip Üyeleri 
 
-| İsim | Görev |
-|------|------|
-| Sarya Su Toğyıldız | Teknoloji Araştırması ve Seçimi |
-| AbdulKadir Demir | Gereksinim Toplama ve Belgeleme | 
-| Elif Babürhan | Geliştirme Ortamı Kurulumu |
-| Sema Elmahmud | Proje Analizi ve Kapsam Tanımlama |
-| İsmail Özdemir | Veri Seti Araştırması ve Erişimi |
-
----
-
-# Görev Açıklamaları
-
-### Sarya Su Toğyıldız (Yönetici)
-**Teknoloji Araştırması ve Seçimi**
-
-Proje için uygun olan yapay zeka algoritmalarını, veri işleme araçlarını ve diğer teknolojileri araştırmak.  
-Seçilen teknolojilerin avantaj ve dezavantajlarını karşılaştırmak.
-
----
-
-### AbdulKadir Demir
-**Gereksinim Toplama ve Belgeleme**
-
-Müşteri davranışlarını analiz etmek ve kişiselleştirilmiş ürün önerileri sunmak için gerekli olan tüm fonksiyonel ve teknik gereksinimleri toplamak ve detaylı şekilde belgelemek.
-
----
-
-### Elif Babürhan
-**Geliştirme Ortamı Kurulumu**
-
-Proje için gerekli yazılım ve araçları kurmak.
-Veritabanı bağlantılarını ve temel konfigürasyonları hazırlamak.
-
----
-
-### Sema Elmahmud
-**Proje Analizi ve Kapsam Tanımlama**
-
-Projenin hedeflerini ve kapsamını analiz etmek.  
-Rakip sistemleri inceleyerek projenin benzersiz yönlerini belirlemek.
-
----
-
-### İsmail Özdemir
-**Veri Seti Araştırması ve Erişimi**
-
-Proje için uygun veri setlerini araştırmak.  
-Açık kaynak veri setlerine erişmek veya veri toplama stratejileri geliştirmek.
+| İsim |
+|------|
+| Sarya Su Toğyıldız |
+| AbdulKadir Demir | 
+| Elif Babürhan | 
+| Sema Elmahmud | 
+| İsmail Özdemir | 
 
 ---
 
@@ -86,7 +45,34 @@ Açık kaynak veri setlerine erişmek veya veri toplama stratejileri geliştirme
 ## 1. Hafta
 
 **Sarya Su Toğyıldız:**  
-Proje için kullanılacak teknolojiler araştırıldı. Yapay zeka algoritmaları ve veri analizi araçları incelendi.
+## 🎯 Amaç  
+Bu hafta, proje için kullanılabilecek yapay zeka algoritmaları, veri işleme araçları ve diğer teknolojiler araştırılmıştır. Ayrıca proje geliştirme süreci için gerekli teknik altyapı oluşturulmuştur.
+
+---
+
+## 🛠️ Yapılan Çalışmalar  
+
+- Proje için bir GitHub reposu oluşturuldu  
+- Takım arkadaşları repoya davet edilerek iş birliği ortamı sağlandı  
+- Proje geliştirme süreci planlandı  
+- Kullanılabilecek teknolojiler araştırılmaya başlandı  
+
+---
+
+## 🤖 Yapay Zeka Algoritmaları  
+
+### Collaborative Filtering  
+Kullanıcı davranışlarına göre öneri yapar  
+
+## ✅ Sonuç  
+
+Bu hafta:  
+- Proje için teknik altyapı (GitHub) oluşturulmuştur  
+- Takım içi iş birliği sağlanmıştır  
+- Algoritmalar ve teknolojiler araştırılmıştır  
+
+> Not: Uygulama geliştirme ve kesin teknoloji seçimi ilerleyen haftalarda yapılacaktır.
+GitHub repo
 
 **AbdulKadir Demir:**  
 Projenin fonksiyonel ve teknik gereksinimleri analiz edildi ve dokümantasyon çalışmaları başlatıldı.  
