@@ -1,4 +1,4 @@
-# Veri Vizyonerler - Proje Akışı ve Haftalık İlerleme
+# Veri Vizyonerler - Proje Akışı ve Haftalık İlerleme .
 
 Bu doküman ekip üyelerinin görev dağılımını ve haftalık proje ilerlemelerini içermektedir.
 
