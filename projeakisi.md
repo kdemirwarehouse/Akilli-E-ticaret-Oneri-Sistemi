@@ -105,12 +105,14 @@ Proje için kullanılabilecek açık kaynak e-ticaret veri setleri araştırıld
 ---
 
 ## 2. Hafta
-(İlerleyen haftalarda ekip üyeleri tarafından güncellenecek)
+Öneri Algoritması Araştırması ve Değerlendirmesi yapıldı.
+
 
 ---
 
 ## 3. Hafta
-(İlerleyen haftalarda ekip üyeleri tarafından güncellenecek)
+Basit İçerik Tabanlı Öneri Algoritması uygulandi.
+
 
 ---
 
