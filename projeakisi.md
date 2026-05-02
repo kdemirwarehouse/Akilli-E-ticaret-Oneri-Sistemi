@@ -77,9 +77,9 @@ Proje için kullanılabilecek açık kaynak e-ticaret veri setleri araştırıld
 **Sema Elmahmud:** ✅ Görev 2 Tamamlandı: Veri Seti Keşfi ve Ön İşleme Planlaması
 Hatalı yazımları giderilmiş, veri tipleri düzeltilmiş ve farklı tabloları anlamlı bir şekilde birbirine bağlanmış, temiz bir veri seti yapısı oluşturmuş oldum.
 
-**Elif Babürhan:**  Görev 2 Tamamlandı: PostgreSQL kullanılarak bir e-ticaret veritabanı tasarlanmıştır. Kullanıcılar, ürünler, siparişler ve etkileşimler için tablolar oluşturulmuş ve aralarındaki ilişkiler kurulmuştur.
+**Elif Babürhan:** ✅ Görev 2 Tamamlandı: PostgreSQL kullanılarak bir e-ticaret veritabanı tasarlanmıştır. Kullanıcılar, ürünler, siparişler ve etkileşimler için tablolar oluşturulmuş ve aralarındaki ilişkiler kurulmuştur.
 
-**Sarya Su Toğyıldız:** # ✅ Görev 2 Tamamlandı: UI ve UX Wireframe Tasarımı
+**Sarya Su Toğyıldız:** ✅ Görev 2 Tamamlandı: UI ve UX Wireframe Tasarımı
 
 E-ticaret öneri sisteminin kullanıcı arayüzü (UI) ve kullanıcı deneyimi (UX) planlaması başarıyla tamamlanmıştır.
 
@@ -101,7 +101,7 @@ Veri setindeki gürültüyü ve eksiklikleri gidermek için Pandas ile otomatik 
 
 **Elif Babürhan:**  
 
-**Sarya Su Toğyıldız:** # ✅ Görev 3 Tamamlandı: REST API Tasarımı ve Spesifikasyonu
+**Sarya Su Toğyıldız:** ✅ Görev 3 Tamamlandı: REST API Tasarımı ve Spesifikasyonu
 
 Öneri sonuçlarını sunacak olan sistemin teknik mimarisi ve API standartları belirlenmiştir.
 
@@ -125,7 +125,7 @@ Veri setindeki gürültüyü ve eksiklikleri gidermek için Pandas ile otomatik 
 
 **Elif Babürhan:**  
 
-**Sarya Su Toğyıldız:** # ✅ Görev 4 Tamamlandı: Flask API ve Logging
+**Sarya Su Toğyıldız:** ✅ Görev 4 Tamamlandı: Flask API ve Logging
 
 Ürün öneri sisteminin temel API uç noktaları Flask framework'ü ile başarıyla oluşturuldu.
 
@@ -147,7 +147,7 @@ Veri setindeki gürültüyü ve eksiklikleri gidermek için Pandas ile otomatik 
 
 **Elif Babürhan:**  
 
-**Sarya Su Toğyıldız:** # # ✅ Görev 5 Tamamlandı: Dokümantasyon ve Final Kontroller
+**Sarya Su Toğyıldız:**  ✅ Görev 5 Tamamlandı: Dokümantasyon ve Final Kontroller
 
 ###  Yapılan Teknik İşlemler
 
