@@ -143,3 +143,40 @@ Veri setindeki gürültüyü ve eksiklikleri gidermek için Pandas ile otomatik 
 
 ---
 
+## 5. Hafta
+
+**İsmail Özdemir:** 
+
+**Sema Elmahmud:** 
+
+**Elif Babürhan:**  
+
+**Sarya Su Toğyıldız:** # # ✅ Görev 5 Tamamlandı: Dokümantasyon ve Final Kontroller
+
+###  Yapılan Teknik İşlemler
+
+#### 1. Modüler Dokümantasyon Entegrasyonu
+Ekip arkadaşlarım tarafından geliştirilen farklı modüller analiz edilerek sistem genelindeki yerleri netleştirilmiştir:
+* **Veri Analizi:** Jupyter Notebook üzerindeki veri temizleme süreçleri incelendi.
+* **Veritabanı:** PostgreSQL şemasının API ile veri tutarlılığı kontrol edildi.
+* **Frontend:** UI entegrasyon planının backend uç noktalarıyla uyumu doğrulandı.
+
+#### 2. API Son Kontrolleri ve Hata Yönetimi
+Geliştirilen Flask API üzerinde stres ve hata testleri yapılmıştır:
+* **404 Hata Yönetimi:** Geçersiz bir endpoint isteği gönderildiğinde sistemin standart JSON hata mesajı döndüğü teyit edildi.
+* **Parametre Kontrolü:** Kullanıcı ve ürün ID'lerinin API tarafından doğru şekilde işlendiği doğrulandı.
+
+#### 3. Logging (Kayıt) Mekanizması Doğrulaması
+`api_logs.log` dosyası üzerinden yapılan incelemelerde:
+* Her bir API isteğinin zaman damgası (timestamp) ve işlem detayları ile kaydedildiği görüldü.
+* Hataların log dosyasına "ERROR" seviyesinde doğru şekilde işlendiği onaylandı.
+
+### 📊 Projenin Güncel Durumu
+* **Backend:** Flask tabanlı REST API çalışır durumda.
+* **Veri:** Temizlenmiş ve işlenmiş veri seti analizi hazır.
+* **Dokümantasyon:** Proje akışı ve haftalık raporlar eksiksiz tamamlandı.
+
+
+**AbdulKadir Demir:** 
+
+---
