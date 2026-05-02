@@ -79,7 +79,7 @@ Proje için kullanılabilecek açık kaynak e-ticaret veri setleri araştırıld
 ✅ Görev 2 Tamamlandı: Veri Seti Keşfi ve Ön İşleme Planlaması
 Hatalı yazımları giderilmiş, veri tipleri düzeltilmiş ve farklı tabloları anlamlı bir şekilde birbirine bağlanmış, temiz bir veri seti yapısı oluşturmuş oldum.
 
-**Elif Babürhan:**  
+**Elif Babürhan:**  Görev 2 Tamamlandı: PostgreSQL kullanılarak bir e-ticaret veritabanı tasarlanmıştır. Kullanıcılar, ürünler, siparişler ve etkileşimler için tablolar oluşturulmuş ve aralarındaki ilişkiler kurulmuştur.
 
 **Sarya Su Toğyıldız:** # ✅ Görev 2 Tamamlandı: UI ve UX Wireframe Tasarımı
 
