@@ -74,9 +74,7 @@ Proje için kullanılabilecek açık kaynak e-ticaret veri setleri araştırıld
 
 **İsmail Özdemir:** 
 
-**Sema Elmahmud:**
-
-✅ Görev 2 Tamamlandı: Veri Seti Keşfi ve Ön İşleme Planlaması
+**Sema Elmahmud:** ✅ Görev 2 Tamamlandı: Veri Seti Keşfi ve Ön İşleme Planlaması
 Hatalı yazımları giderilmiş, veri tipleri düzeltilmiş ve farklı tabloları anlamlı bir şekilde birbirine bağlanmış, temiz bir veri seti yapısı oluşturmuş oldum.
 
 **Elif Babürhan:**  
@@ -98,9 +96,7 @@ E-ticaret öneri sisteminin kullanıcı arayüzü (UI) ve kullanıcı deneyimi (
 
 **İsmail Özdemir:** 
 
-**Sema Elmahmud:** 
-
-✅ Görev 3 Tamamlandı:Veri Ön İşleme ve Temizleme Modülünün Geliştirilmesi
+**Sema Elmahmud:**  ✅ Görev 3 Tamamlandı: Veri Ön İşleme ve Temizleme Modülünün Geliştirilmesi
 Veri setindeki gürültüyü ve eksiklikleri gidermek için Pandas ile otomatik bir temizleme modülü yazdım. Bu modülle; eksik verileri tamamladım, aykırı değerleri (outliers) IQR yöntemiyle eledim ve veri tiplerini optimize ettim. Sonuç olarak, veriyi modellemeye hazır, yüksek performanslı Parquet formatında dışa aktardım.
 
 **Elif Babürhan:**  
