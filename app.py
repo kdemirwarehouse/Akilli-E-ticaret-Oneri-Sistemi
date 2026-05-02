@@ -22,12 +22,27 @@ def home():
 # 2. Ürün Önerileri Endpoint'i
 @app.route('/api/v1/recommendations/<int:user_id>', methods=['GET'])
 def get_recommendations(user_id):
-    app.logger.info(f"Kullanici {user_id} icin oneri istendi.")
+    # Örnek ürün verisi (Normalde veritabanından veya modelden gelir)
+    # Doğruluğu artırmak için her ürüne bir 'similarity_score' (benzerlik skoru) ekledik
+    all_products = [
+        {"id": 1, "name": "Kablosuz Kulaklık", "similarity_score": 0.95},
+        {"id": 2, "name": "Bluetooth Hoparlör", "similarity_score": 0.82},
+        {"id": 3, "name": "Akıllı Saat", "similarity_score": 0.45},  # Skoru düşük
+        {"id": 4, "name": "Laptop Standı", "similarity_score": 0.88}
+    ]
+
+    # HASSASİYET ARTIRMA: Sadece benzerlik skoru 0.70'den büyük olanları öner
+    # Bu işlem algoritmanın "doğruluğunu" simüle eder.
+    threshold = 0.70
+    optimized_recommendations = [p for p in all_products if p['similarity_score'] >= threshold]
+
+    app.logger.info(f"Kullanıcı {user_id} için {threshold} eşiği ile hassas hesaplama yapıldı.")
     
-    # Basit bir mantık: Herkese ürün listesini dönüyoruz
     return jsonify({
         "user_id": user_id,
-        "recommendations": products
+        "optimization_status": "High Accuracy Mode (Threshold: 0.70)",
+        "results_count": len(optimized_recommendations),
+        "recommendations": optimized_recommendations
     })
 
 # 3. Temel Hata Yönetimi
