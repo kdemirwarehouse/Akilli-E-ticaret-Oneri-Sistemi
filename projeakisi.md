@@ -147,7 +147,41 @@ Veri setindeki gürültüyü ve eksiklikleri gidermek için Pandas ile otomatik 
 
 **Elif Babürhan:**  
 
-**Sarya Su Toğyıldız:**  ✅ Görev 5 Tamamlandı: Dokümantasyon ve Final Kontroller
+**Sarya Su Toğyıldız:**  ✅ Görev 5 Tamamlandı: Öneri Algoritmasının Hassasiyet ve Doğruluğunu Artırma
+
+Bu hafta, kişiselleştirilmiş ürün önerileri sunan temel algoritmanın performansını artırmak ve daha isabetli sonuçlar üretmesini sağlamak amacıyla çeşitli optimizasyon teknikleri uygulanmıştır.
+
+###  Uygulanan İyileştirme Teknikleri
+
+#### 1. Özellik Mühendisliği (Feature Engineering)
+* **Ağırlıklandırma:** Kullanıcıların ürünlere verdiği puanlar veya tıklama oranları, zaman bazlı bir ağırlıklandırma sistemine (Time Decay) tabi tutularak güncel trendlerin önerilerde daha baskın çıkması sağlandı.
+* **Metin Analitiği (TF-IDF):** Ürün kategorileri ve açıklamaları TF-IDF (Term Frequency-Inverse Document Frequency) yöntemiyle vektörleştirilerek içerik tabanlı önerilerin hassasiyeti artırıldı.
+
+#### 2. Benzerlik Metriklerinin Optimizasyonu
+* **Cosine Similarity:** Ürünler arasındaki benzerlik hesaplamasında kullanılan metrikler optimize edilerek, sadece kategorik benzerlik değil, kullanıcı davranışsal benzerliği de modele dahil edildi.
+* **Veri Normalizasyonu:** Fiyat ve stok bilgileri gibi sayısal veriler normalize edilerek modelin bu özellikler üzerindeki yanlılığı giderildi.
+
+#### 3. Analiz ve İyileştirme Alanları
+Yapılan testler sonucunda şu iyileştirme alanları belirlenmiştir:
+* **Cold Start Problemi:** Hiç etkileşim almamış ürünler için "Popüler Ürünler" yedeği oluşturularak boş sonuç dönme hatası giderildi.
+* **Performans:** Büyük veri setlerinde benzerlik hesaplamalarının yavaşlamaması için matris işlemleri NumPy vektörizasyonu ile optimize edildi.
+
+### 📊 Sonuç
+Bu optimizasyonlar neticesinde öneri motorunun isabet oranı (Hit Rate) ve kullanıcı etkileşim tahminleme başarısı gözle görülür bir artış göstermiştir.
+
+**AbdulKadir Demir:** 
+
+---
+
+## 6. Hafta
+
+**İsmail Özdemir:** 
+
+**Sema Elmahmud:** 
+
+**Elif Babürhan:**  
+
+**Sarya Su Toğyıldız:**  ✅ Görev 6 Tamamlandı: Dokümantasyon ve Final Kontroller
 
 ###  Yapılan Teknik İşlemler
 
