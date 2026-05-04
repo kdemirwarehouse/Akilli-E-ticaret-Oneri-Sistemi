@@ -44,7 +44,7 @@ Bu sistem kullanıcı deneyimini iyileştirmeyi ve satışları artırmayı hede
 
 ## 1. Hafta
 
-**Sarya Su Toğyıldız:**  # ✅ Görev 1 Tamamlandı: Teknoloji Araştırması ve Algoritma Karşılaştırması
+**Sarya Su Toğyıldız:**  ✅ Görev 1 Tamamlandı: Teknoloji Araştırması ve Algoritma Karşılaştırması
 
 Projenin akademik ve teknik altyapısını oluşturmak amacıyla yapılan kapsamlı teknoloji araştırması başarıyla tamamlanmıştır.
 
@@ -88,7 +88,7 @@ E-ticaret öneri sisteminin kullanıcı arayüzü (UI) ve kullanıcı deneyimi (
 - **Bileşen Tasarımı:** "Sizin İçin Seçtiklerimiz" ve "Benzer Ürünler" bölümleri için tel kafes (wireframe) yapıları oluşturuldu.
 - **Strateji:** Kullanıcının alışveriş akışını bozmadan, sepet ortalamasını artırmaya yönelik çapraz satış (cross-sell) noktaları belirlendi.
 - **Teknoloji Kararı:** Arayüzün geliştirilmesinde Python ile tam uyumlu çalışan Streamlit veya FastAPI/React ikilisinin kullanılması kararlaştırıldı.
-- 
+
 **AbdulKadir Demir:** 
 ---
 
@@ -113,7 +113,6 @@ Veri setindeki gürültüyü ve eksiklikleri gidermek için Pandas ile otomatik 
 - **Dokümantasyon:** API'nin Swagger/OpenAPI standartlarına uygun olarak sunulması sağlandı.
 
 **AbdulKadir Demir:** 
-
 
 ---
 
