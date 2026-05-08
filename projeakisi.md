@@ -102,6 +102,9 @@ E-ticaret öneri sisteminin kullanıcı arayüzü (UI) ve kullanıcı deneyimi (
 
 **İsmail Özdemir:** 
 
+**AbdulKadir Demir:** Modelin performansını değerlendirmek için kullanılan metrikler (kesinlik, doğruluk, F1 skoru vb.) analiz edildi  ve sonuçları raporlandı. 
+
+
 
 **Sema Elmahmud:**  ✅ Görev 3 Tamamlandı: Veri Ön İşleme ve Temizleme Modülünün Geliştirilmesi
 Veri setindeki gürültüyü ve eksiklikleri gidermek için Pandas ile otomatik bir temizleme modülü yazdım. Bu modülle; eksik verileri tamamladım, aykırı değerleri (outliers) IQR yöntemiyle eledim ve veri tiplerini optimize ettim. Sonuç olarak, veriyi modellemeye hazır, yüksek performanslı Parquet formatında dışa aktardım.
