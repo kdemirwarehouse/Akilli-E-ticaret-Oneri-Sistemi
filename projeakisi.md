@@ -124,7 +124,26 @@ Veri setindeki gürültüyü ve eksiklikleri gidermek için Pandas ile otomatik 
 
 **Sema Elmahmud:** 
 
-**Elif Babürhan:**  
+**Elif Babürhan:** ✅ Görev 4 Tamamlandı : # E-Ticaret Veri Çekme ve Analiz Projesi
+
+Bu projede PostgreSQL veritabanına Python ile bağlantı kurulmuş, kullanıcı ve ürün verileri çekilmiş ve Pandas ile analiz edilmiştir. Ayrıca basit bir ürün öneri sistemi geliştirilmiştir.
+
+## Kullanılan Teknolojiler
+- Python
+- PostgreSQL
+- Pandas
+- psycopg2
+
+## Özellikler
+- Veritabanına güvenli bağlantı
+- SQL sorguları ile veri çekme
+- Veri analizi
+- Basit ürün öneri sistemi
+
+## Çalıştırma
+
+```bash
+python main.py
 
 **Sarya Su Toğyıldız:** ✅ Görev 4 Tamamlandı: Flask API ve Logging
 
