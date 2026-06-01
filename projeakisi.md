@@ -44,18 +44,14 @@ Bu sistem kullanıcı deneyimini iyileştirmeyi ve satışları artırmayı hede
 
 ## 1. Hafta
 
-**AbdulKadir Demir:**  
-Projenin fonksiyonel ve teknik gereksinimleri analiz edildi ve dokümantasyon çalışmaları başlatıldı.  
+**AbdulKadir Demir:**  ✅ Görev 1 Tamamlandı: Projenin fonksiyonel ve teknik gereksinimleri analiz edildi ve dokümantasyon çalışmaları başlatıldı.  
 Gereksinim toplandı ve belgeleme görevi tamamlandı.
 
-**Elif Babürhan:**  
-Geliştirme ortamı kurulumu için gerekli araçlar araştırıldı ve sistem gereksinimleri belirlendi. 
+**Elif Babürhan:**   ✅ Görev 1 Tamamlandı:Geliştirme ortamı kurulumu için gerekli araçlar araştırıldı ve sistem gereksinimleri belirlendi. 
 
-**Sema Elmahmud:**  
-Projenin kapsamı analiz edildi ve benzer e-ticaret öneri sistemleri incelendi.
+**Sema Elmahmud:**  ✅ Görev 1 Tamamlandı: Projenin kapsamı analiz edildi ve benzer e-ticaret öneri sistemleri incelendi.
 
-**İsmail Özdemir:**  
-Proje için kullanılabilecek açık kaynak e-ticaret veri setleri araştırıldı ve veri setleri indirildi.
+**İsmail Özdemir:**  ✅ Görev 1 Tamamlandı: Proje için kullanılabilecek açık kaynak e-ticaret veri setleri araştırıldı ve veri setleri indirildi.
 
 **Sarya Su Toğyıldız:**  ✅ Görev 1 Tamamlandı: Teknoloji Araştırması ve Algoritma Karşılaştırması
 
@@ -73,16 +69,40 @@ Projenin akademik ve teknik altyapısını oluşturmak amacıyla yapılan kapsam
 
 ## 2. Hafta
 
-
-**AbdulKadir Demir:** Öneri Algoritması Araştırması ve Değerlendirmesi yapıldı.
-Görev 2 ✅
+**AbdulKadir Demir:** ✅ Görev 2 Tamamlandı: Öneri Algoritması Araştırması ve Değerlendirmesi yapıldı.
 
 **İsmail Özdemir:** 
 
 **Sema Elmahmud:** ✅ Görev 2 Tamamlandı: Veri Seti Keşfi ve Ön İşleme Planlaması
 Hatalı yazımları giderilmiş, veri tipleri düzeltilmiş ve farklı tabloları anlamlı bir şekilde birbirine bağlanmış, temiz bir veri seti yapısı oluşturmuş oldum.
 
-**Elif Babürhan:** ✅ Görev 2 Tamamlandı: PostgreSQL kullanılarak bir e-ticaret veritabanı tasarlanmıştır. Kullanıcılar, ürünler, siparişler ve etkileşimler için tablolar oluşturulmuş ve aralarındaki ilişkiler kurulmuştur.
+**Elif Babürhan:** ✅ Görev 2 Tamamlandı: # PostgreSQL Veritabanı Tasarımı
+
+Bu projede, e-ticaret sistemi için müşteri bilgileri, ürünler ve kullanıcı etkileşimlerini içeren ilişkisel bir veritabanı tasarlanmıştır.
+
+## 📌 Yapılanlar
+
+- Müşteri, ürün ve sipariş tabloları oluşturuldu
+- Tablolar için sütunlar ve veri tipleri tanımlandı
+- Tablolar arasında FOREIGN KEY ilişkileri kuruldu
+- Veri bütünlüğü için PRIMARY KEY, UNIQUE, NOT NULL ve CHECK kısıtlamaları eklendi
+- Performans için gerekli alanlara INDEX yapısı oluşturuldu
+
+## 🔗 Veritabanı Yapısı
+
+- users → müşteri bilgileri
+- products → ürün bilgileri
+- orders → siparişler
+- order_items → sipariş detayları
+- interactions → kullanıcı etkileşimleri
+
+## 📊 Diyagram
+
+Veri modeli ER diyagramı ile görselleştirilmiştir ve tablolar arasındaki ilişkiler gösterilmiştir.
+
+## ⚡ Amaç
+
+Verimli, ölçeklenebilir ve veri bütünlüğü korunmuş bir e-ticaret veritabanı tasarlamak.
 
 **Sarya Su Toğyıldız:** ✅ Görev 2 Tamamlandı: UI ve UX Wireframe Tasarımı
 
@@ -102,14 +122,34 @@ E-ticaret öneri sisteminin kullanıcı arayüzü (UI) ve kullanıcı deneyimi (
 
 **İsmail Özdemir:** 
 
-**AbdulKadir Demir:** Modelin performansını değerlendirmek için kullanılan metrikler (kesinlik, doğruluk, F1 skoru vb.) analiz edildi  ve sonuçları raporlandı. 
-
-
+**AbdulKadir Demir:** ✅ Görev 3 Tamamlandı: Modelin performansını değerlendirmek için kullanılan metrikler (kesinlik, doğruluk, F1 skoru vb.) analiz edildi  ve sonuçları raporlandı. 
 
 **Sema Elmahmud:**  ✅ Görev 3 Tamamlandı: Veri Ön İşleme ve Temizleme Modülünün Geliştirilmesi
 Veri setindeki gürültüyü ve eksiklikleri gidermek için Pandas ile otomatik bir temizleme modülü yazdım. Bu modülle; eksik verileri tamamladım, aykırı değerleri (outliers) IQR yöntemiyle eledim ve veri tiplerini optimize ettim. Sonuç olarak, veriyi modellemeye hazır, yüksek performanslı Parquet formatında dışa aktardım.
 
-**Elif Babürhan:**  
+**Elif Babürhan:** ✅ Görev 3 Tamamlandı: # Flask + Scikit-learn Ürün Öneri Sistemi
+
+## Amaç
+Flask kullanarak REST API geliştirmek ve Scikit-learn ile ürün öneri sistemi oluşturmak.
+
+## Yapılanlar
+- Flask ile API kuruldu
+- `/recommendations` endpoint’i oluşturuldu
+- Kosinüs benzerliği ile öneri algoritması geliştirildi
+- Model `.pkl` olarak kaydedildi ve API’ye entegre edildi
+- Threshold ve top_n parametreleri eklendi
+- Fallback (model yoksa statik veri) sistemi kuruldu
+
+## Testler
+- `/` ana sayfa çalıştı
+- `/api/v1/recommendations/<user_id>` öneri döndürdü
+- Parametreli sorgular test edildi
+
+## Teknolojiler
+Flask, Scikit-learn, Pandas, NumPy, Joblib
+
+## Sonuç
+Çalışan bir REST API tabanlı ürün öneri sistemi geliştirilmiştir. 
 
 **Sarya Su Toğyıldız:** ✅ Görev 3 Tamamlandı: REST API Tasarımı ve Spesifikasyonu
 
@@ -130,13 +170,11 @@ Veri setindeki gürültüyü ve eksiklikleri gidermek için Pandas ile otomatik 
 
 **İsmail Özdemir:** 
 
-**AbdulKadir Demir:** Basit İçerik Tabanlı Öneri Algoritmasının Uygulanması --> Scikit-learn kütüphanesi kullanılarak ürün açıklamaları ve özelliklerine göre basit bir içerik tabanlı öneri algoritması geliştirildi. TF-IDF veya CountVectorizer gibi yöntemlerle ürün açıklamaları vektörleştirildi ve benzerlik matrisi oluşturuldu.
-Görev 4 ✅
-
+**AbdulKadir Demir:** ✅ Görev 4 Tamamlandı: Basit İçerik Tabanlı Öneri Algoritmasının Uygulanması --> Scikit-learn kütüphanesi kullanılarak ürün açıklamaları ve özelliklerine göre basit bir içerik tabanlı öneri algoritması geliştirildi. TF-IDF veya CountVectorizer gibi yöntemlerle ürün açıklamaları vektörleştirildi ve benzerlik matrisi oluşturuldu.
 
 **Sema Elmahmud:** 
 
-**Elif Babürhan:** ✅ Görev 4 Tamamlandı : # E-Ticaret Veri Çekme ve Analiz Projesi
+**Elif Babürhan:** ✅ Görev 4 Tamamlandı: # E-Ticaret Veri Çekme ve Analiz Projesi
 
 Bu projede PostgreSQL veritabanına Python ile bağlantı kurulmuş, kullanıcı ve ürün verileri çekilmiş ve Pandas ile analiz edilmiştir. Ayrıca basit bir ürün öneri sistemi geliştirilmiştir.
 
@@ -153,9 +191,7 @@ Bu projede PostgreSQL veritabanına Python ile bağlantı kurulmuş, kullanıcı
 - Basit ürün öneri sistemi
 
 ## Çalıştırma
-
-```bash
-python main.py
+python main.p
 
 **Sarya Su Toğyıldız:** ✅ Görev 4 Tamamlandı: Flask API ve Logging
 
@@ -174,12 +210,9 @@ python main.py
 
 **İsmail Özdemir:** 
 
+**AbdulKadir Demir:** ✅ Görev 5 Tamamlandı: Model Performansını Artırmak İçin Yeni Özellikler Geliştirildi. 
 
-**AbdulKadir Demir:** Model Performansını Artırmak İçin Yeni Özellikler Geliştirildi. 
-Görev 5 ✅
-
-
-**Sema Elmahmud:** ✅ Görev 5 Tamamlandı :Proje Sunumu için Veri Görselleştirme ve Raporlama
+**Sema Elmahmud:** ✅ Görev 5 Tamamlandı: Proje Sunumu için Veri Görselleştirme ve Raporlama
 
 Bu hafta proje sunumu için veri görselleştirme çalışmaları tamamlandı ve kullanıcı davranışlarını analiz eden grafikler oluşturuldu. Elde edilen sonuçlar düzenlenerek raporlama süreci tamamlandı ve sunuma hazır hale getirildi.
 
@@ -213,14 +246,15 @@ Bu optimizasyonlar neticesinde öneri motorunun isabet oranı (Hit Rate) ve kull
 
 **İsmail Özdemir:** 
 
-**AbdulKadir Demir:** Modelin performansını değerlendirmek için kullanılan metrikler (kesinlik, doğruluk, F1 skoru vb.) analiz edildi ve sonuçlar raporlandı. 
+**AbdulKadir Demir:** ✅ Görev 6 Tamamlandı: Modelin performansını değerlendirmek için kullanılan metrikler (kesinlik, doğruluk, F1 skoru vb.) analiz edildi ve sonuçlar raporlandı. 
 
-**Sema Elmahmud:** 
+**Sema Elmahmud:** ✅ Görev 6 Tamamlandı: REST API Tasarımı Ve Belgelendirme
+
+Bu projede, bir ürün öneri sisteminin dış dünya ile iletişimini sağlayan REST API yapısını tasarlayıp JSON formatlarını ve uç noktalarını belirledim. Sistemin güvenliğini JWT ve rol tabanlı yetkilendirme ile sağlarken, yüksek hız ve performans için Redis önbellekleme ve veritabanı indeksleme tekniklerini kullandım.
 
 **Elif Babürhan:**  
 
 **Sarya Su Toğyıldız:**  ✅ Görev 6 Tamamlandı: Dokümantasyon ve Final Kontroller
-
 
 ###  Yapılan Teknik İşlemler
 
@@ -244,8 +278,5 @@ Geliştirilen Flask API üzerinde stres ve hata testleri yapılmıştır:
 * **Backend:** Flask tabanlı REST API çalışır durumda.
 * **Veri:** Temizlenmiş ve işlenmiş veri seti analizi hazır.
 * **Dokümantasyon:** Proje akışı ve haftalık raporlar eksiksiz tamamlandı.
-
-
-**AbdulKadir Demir:** 
 
 ---
