@@ -198,6 +198,8 @@ Flask API'den alınan ürün önerilerini görüntüleyen, kullanıcı etkileşi
 
 **AbdulKadir Demir:** ✅ Görev 4 Tamamlandı: Basit İçerik Tabanlı Öneri Algoritmasının Uygulanması --> Scikit-learn kütüphanesi kullanılarak ürün açıklamaları ve özelliklerine göre basit bir içerik tabanlı öneri algoritması geliştirildi. TF-IDF veya CountVectorizer gibi yöntemlerle ürün açıklamaları vektörleştirildi ve benzerlik matrisi oluşturuldu.
 
+**Sema Elmahmud:**  ✅ Görev 3 Tamamlandı: Bu hafta veri ön işleme ve temizleme adımları geliştirilerek eksik veriler, aykırı değerler ve veri tipi hataları düzenlendi. Ayrıca tablolar arası birleştirme işlemleri iyileştirildi ve temizleme kodları modüler hale getirilerek sistemin performansı ve veri kalitesi artırıldı.
+
 **Elif Babürhan:** ✅ Görev 4 Tamamlandı: # E-Ticaret Veri Çekme ve Analiz Projesi
 
 Bu projede PostgreSQL veritabanına Python ile bağlantı kurulmuş, kullanıcı ve ürün verileri çekilmiş ve Pandas ile analiz edilmiştir. Ayrıca basit bir ürün öneri sistemi geliştirilmiştir.
