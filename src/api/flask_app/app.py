@@ -1,7 +1,9 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 import logging
 
 app = Flask(__name__)
+CORS(app) # Tüm originlerden gelen isteklere izin verir
 
 # 1. Logging (Loglama) Mekanizması: Hataları ve işlemleri dosyaya kaydeder
 logging.basicConfig(filename='api_logs.log', level=logging.INFO,
