@@ -5,7 +5,7 @@ services:
     env: python
     buildCommand: "pip install -r requirements.txt"
     # FastAPI'nin çalıştırılacağı komut (Dizin yoluna dikkat edin)
-    startCommand: "uvicorn src.api.fastapi_app.main:app --host 0.0.0.0 --port $PORT"
+    startCommand: "gunicorn src.api.fastapi_app.main:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT"
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
