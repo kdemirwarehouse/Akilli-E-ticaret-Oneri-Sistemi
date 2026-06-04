@@ -1,0 +1,14 @@
+# Flask API Requirements
+Flask==3.0.0
+
+# FastAPI API Requirements
+fastapi==0.104.0
+uvicorn==0.23.2
+
+# Machine Learning / Data Science Requirements
+pandas==2.1.2
+scikit-learn==1.3.2
+numpy==1.26.1
+
+# Diğerleri
+requests==2.31.0
