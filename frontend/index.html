@@ -567,17 +567,17 @@
 
     let data;
     try {
-      // Gerçek Flask API çağrısı — app.py çalışıyorken bu aktif olur
-      const res = await fetch(`http://127.0.0.1:5000/api/v1/recommendations/${userId}`);
+      // Gerçek API çağrısı (Relative path kullanıldığı için hem lokalde hem Render'da çalışır)
+      const res = await fetch(`/api/v1/recommendations/${userId}`);
       if (!res.ok) throw new Error('API yanıt vermedi');
       data = await res.json();
       dot.className = 'status-dot';
-      status.textContent = `Flask API ✓ — ${data.optimization_status || ''}`;
+      status.textContent = `API Bağlantısı Başarılı ✓`;
     } catch (e) {
       // API kapalıysa mock veriye geç
       data = MOCK;
       dot.className = 'status-dot error';
-      status.textContent = 'API Kapalı — Örnek Veri';
+      status.textContent = 'API Hatası — Örnek Veri';
     }
 
     renderProducts(data.recommendations || []);

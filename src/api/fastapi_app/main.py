@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+import os
 
 app = FastAPI(title="E-Ticaret Oneri Sistemi")
 
@@ -21,7 +23,11 @@ urunler = [
 
 @app.get("/")
 def ana_sayfa():
-    return {"mesaj": "Oneri API'sine Hos Geldiniz"}
+    # Frontend arayüzünü ana sayfada göster
+    html_path = os.path.join("frontend", "index.html")
+    if os.path.exists(html_path):
+        return FileResponse(html_path)
+    return {"mesaj": "Oneri API'sine Hos Geldiniz (Arayüz bulunamadı)"}
 
 @app.get("/api/v1/recommendations/{user_id}")
 def get_recommendations(user_id: int):
