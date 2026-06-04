@@ -1,6 +1,16 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="E-Ticaret Oneri Sistemi")
+
+# CORS (Cross-Origin Resource Sharing) Ayarları
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # Canlıda buraya kendi domaininizi yazmanız güvenlidir
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Sahte veri seti (İleride veritabanından gelecek)
 urunler = [

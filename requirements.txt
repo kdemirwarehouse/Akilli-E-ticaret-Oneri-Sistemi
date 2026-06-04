@@ -1,5 +1,6 @@
 # Flask API Requirements
 Flask==3.0.0
+Flask-Cors==4.0.0
 
 # FastAPI API Requirements
 fastapi==0.104.0
