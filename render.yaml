@@ -1,9 +1,11 @@
 services:
   - type: web
-    name: e-commerce-recommendation-api
+    name: shopai
     env: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn src.api.fastapi_app.main:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT"
+    startCommand: "gunicorn main:app -w 1 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT --timeout 120"
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11.0
+        value: "3.11.0"
+      - key: SECRET_KEY
+        value: "shopai2026gizliAnahtar"
