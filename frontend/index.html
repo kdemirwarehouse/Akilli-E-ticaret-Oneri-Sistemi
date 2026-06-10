@@ -74,10 +74,6 @@
 
     /* ── HERO ── */
     .hero{padding:40px 24px 28px;max-width:1200px;margin:0 auto;}
-    .hero-tag{display:inline-flex;align-items:center;gap:8px;
-      background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.25);
-      color:var(--accent);font-size:.74rem;font-weight:600;letter-spacing:.07em;
-      text-transform:uppercase;padding:5px 13px;border-radius:100px;margin-bottom:14px;}
     .hero h1{font-family:"Syne",sans-serif;font-size:clamp(1.7rem,5vw,3.2rem);
       font-weight:800;line-height:1.1;letter-spacing:-.03em;}
     .hero h1 span{color:var(--accent);}
@@ -397,8 +393,7 @@
 </header>
 
 <div class="hero">
-  <div class="hero-tag" id="heroTag">✦ YAPAY ZEKA DESTEKLİ</div>
-  <h1>Size Özel <span>Ürün Önerileri</span></h1>
+  <h1 id="heroTag">Size Özel <span>Ürün Önerileri</span></h1>
   <p id="heroDesc">Beğendiğiniz ve sepete eklediğiniz ürünlere göre AI önerileriniz kişiselleşir.</p>
 </div>
 
@@ -648,6 +643,18 @@ async function doLogin(){
     const d=await r.json();
     if(!r.ok)throw new Error(d.detail||"Giriş başarısız");
     saveSession(d.token,d.user_id,d.name);
+    // Giriş sonrası DB'deki beğenileri local'e ekle (mevcut local data kaybolmaz)
+    try{
+      const ir=await fetch("/api/v1/interactions/me",{headers:{Authorization:"Bearer "+d.token}});
+      if(ir.ok){
+        const id=await ir.json();
+        (id.interactions||[]).forEach(i=>{
+          if(i.interaction_type==="like")likedSet.add(i.product_id);
+          if(i.interaction_type==="cart"&&!cartMap.has(i.product_id))cartMap.set(i.product_id,1);
+        });
+        saveLikedCart();
+      }
+    }catch(_){}
     closeAuth();renderAuth();
     toast(`Hoş geldin, ${d.name}! 👋`,"ok");
     await Promise.all([loadAll(),fetchProfile()]);
@@ -686,10 +693,12 @@ async function doRegister(){
 }
 
 function doLogout(){
-  clearSession();likedSet.clear();cartMap.clear();saveLikedCart();
+  clearSession();
+  // Liked ve cart local'de kalıyor — giriş yapınca geri yüklenir
   renderAuth();closePanel();updateBadges();
   document.getElementById("recSection").style.display="none";
-  document.getElementById("heroTag").textContent="✦ YAPAY ZEKA DESTEKLİ";
+  const htag=document.getElementById("heroTag");
+  if(htag)htag.textContent="Size Özel Ürün Önerileri";
   const desc=document.getElementById("heroDesc");
   if(desc)desc.textContent="Beğendiğiniz ve sepete eklediğiniz ürünlere göre AI önerileriniz kişiselleşir.";
   loadAllProducts();toast("Çıkış yapıldı.");
@@ -789,10 +798,9 @@ function toggleLikeFromModal(){
 
 // ── SEPET ────────────────────────────────────────────────────────────────────
 async function addToCart(id){
-  if(!token){toast("Sepete eklemek için giriş yapın.","err");openAuth("login");return;}
   cartMap.set(id,(cartMap.get(id)||0)+1);
   toast("Sepete eklendi 🛒","ok");saveLikedCart();updateBadges();renderPanel();
-  await interact(id,"cart");scheduleRefresh();
+  if(token){await interact(id,"cart");scheduleRefresh();}
 }
 function addToCartFromModal(){if(modalId)addToCart(modalId);}
 function updateQty(id,delta){
