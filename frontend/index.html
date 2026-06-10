@@ -409,11 +409,19 @@
 <script>
 // ── State ──────────────────────────────────────────────────────────────────
 let token = null, userId = null, userName = null;
-let allProducts = [];
+let allProducts = [];      // tam katalog — getProduct() için
 let likedSet = new Set();
-let cartMap = new Map();  // productId -> qty
+let cartMap = new Map();   // productId -> qty
 let currentCat = '';
 let modalProductId = null;
+let refreshTimer = null;
+
+// Etkileşim sonrası öneri motorunu debounce ile tetikle (1 sn bekle)
+function scheduleRefresh() {
+  if (!token) return;
+  clearTimeout(refreshTimer);
+  refreshTimer = setTimeout(loadPersonalized, 1000);
+}
 
 // ── Category Emoji Map ─────────────────────────────────────────────────────
 const CAT_EMOJI = {
@@ -564,8 +572,11 @@ async function loadProducts() {
       : '/api/v1/products?limit=200';
     const r = await fetch(url, token ? {headers:{Authorization:`Bearer ${token}`}} : {});
     const d = await r.json();
-    allProducts = d.products || d || [];
-    renderProducts(allProducts);
+    const fetched = d.products || d || [];
+    // Kataloğu birleştir — mevcut ürünleri kaybetme
+    mergeIntoAll(fetched);
+    document.getElementById('sectionTitle').textContent = currentCat || 'Tüm Ürünler';
+    renderProducts(fetched);
   } catch(e) {
     grid.innerHTML = '<div class="error-state">⚠️ Ürünler yüklenemedi.</div>';
   }
@@ -573,9 +584,11 @@ async function loadProducts() {
 
 async function loadPersonalized() {
   if (!token || !userId) return loadProducts();
-  const grid = document.getElementById('productGrid');
   document.getElementById('sectionTitle').textContent = 'Size Özel Öneriler';
-  grid.innerHTML = '<div class="loading"><div class="spinner"></div><span>Kişisel öneriler hazırlanıyor...</span></div>';
+  // Mevcut grid'i silme — sadece yeni sonuç gelince güncelle
+  const prevContent = document.getElementById('productGrid').innerHTML;
+  document.getElementById('productGrid').innerHTML =
+    '<div class="loading"><div class="spinner"></div><span>Öneriler güncelleniyor...</span></div>';
   try {
     const r = await fetch('/api/v1/recommendations/me/personalized', {
       headers: {Authorization: `Bearer ${token}`}
@@ -583,12 +596,26 @@ async function loadPersonalized() {
     if (!r.ok) throw new Error();
     const d = await r.json();
     const list = d.recommendations || d.products || d || [];
-    if (!list.length) return loadProducts();
-    allProducts = [...list, ...allProducts.filter(p => !list.find(l => (l.product_id||l.id) === (p.product_id||p.id)))];
+    if (!list.length) { document.getElementById('productGrid').innerHTML = prevContent; return loadProducts(); }
+    mergeIntoAll(list);
     renderProducts(list);
   } catch {
-    loadProducts();
+    document.getElementById('productGrid').innerHTML = prevContent;
   }
+}
+
+// Yeni ürünleri allProducts kataloğuna ekle (duplicate'leri atla)
+function mergeIntoAll(list) {
+  list.forEach(p => {
+    const id = p.product_id || p.id;
+    if (!allProducts.find(x => (x.product_id||x.id) === id)) {
+      allProducts.push(p);
+    } else {
+      // image_url gibi eksik alanları güncelle
+      const idx = allProducts.findIndex(x => (x.product_id||x.id) === id);
+      if (idx >= 0) allProducts[idx] = {...allProducts[idx], ...p};
+    }
+  });
 }
 
 function renderProducts(list) {
@@ -662,6 +689,7 @@ function toggleLike(id, btn) {
     recordInteraction(id, 'like');
   }
   saveLikedCart(); updateBadges(); renderPanel();
+  scheduleRefresh();  // ← öneri motorunu tetikle
 }
 
 function toggleLikeFromModal() {
@@ -679,6 +707,7 @@ function addToCart(id) {
   saveLikedCart(); updateBadges(); renderPanel();
   toast('Sepete eklendi 🛒');
   recordInteraction(id, 'cart');
+  scheduleRefresh();  // ← öneri motorunu tetikle
 }
 
 function addToCartFromModal() {
@@ -691,12 +720,13 @@ function updateCartQty(id, delta) {
   if (qty <= 0) { cartMap.delete(id); }
   else { cartMap.set(id, qty); }
   saveLikedCart(); updateBadges(); renderPanel();
-  if (qty <= 0) setTimeout(loadPersonalized, 600);
+  scheduleRefresh();  // ← her miktar değişiminde öneriyi güncelle
 }
 
 function removeLiked(id) {
   likedSet.delete(id);
   saveLikedCart(); updateBadges(); renderPanel();
+  scheduleRefresh();  // ← beğeniden çıkarınca öneriyi güncelle
 }
 
 function updateBadges() {
@@ -883,6 +913,13 @@ async function refreshAll() {
   } else {
     document.getElementById('heroTag').textContent = '✦ Yapay Zeka Destekli';
     await loadProducts();
+  }
+  // Tam kataloğu arka planda yükle — panel için getProduct() çalışsın
+  if (allProducts.length < 50) {
+    fetch('/api/v1/products?limit=500')
+      .then(r => r.json())
+      .then(d => mergeIntoAll(d.products || d || []))
+      .catch(() => {});
   }
 }
 
