@@ -477,7 +477,7 @@ const EMOJI={"Kadın":"👗","Erkek":"👔","Elektronik":"⚡","Kozmetik":"💄"
   "Spor Outdoor":"⚽","Çocuk":"👦","Anne & Bebek & Çocuk":"👶",
   "Otomobil ve Motosiklet":"🚗"};
 const emo=c=>EMOJI[c]||"📦";
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':'&quot;',"'":"&#39;"}[c]));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":'&#39;'}[c]));
 const fmt=n=>`₺${Number(n).toLocaleString("tr-TR",{minimumFractionDigits:2})}`;
 
 // ── STORAGE ─────────────────────────────────────────────────────────────────
@@ -630,8 +630,8 @@ async function loadAllProducts(cat=""){
     merge(list);
     document.getElementById("allTitle").textContent=cat||"Tüm Ürünler";
     document.getElementById("allBadge").textContent=`${list.length} ürün`;
-    grid.innerHTML=list.length?list.map((p,i)=>cardHtml(p,i,"all")).join(""):"<div class='empty'>Bu kategoride ürün bulunamadı.</div>";
-  }catch(e){grid.innerHTML="<div class='empty'>⚠️ Ürünler yüklenemedi.</div>";}
+    grid.innerHTML=list.length?list.map((p,i)=>cardHtml(p,i,"all")).join(""):'<div class="empty">Bu kategoride ürün bulunamadı.</div>';
+  }catch(e){grid.innerHTML='<div class="empty">⚠️ Ürünler yüklenemedi.</div>';}
 }
 
 async function loadPersonalized(silent=false){
@@ -646,7 +646,7 @@ async function loadPersonalized(silent=false){
     if(!r.ok)throw new Error();
     const d=await r.json();const list=d.recommendations||d.products||d||[];
     merge(list);
-    if(!list.length){grid.innerHTML="<div class='empty'>Ürünleri beğen veya sepete ekle — sana özel öneriler göreceğiz! ❤️</div>";document.getElementById("recBadge").textContent="Kişiselleştirilmiş";return;}
+    if(!list.length){grid.innerHTML='<div class="empty">Ürünleri beğen veya sepete ekle — sana özel öneriler göreceğiz! ❤️</div>';document.getElementById("recBadge").textContent="Kişiselleştirilmiş";return;}
     const cats=[...new Set(list.map(p=>p.category).filter(Boolean))];
     document.getElementById("recBadge").textContent=`${list.length} öneri · ${cats.join(", ")}`;
     document.getElementById("heroTag").textContent=`✦ ${list.length} KİŞİSEL ÖNERİ`;
@@ -745,10 +745,10 @@ function renderPanel(){
   document.getElementById("lcnt").textContent=`(${likedIds.length})`;
   document.getElementById("tcLiked").innerHTML=likedIds.length
     ?likedIds.map(id=>{const p=getP(id);if(!p)return"";return`<div class="pitem" onclick="closePanel();setTimeout(()=>openProd(${id}),60)">${thumb(p)}<div class="pinfo"><div class="piname">${esc(p.name)}</div><div class="piprice">${fmt(p.price)}</div></div><button class="prem" onclick="event.stopPropagation();removeLiked(${id})">✕</button></div>`;}).filter(Boolean).join("")
-    :"<div class="pempty">Henüz beğendiğiniz ürün yok.</div>";
+    :"<div class='pempty'>Henüz beğendiğiniz ürün yok.</div>";
   const entries=[...cartMap.entries()];
   document.getElementById("ccnt").textContent=`(${entries.length})`;
-  if(!entries.length){document.getElementById("tcCart").innerHTML="<div class="pempty">Sepetiniz boş.</div>";document.getElementById("cartFtr").style.display="none";return;}
+  if(!entries.length){document.getElementById("tcCart").innerHTML='<div class="pempty">Sepetiniz boş.</div>';document.getElementById("cartFtr").style.display="none";return;}
   let total=0;
   document.getElementById("tcCart").innerHTML=entries.map(([id,qty])=>{const p=getP(id);if(!p)return"";total+=Number(p.price)*qty;return`<div class="pitem" onclick="closePanel();setTimeout(()=>openProd(${id}),60)">${thumb(p)}<div class="pinfo"><div class="piname">${esc(p.name)}</div><div class="piprice">${fmt(p.price)}</div><div class="qty-row" onclick="event.stopPropagation()"><button class="qty-btn" onclick="updateQty(${id},-1)">−</button><span class="qty-val">${qty}</span><button class="qty-btn" onclick="updateQty(${id},+1)">+</button></div></div><button class="prem" onclick="event.stopPropagation();updateQty(${id},-999)">✕</button></div>`;}).filter(Boolean).join("");
   document.getElementById("totalPrice").textContent=fmt(total);document.getElementById("cartFtr").style.display="";
