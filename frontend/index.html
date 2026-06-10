@@ -1,207 +1,305 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" data-theme="dark">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ShopAI — Akıllı Alışveriş</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
-    :root {
+    /* ── DARK THEME (varsayılan) ── */
+    [data-theme="dark"]{
       --bg:#0a0a0f; --surface:#13131a; --card:#1a1a24; --border:#2a2a38;
       --accent:#f0c040; --text:#f0ede8; --muted:#8a8799;
-      --green:#4caf82; --red:#e05a2b; --radius:16px;
+      --green:#4caf82; --red:#e05a2b;
+      --hdr-bg:rgba(10,10,15,0.96);
+      --shadow:0 20px 50px rgba(0,0,0,.5);
+    }
+    /* ── LIGHT THEME ── */
+    [data-theme="light"]{
+      --bg:#f5f5f0; --surface:#ffffff; --card:#ffffff; --border:#e0ddd6;
+      --accent:#d4a000; --text:#1a1a1a; --muted:#6b6878;
+      --green:#2e8b5a; --red:#c0392b;
+      --hdr-bg:rgba(245,245,240,0.96);
+      --shadow:0 8px 30px rgba(0,0,0,.1);
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;}
-    header{padding:18px 48px;display:flex;align-items:center;justify-content:space-between;
-      border-bottom:1px solid var(--border);position:sticky;top:0;
-      background:rgba(10,10,15,0.96);backdrop-filter:blur(16px);z-index:100;}
-    .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.25rem;
-      letter-spacing:-0.03em;display:flex;align-items:center;gap:9px;cursor:pointer;}
-    .logo-dot{width:9px;height:9px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;}
-    .hdr-right{display:flex;align-items:center;gap:10px;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;min-height:100vh;transition:background .3s,color .3s;}
+
+    /* ── HEADER ── */
+    header{
+      padding:14px 24px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      border-bottom:1px solid var(--border);
+      position:sticky;top:0;
+      background:var(--hdr-bg);backdrop-filter:blur(16px);z-index:100;
+    }
+    .logo{font-family:"Syne",sans-serif;font-weight:800;font-size:1.2rem;
+      letter-spacing:-0.03em;display:flex;align-items:center;gap:8px;cursor:pointer;flex-shrink:0;}
+    .logo-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;}
+    .hdr-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
     .icon-btn{background:var(--surface);border:1px solid var(--border);color:var(--muted);
-      width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1rem;
-      display:flex;align-items:center;justify-content:center;transition:all .2s;position:relative;}
+      width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:.95rem;
+      display:flex;align-items:center;justify-content:center;transition:all .2s;position:relative;flex-shrink:0;}
     .icon-btn:hover{border-color:var(--accent);color:var(--accent);}
     .badge{position:absolute;top:-4px;right:-4px;background:var(--accent);color:#0a0a0f;
-      font-size:.6rem;font-weight:700;min-width:16px;height:16px;border-radius:8px;
-      padding:0 4px;display:flex;align-items:center;justify-content:center;}
-    .btn-auth{background:var(--accent);color:#0a0a0f;border:none;padding:9px 20px;
-      border-radius:100px;font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;cursor:pointer;transition:opacity .2s;}
-    .btn-auth:hover{opacity:.85;}
-    .chip-user{background:var(--surface);border:1px solid var(--border);padding:7px 14px;
-      border-radius:100px;font-size:.82rem;color:var(--text);cursor:pointer;
-      transition:border-color .2s;display:flex;align-items:center;gap:8px;}
+      font-size:.58rem;font-weight:700;min-width:15px;height:15px;border-radius:8px;
+      padding:0 3px;display:flex;align-items:center;justify-content:center;}
+
+    /* ── AUTH BUTTONS (header) ── */
+    .hdr-auth{display:flex;gap:6px;}
+    .btn-login{background:var(--surface);border:1px solid var(--border);color:var(--text);
+      padding:7px 14px;border-radius:100px;font-family:"DM Sans",sans-serif;font-weight:600;font-size:.8rem;
+      cursor:pointer;transition:all .2s;white-space:nowrap;}
+    .btn-login:hover{border-color:var(--accent);}
+    .btn-register{background:var(--accent);color:#0a0a0f;border:none;padding:7px 14px;
+      border-radius:100px;font-family:"Syne",sans-serif;font-weight:700;font-size:.8rem;
+      cursor:pointer;transition:opacity .2s;white-space:nowrap;}
+    .btn-register:hover{opacity:.85;}
+
+    /* ── THEME TOGGLE ── */
+    .theme-btn{background:var(--surface);border:1px solid var(--border);color:var(--muted);
+      width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;
+      display:flex;align-items:center;justify-content:center;transition:all .2s;}
+    .theme-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+    /* ── USER CHIP ── */
+    .chip-user{background:var(--surface);border:1px solid var(--border);padding:6px 12px;
+      border-radius:100px;font-size:.8rem;color:var(--text);cursor:pointer;
+      transition:border-color .2s;display:flex;align-items:center;gap:7px;max-width:160px;}
     .chip-user:hover{border-color:var(--accent);}
-    .chip-av{width:22px;height:22px;background:var(--accent);border-radius:50%;
-      display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#0a0a0f;}
-    .hero{padding:56px 48px 36px;max-width:1200px;margin:0 auto;}
+    .chip-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .chip-av{width:22px;height:22px;background:var(--accent);border-radius:50%;flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:700;color:#0a0a0f;}
+
+    /* ── HERO ── */
+    .hero{padding:40px 24px 28px;max-width:1200px;margin:0 auto;}
     .hero-tag{display:inline-flex;align-items:center;gap:8px;
       background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.25);
-      color:var(--accent);font-size:.78rem;font-weight:600;letter-spacing:.08em;
-      text-transform:uppercase;padding:6px 14px;border-radius:100px;margin-bottom:18px;}
-    .hero h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.4rem);
-      font-weight:800;line-height:1.1;letter-spacing:-.04em;max-width:680px;}
+      color:var(--accent);font-size:.74rem;font-weight:600;letter-spacing:.07em;
+      text-transform:uppercase;padding:5px 13px;border-radius:100px;margin-bottom:14px;}
+    .hero h1{font-family:"Syne",sans-serif;font-size:clamp(1.7rem,5vw,3.2rem);
+      font-weight:800;line-height:1.1;letter-spacing:-.03em;}
     .hero h1 span{color:var(--accent);}
-    .hero p{color:var(--muted);font-size:1rem;margin-top:14px;max-width:480px;line-height:1.7;}
-    .cat-bar{max-width:1200px;margin:0 auto;padding:0 48px 28px;display:flex;gap:8px;flex-wrap:wrap;}
+    .hero p{color:var(--muted);font-size:.9rem;margin-top:10px;line-height:1.65;max-width:460px;}
+
+    /* ── CATEGORY BAR ── */
+    .cat-bar{max-width:1200px;margin:0 auto;padding:0 24px 22px;
+      display:flex;gap:7px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+      scrollbar-width:none;padding-bottom:22px;}
+    .cat-bar::-webkit-scrollbar{display:none;}
     .cat-pill{background:var(--surface);border:1px solid var(--border);color:var(--muted);
-      padding:7px 16px;border-radius:100px;font-size:.82rem;font-weight:500;cursor:pointer;transition:all .2s;}
+      padding:6px 14px;border-radius:100px;font-size:.78rem;font-weight:500;
+      cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;}
     .cat-pill:hover{border-color:var(--accent);color:var(--text);}
     .cat-pill.active{background:var(--accent);border-color:var(--accent);color:#0a0a0f;font-weight:700;}
-    .section{max-width:1200px;margin:0 auto;padding:0 48px 64px;}
-    .sec-hdr{display:flex;align-items:center;gap:14px;margin-bottom:24px;flex-wrap:wrap;}
-    .sec-title{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;letter-spacing:-.02em;}
-    .sec-badge{font-size:.75rem;color:var(--muted);background:var(--surface);
-      border:1px solid var(--border);padding:3px 10px;border-radius:100px;}
+
+    /* ── SECTION ── */
+    .section{max-width:1200px;margin:0 auto;padding:0 24px 48px;}
+    .sec-hdr{display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap;}
+    .sec-title{font-family:"Syne",sans-serif;font-size:1.15rem;font-weight:700;letter-spacing:-.02em;}
+    .sec-badge{font-size:.72rem;color:var(--muted);background:var(--surface);
+      border:1px solid var(--border);padding:3px 9px;border-radius:100px;}
     .sec-badge.ai{background:rgba(240,192,64,.1);border-color:rgba(240,192,64,.3);color:var(--accent);}
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-      overflow:hidden;cursor:pointer;transition:transform .25s,border-color .25s,box-shadow .25s;
-      animation:fadeUp .45s ease both;}
-    .card:hover{transform:translateY(-5px);border-color:rgba(240,192,64,.35);box-shadow:0 20px 50px rgba(0,0,0,.5);}
-    .card-img{width:100%;aspect-ratio:4/3;overflow:hidden;background:#1a1a2e;
-      display:flex;align-items:center;justify-content:center;font-size:2.8rem;position:relative;}
-    .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
-    .card:hover .card-img img{transform:scale(1.07);}
-    .card-body{padding:14px;}
-    .card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;}
-    .card-cat{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);}
-    .score-badge{font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:100px;
+
+    /* ── GRID ── */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px;}
+
+    /* ── CARD ── */
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;
+      overflow:hidden;cursor:pointer;transition:transform .22s,border-color .22s,box-shadow .22s;
+      animation:fadeUp .4s ease both;}
+    .card:hover{transform:translateY(-4px);border-color:rgba(240,192,64,.35);box-shadow:var(--shadow);}
+    .card-img{width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--surface);
+      display:flex;align-items:center;justify-content:center;font-size:2.2rem;position:relative;}
+    .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .35s;}
+    .card:hover .card-img img{transform:scale(1.06);}
+    .card-body{padding:10px 11px 12px;}
+    .card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;}
+    .card-cat{font-size:.62rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);}
+    .score-badge{font-size:.62rem;font-weight:700;padding:2px 7px;border-radius:100px;
       background:rgba(76,175,130,.15);color:var(--green);border:1px solid rgba(76,175,130,.3);}
-    .card-name{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;line-height:1.3;
-      margin-bottom:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-    .card-price{font-size:.95rem;font-weight:700;color:var(--accent);margin-bottom:11px;}
-    .card-actions{display:flex;gap:7px;}
+    .card-name{font-family:"Syne",sans-serif;font-size:.82rem;font-weight:700;line-height:1.25;
+      margin-bottom:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.5em;}
+    .card-price{font-size:.88rem;font-weight:700;color:var(--accent);margin-bottom:9px;}
+    .card-actions{display:flex;gap:6px;}
     .btn-cart{flex:1;background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.2);
-      color:var(--accent);padding:8px 10px;border-radius:10px;font-size:.76rem;font-weight:600;
-      cursor:pointer;transition:background .2s;}
+      color:var(--accent);padding:7px 6px;border-radius:9px;font-size:.72rem;font-weight:600;
+      cursor:pointer;transition:background .2s;min-height:34px;}
     .btn-cart:hover{background:rgba(240,192,64,.22);}
     .btn-like{background:var(--surface);border:1px solid var(--border);color:var(--muted);
-      width:34px;height:34px;border-radius:10px;cursor:pointer;font-size:.95rem;transition:all .2s;}
+      width:34px;min-width:34px;height:34px;border-radius:9px;cursor:pointer;font-size:.9rem;transition:all .2s;}
     .btn-like:hover,.btn-like.on{border-color:var(--red);color:var(--red);}
-    .loading,.empty{display:flex;flex-direction:column;align-items:center;gap:14px;
-      padding:60px 20px;color:var(--muted);font-size:.88rem;grid-column:1/-1;text-align:center;}
-    .spinner{width:32px;height:32px;border:3px solid var(--border);
+
+    /* ── LOADING / EMPTY ── */
+    .loading,.empty{display:flex;flex-direction:column;align-items:center;gap:12px;
+      padding:48px 20px;color:var(--muted);font-size:.86rem;grid-column:1/-1;text-align:center;}
+    .spinner{width:30px;height:30px;border:3px solid var(--border);
       border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;}
-    #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);
+
+    /* ── TOAST ── */
+    #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
       background:var(--card);border:1px solid var(--border);border-radius:100px;
-      padding:11px 22px;font-size:.86rem;z-index:9999;
-      transition:transform .3s,opacity .3s;opacity:0;pointer-events:none;white-space:nowrap;}
+      padding:10px 20px;font-size:.84rem;z-index:9999;
+      transition:transform .3s,opacity .3s;opacity:0;pointer-events:none;
+      white-space:nowrap;max-width:calc(100vw - 32px);text-align:center;}
     #toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
-    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(8px);
-      z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;
-      opacity:0;pointer-events:none;transition:opacity .25s;}
+
+    /* ── OVERLAY ── */
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(8px);
+      z-index:300;display:flex;align-items:center;justify-content:center;
+      padding:16px;opacity:0;pointer-events:none;transition:opacity .25s;}
     .overlay.active{opacity:1;pointer-events:all;}
-    .mbox{background:var(--card);border:1px solid var(--border);border-radius:22px;
-      max-width:460px;width:100%;padding:30px;
-      transform:translateY(18px);transition:transform .25s;max-height:90vh;overflow-y:auto;}
+    .mbox{background:var(--card);border:1px solid var(--border);border-radius:20px;
+      max-width:440px;width:100%;padding:24px;
+      transform:translateY(16px);transition:transform .25s;
+      max-height:92vh;overflow-y:auto;}
     .overlay.active .mbox{transform:translateY(0);}
     .mclose{float:right;background:var(--surface);border:1px solid var(--border);
-      color:var(--muted);width:30px;height:30px;border-radius:50%;cursor:pointer;
-      font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:color .2s;}
+      color:var(--muted);width:28px;height:28px;border-radius:50%;cursor:pointer;
+      font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:color .2s;}
     .mclose:hover{color:var(--text);}
-    .auth-tabs{display:flex;border:1px solid var(--border);border-radius:11px;overflow:hidden;margin-bottom:22px;}
+
+    /* ── AUTH MODAL ── */
+    .auth-tabs{display:flex;border:1px solid var(--border);border-radius:10px;
+      overflow:hidden;margin-bottom:20px;}
     .atab{flex:1;padding:9px;text-align:center;font-size:.84rem;font-weight:600;
       cursor:pointer;color:var(--muted);background:transparent;border:none;transition:all .2s;}
     .atab.active{background:var(--accent);color:#0a0a0f;}
-    .aform{display:flex;flex-direction:column;gap:11px;}
+    .aform{display:flex;flex-direction:column;gap:10px;}
     .ainput{background:var(--surface);border:1px solid var(--border);color:var(--text);
-      padding:11px 15px;border-radius:11px;font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;}
+      padding:11px 14px;border-radius:10px;font-size:.88rem;font-family:"DM Sans",sans-serif;
+      outline:none;transition:border-color .2s;width:100%;}
     .ainput:focus{border-color:var(--accent);}
     .ainput::placeholder{color:var(--muted);}
-    .aerr{color:var(--red);font-size:.8rem;text-align:center;min-height:16px;}
+    .aerr{color:var(--red);font-size:.78rem;text-align:center;min-height:15px;}
     .asubmit{background:var(--accent);color:#0a0a0f;border:none;padding:12px;
-      border-radius:11px;font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;
-      cursor:pointer;transition:opacity .2s;margin-top:4px;}
+      border-radius:10px;font-family:"Syne",sans-serif;font-weight:700;font-size:.9rem;
+      cursor:pointer;transition:opacity .2s;margin-top:2px;width:100%;}
     .asubmit:hover{opacity:.88;}
     .asubmit:disabled{opacity:.5;cursor:not-allowed;}
-    .pmbox{max-width:520px;}
-    .pimg{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:13px;margin-bottom:18px;}
-    .pimg-ph{width:100%;aspect-ratio:4/3;background:#1a1a2e;border-radius:13px;
-      margin-bottom:18px;display:flex;align-items:center;justify-content:center;font-size:4rem;}
-    .pcat{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:7px;}
-    .ptitle{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:-.03em;margin-bottom:8px;}
-    .pprice{font-size:1.4rem;font-weight:700;color:var(--accent);margin-bottom:18px;}
-    .pacts{display:flex;gap:10px;}
+    .auth-switch{text-align:center;margin-top:14px;font-size:.8rem;color:var(--muted);}
+    .auth-switch a{color:var(--accent);cursor:pointer;font-weight:600;}
+
+    /* ── PRODUCT MODAL ── */
+    .pmbox{max-width:500px;}
+    .pimg{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;margin-bottom:16px;}
+    .pimg-ph{width:100%;aspect-ratio:4/3;background:var(--surface);border-radius:12px;
+      margin-bottom:16px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;}
+    .pcat{font-size:.65rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+      color:var(--accent);margin-bottom:6px;}
+    .ptitle{font-family:"Syne",sans-serif;font-size:1.25rem;font-weight:800;
+      letter-spacing:-.02em;margin-bottom:7px;line-height:1.2;}
+    .pprice{font-size:1.25rem;font-weight:700;color:var(--accent);margin-bottom:16px;}
+    .pacts{display:flex;gap:9px;}
     .btn-addcart{flex:1;background:var(--accent);color:#0a0a0f;border:none;padding:12px;
-      border-radius:11px;font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;cursor:pointer;transition:opacity .2s;}
+      border-radius:10px;font-family:"Syne",sans-serif;font-weight:700;font-size:.9rem;
+      cursor:pointer;transition:opacity .2s;}
     .btn-addcart:hover{opacity:.88;}
     .btn-plike{background:var(--surface);border:1px solid var(--border);color:var(--muted);
-      padding:12px 15px;border-radius:11px;font-size:1.1rem;cursor:pointer;transition:all .2s;}
+      padding:12px 14px;border-radius:10px;font-size:1rem;cursor:pointer;transition:all .2s;}
     .btn-plike:hover,.btn-plike.on{border-color:var(--red);color:var(--red);}
-    #panel{position:fixed;top:0;right:0;bottom:0;width:360px;background:var(--card);
-      border-left:1px solid var(--border);z-index:500;
-      transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;}
+
+    /* ── PANEL ── */
+    #panel{position:fixed;top:0;right:0;bottom:0;width:min(360px,100vw);
+      background:var(--card);border-left:1px solid var(--border);z-index:500;
+      transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);
+      display:flex;flex-direction:column;}
     #panel.open{transform:translateX(0);}
-    #pback{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:499;opacity:0;pointer-events:none;transition:opacity .35s;}
+    #pback{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:499;
+      opacity:0;pointer-events:none;transition:opacity .35s;}
     #pback.open{opacity:1;pointer-events:all;}
-    .phdr{padding:20px 18px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
-    .pusr{display:flex;align-items:center;gap:11px;}
-    .pav{width:38px;height:38px;background:var(--accent);border-radius:50%;
+    .phdr{padding:16px 14px 12px;border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;}
+    .pusr{display:flex;align-items:center;gap:10px;min-width:0;}
+    .pav{width:36px;height:36px;background:var(--accent);border-radius:50%;flex-shrink:0;
       display:flex;align-items:center;justify-content:center;
-      font-family:'Syne',sans-serif;font-weight:700;color:#0a0a0f;font-size:.95rem;}
-    .pname{font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;}
-    .plabel{font-size:.7rem;color:var(--accent);margin-top:2px;}
-    .pemail{font-size:.72rem;color:var(--muted);}
+      font-family:"Syne",sans-serif;font-weight:700;color:#0a0a0f;font-size:.9rem;}
+    .pname{font-family:"Syne",sans-serif;font-weight:700;font-size:.88rem;
+      overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .plabel{font-size:.68rem;color:var(--accent);margin-top:1px;}
     .pcls{background:var(--surface);border:1px solid var(--border);color:var(--muted);
-      width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:.9rem;
+      width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:.85rem;flex-shrink:0;
       display:flex;align-items:center;justify-content:center;}
     .ptabs{display:flex;border-bottom:1px solid var(--border);}
-    .ptab{flex:1;padding:11px;text-align:center;font-size:.8rem;font-weight:600;
+    .ptab{flex:1;padding:10px;text-align:center;font-size:.78rem;font-weight:600;
       color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;}
     .ptab.active{color:var(--accent);border-bottom-color:var(--accent);}
-    .pbody{flex:1;overflow-y:auto;padding:14px;}
+    .pbody{flex:1;overflow-y:auto;padding:12px;}
     .ptc{display:none;} .ptc.active{display:block;}
-    .pempty{text-align:center;color:var(--muted);font-size:.83rem;padding:36px 16px;}
-    .pitem{display:flex;gap:11px;padding:11px;background:var(--surface);border:1px solid var(--border);
-      border-radius:11px;margin-bottom:9px;cursor:pointer;transition:border-color .2s;align-items:center;}
+    .pempty{text-align:center;color:var(--muted);font-size:.8rem;padding:30px 14px;}
+    .pitem{display:flex;gap:10px;padding:10px;background:var(--surface);
+      border:1px solid var(--border);border-radius:10px;margin-bottom:8px;
+      cursor:pointer;transition:border-color .2s;align-items:center;}
     .pitem:hover{border-color:rgba(240,192,64,.3);}
-    .pthumb{width:54px;height:54px;border-radius:8px;background:#1a1a2e;flex-shrink:0;
-      display:flex;align-items:center;justify-content:center;font-size:1.4rem;overflow:hidden;}
-    .pthumb img{width:100%;height:100%;object-fit:cover;border-radius:8px;}
+    .pthumb{width:48px;height:48px;border-radius:7px;background:var(--bg);flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;font-size:1.3rem;overflow:hidden;}
+    .pthumb img{width:100%;height:100%;object-fit:cover;border-radius:7px;}
     .pinfo{flex:1;min-width:0;}
-    .piname{font-size:.8rem;font-weight:600;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px;}
-    .piprice{font-size:.84rem;font-weight:700;color:var(--accent);}
-    .qty-row{display:flex;align-items:center;gap:7px;margin-top:5px;}
+    .piname{font-size:.77rem;font-weight:600;line-height:1.25;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px;}
+    .piprice{font-size:.82rem;font-weight:700;color:var(--accent);}
+    .qty-row{display:flex;align-items:center;gap:6px;margin-top:4px;}
     .qty-btn{background:var(--card);border:1px solid var(--border);color:var(--text);
-      width:24px;height:24px;border-radius:6px;cursor:pointer;font-size:.9rem;
+      width:22px;height:22px;border-radius:5px;cursor:pointer;font-size:.88rem;
       display:flex;align-items:center;justify-content:center;transition:border-color .2s;}
     .qty-btn:hover{border-color:var(--accent);color:var(--accent);}
-    .qty-val{font-size:.82rem;font-weight:700;min-width:18px;text-align:center;}
-    .prem{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.85rem;padding:3px;transition:color .2s;flex-shrink:0;}
+    .qty-val{font-size:.8rem;font-weight:700;min-width:16px;text-align:center;}
+    .prem{background:none;border:none;color:var(--muted);cursor:pointer;
+      font-size:.82rem;padding:2px 4px;transition:color .2s;flex-shrink:0;}
     .prem:hover{color:var(--red);}
-    .pftr{padding:14px;border-top:1px solid var(--border);}
-    .ptotal{display:flex;justify-content:space-between;font-weight:700;font-size:.92rem;margin-bottom:11px;}
-    .btn-pay{width:100%;background:var(--accent);color:#0a0a0f;border:none;padding:12px;
-      border-radius:11px;font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;cursor:pointer;transition:opacity .2s;}
+    .pftr{padding:12px;border-top:1px solid var(--border);}
+    .ptotal{display:flex;justify-content:space-between;font-weight:700;
+      font-size:.9rem;margin-bottom:10px;}
+    .btn-pay{width:100%;background:var(--accent);color:#0a0a0f;border:none;
+      padding:11px;border-radius:10px;font-family:"Syne",sans-serif;font-weight:700;
+      font-size:.9rem;cursor:pointer;transition:opacity .2s;}
     .btn-pay:hover{opacity:.88;}
-    .btn-logout{width:100%;margin-top:8px;background:transparent;border:1px solid var(--border);
-      color:var(--muted);padding:9px;border-radius:11px;font-size:.83rem;cursor:pointer;transition:all .2s;}
+    .btn-logout{width:100%;margin-top:7px;background:transparent;
+      border:1px solid var(--border);color:var(--muted);padding:9px;border-radius:10px;
+      font-size:.8rem;cursor:pointer;transition:all .2s;}
     .btn-logout:hover{border-color:var(--red);color:var(--red);}
-    .co-items{max-height:180px;overflow-y:auto;margin-bottom:14px;}
-    .co-item{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:.83rem;}
+
+    /* ── CHECKOUT ── */
+    .co-items{max-height:160px;overflow-y:auto;margin-bottom:12px;}
+    .co-item{display:flex;justify-content:space-between;padding:6px 0;
+      border-bottom:1px solid var(--border);font-size:.8rem;}
     .co-item:last-child{border:none;}
-    .co-addr{width:100%;background:var(--surface);border:1px solid var(--border);color:var(--text);
-      padding:11px 13px;border-radius:11px;font-family:'DM Sans',sans-serif;font-size:.86rem;
-      resize:none;outline:none;transition:border-color .2s;margin-bottom:11px;}
+    .co-addr{width:100%;background:var(--surface);border:1px solid var(--border);
+      color:var(--text);padding:10px 12px;border-radius:10px;
+      font-family:"DM Sans",sans-serif;font-size:.84rem;
+      resize:none;outline:none;transition:border-color .2s;margin-bottom:10px;}
     .co-addr:focus{border-color:var(--accent);}
-    .co-total{font-size:1rem;font-weight:700;text-align:right;margin-bottom:14px;color:var(--accent);}
+    .co-total{font-size:.95rem;font-weight:700;text-align:right;margin-bottom:12px;color:var(--accent);}
+
+    /* ── WELCOME ── */
     .welbox{text-align:center;}
-    .welbox .we{font-size:2.8rem;margin-bottom:14px;}
-    .welbox h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:8px;}
-    .welbox p{color:var(--muted);font-size:.9rem;line-height:1.65;margin-bottom:22px;}
-    footer{border-top:1px solid var(--border);padding:26px 48px;text-align:center;color:var(--muted);font-size:.8rem;}
+    .welbox .we{font-size:2.4rem;margin-bottom:12px;}
+    .welbox h2{font-family:"Syne",sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:7px;}
+    .welbox p{color:var(--muted);font-size:.87rem;line-height:1.6;margin-bottom:20px;}
+
+    footer{border-top:1px solid var(--border);padding:22px 24px;
+      text-align:center;color:var(--muted);font-size:.78rem;}
+
     @keyframes spin{to{transform:rotate(360deg);}}
     @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.4);}}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-    @media(max-width:768px){
-      header,.hero,.cat-bar,.section{padding-left:16px;padding-right:16px;}
-      .hero{padding-top:36px;}
-      #panel{width:100%;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+    /* ── RESPONSIVE ── */
+    @media(min-width:640px){
+      header{padding:16px 48px;}
+      .hero{padding:52px 48px 32px;}
+      .cat-bar{padding:0 48px 24px;overflow-x:visible;flex-wrap:wrap;}
+      .section{padding:0 48px 56px;}
+      .grid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;}
+      .card-body{padding:13px 14px 14px;}
+      .card-name{font-size:.9rem;}
     }
-</style>
+    @media(max-width:380px){
+      .grid{grid-template-columns:repeat(2,1fr);gap:10px;}
+      .btn-register{display:none;}
+    }
+  </style>
 </head>
 <body>
 
@@ -214,14 +312,15 @@
     <button class="icon-btn" onclick="openPanel('cart')" title="Sepet">
       🛒<span class="badge" id="cartBadge" style="display:none">0</span>
     </button>
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Tema değiştir">🌙</button>
     <div id="authArea"></div>
   </div>
 </header>
 
 <div class="hero">
-  <div class="hero-tag" id="heroTag">✶ YAPAY ZEKA DESTEKLİ</div>
+  <div class="hero-tag" id="heroTag">✦ YAPAY ZEKA DESTEKLİ</div>
   <h1>Size Özel <span>Ürün Önerileri</span></h1>
-  <p id="heroDesc">Beğendiğiniz ve sepete eklediğiniz ürünlere göre AI önerileriniz kişişelleşir.</p>
+  <p id="heroDesc">Beğendiğiniz ve sepete eklediğiniz ürünlere göre AI önerileriniz kişiselleşir.</p>
 </div>
 
 <div class="cat-bar" id="catBar">
@@ -231,8 +330,8 @@
 <div class="section" id="recSection" style="display:none">
   <div class="sec-hdr">
     <div class="sec-title">🤖 Size Özel Öneriler</div>
-    <div class="sec-badge ai" id="recBadge">Kişişelleştirilmiş</div>
-    <div class="sec-badge" id="recUpdating" style="display:none">↻ Güncelleniyor...</div>
+    <div class="sec-badge ai" id="recBadge">Kişiselleştirilmiş</div>
+    <div class="sec-badge" id="recUpdating" style="display:none">⟳ Güncelleniyor...</div>
   </div>
   <div class="grid" id="recGrid">
     <div class="loading"><div class="spinner"></div><span>Öneriler hazırlanıyor...</span></div>
@@ -253,11 +352,12 @@
 <div id="toast"></div>
 <div id="pback" onclick="closePanel()"></div>
 
+<!-- PANEL -->
 <div id="panel">
   <div class="phdr">
     <div class="pusr">
       <div class="pav" id="pav">?</div>
-      <div>
+      <div style="min-width:0">
         <div class="pname" id="pname">Misafir</div>
         <div class="plabel" id="plabel"></div>
       </div>
@@ -281,17 +381,19 @@
   </div>
 </div>
 
+<!-- AUTH MODAL -->
 <div class="overlay" id="authOv" onclick="if(event.target===this)closeAuth()">
   <div class="mbox">
     <div class="auth-tabs">
-      <button class="atab active" onclick="switchAuth('login',this">Giriş Yap</button>
-      <button class="atab" onclick="switchAuth('register',this)">Kayıt Ol</button>
+      <button class="atab" id="tabLogin" onclick="switchAuth('login')">Giriş Yap</button>
+      <button class="atab" id="tabReg" onclick="switchAuth('register')">Kayıt Ol</button>
     </div>
     <div class="aform" id="fLogin">
       <input class="ainput" type="email" id="lEmail" placeholder="E-posta" autocomplete="email" onkeydown="if(event.key==='Enter')doLogin()"/>
       <input class="ainput" type="password" id="lPass" placeholder="Şifre" onkeydown="if(event.key==='Enter')doLogin()"/>
       <div class="aerr" id="lErr"></div>
       <button class="asubmit" id="lBtn" onclick="doLogin()">Giriş Yap</button>
+      <div class="auth-switch">Hesabın yok mu? <a onclick="switchAuth('register')">Kayıt Ol</a></div>
     </div>
     <div class="aform" id="fReg" style="display:none">
       <input class="ainput" type="text" id="rName" placeholder="Ad Soyad" onkeydown="if(event.key==='Enter')doRegister()"/>
@@ -299,10 +401,12 @@
       <input class="ainput" type="password" id="rPass" placeholder="Şifre (min 6 karakter)" onkeydown="if(event.key==='Enter')doRegister()"/>
       <div class="aerr" id="rErr"></div>
       <button class="asubmit" id="rBtn" onclick="doRegister()">Kayıt Ol</button>
+      <div class="auth-switch">Zaten üye misin? <a onclick="switchAuth('login')">Giriş Yap</a></div>
     </div>
   </div>
 </div>
 
+<!-- PRODUCT MODAL -->
 <div class="overlay" id="prodOv" onclick="if(event.target===this)closeProd()">
   <div class="mbox pmbox">
     <button class="mclose" onclick="closeProd()">✕</button>
@@ -310,8 +414,8 @@
     <div class="pcat" id="pCat"></div>
     <div class="ptitle" id="pTitle"></div>
     <div class="pprice" id="pPrice"></div>
-    <div id="pSimilar" style="margin-bottom:16px;display:none">
-      <div style="font-size:.78rem;color:var(--muted);margin-bottom:8px;font-weight:600;">Benzer Ürünler</div>
+    <div id="pSimilar" style="margin-bottom:14px;display:none">
+      <div style="font-size:.76rem;color:var(--muted);margin-bottom:8px;font-weight:600;">Benzer Ürünler</div>
       <div id="pSimilarList" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
     </div>
     <div class="pacts">
@@ -321,10 +425,11 @@
   </div>
 </div>
 
+<!-- CHECKOUT MODAL -->
 <div class="overlay" id="coOv" onclick="if(event.target===this)closeCheckout()">
   <div class="mbox">
     <button class="mclose" onclick="closeCheckout()">✕</button>
-    <h2 style="font-family:'Syne',sans-serif;font-weight:800;margin-bottom:18px">Siparişi Tamamla</h2>
+    <h2 style="font-family:'Syne',sans-serif;font-weight:800;margin-bottom:16px">Siparişi Tamamla</h2>
     <div class="co-items" id="coItems"></div>
     <textarea class="co-addr" id="coAddr" rows="3" placeholder="Teslimat adresi..."></textarea>
     <div class="co-total" id="coTotal"></div>
@@ -332,6 +437,7 @@
   </div>
 </div>
 
+<!-- WELCOME MODAL -->
 <div class="overlay" id="welOv">
   <div class="mbox welbox">
     <div class="we">🎉</div>
@@ -342,536 +448,363 @@
 </div>
 
 <script>
+// ── TEMA ────────────────────────────────────────────────────────────────────
+function toggleTheme(){
+  const html=document.documentElement;
+  const next=html.getAttribute("data-theme")==="dark"?"light":"dark";
+  html.setAttribute("data-theme",next);
+  localStorage.setItem("sai_theme",next);
+  document.getElementById("themeBtn").textContent=next==="dark"?"🌙":"☀️";
+}
+(function initTheme(){
+  const saved=localStorage.getItem("sai_theme")||"dark";
+  document.documentElement.setAttribute("data-theme",saved);
+  const btn=document.getElementById("themeBtn");
+  if(btn) btn.textContent=saved==="dark"?"🌙":"☀️";
+})();
 
-// ════════════════════════════════ STATE ════════════════════════════════════
-let token=null, userId=null, userName=null, userLabel=null;
+// ── STATE ───────────────────────────────────────────────────────────────────
+let token=null,userId=null,userName=null,userLabel=null;
 let catalog={};
 let likedSet=new Set();
 let cartMap=new Map();
 let modalId=null;
 let refreshTimer=null;
 
-const EMOJI={
-  'Kadın':'👗','Erkek':'👔','Elektronik':'⚡','Kozmetik':'💄',
-  'Süpermarket':'🛒','Ev ve Mobilya':'🛋️','Bahçe & Yapı Market':'🌿',
-  'Kırtasiye Ofis Malzemeleri':'✏️','Hobi':'🎯','Oyuncak':'🧸',
-  'Spor Outdoor':'⚽','Çocuk':'👦','Anne & Bebek & Çocuk':'👶',
-  'Otomobil ve Motosiklet':'🚗'
-};
-const emo=c=>EMOJI[c]||'📦';
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const fmt=n=>`₺${Number(n).toLocaleString('tr-TR',{minimumFractionDigits:2})}`;
+const EMOJI={"Kadın":"👗","Erkek":"👔","Elektronik":"⚡","Kozmetik":"💄",
+  "Süpermarket":"🛒","Ev ve Mobilya":"🛋️","Bahçe & Yapı Market":"🌿",
+  "Kırtasiye Ofis Malzemeleri":"✏️","Hobi":"🎯","Oyuncak":"🧸",
+  "Spor Outdoor":"⚽","Çocuk":"👦","Anne & Bebek & Çocuk":"👶",
+  "Otomobil ve Motosiklet":"🚗"};
+const emo=c=>EMOJI[c]||"📦";
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':'&quot;',"'":"&#39;"}[c]));
+const fmt=n=>`₺${Number(n).toLocaleString("tr-TR",{minimumFractionDigits:2})}`;
 
-function saveSession(t,uid,name){
-  token=t; userId=uid; userName=name;
-  localStorage.setItem('sai_t',t);
-  localStorage.setItem('sai_u',uid);
-  localStorage.setItem('sai_n',name);
-}
-function loadSession(){
-  token=localStorage.getItem('sai_t');
-  userId=localStorage.getItem('sai_u');
-  userName=localStorage.getItem('sai_n');
-}
-function clearSession(){
-  token=null; userId=null; userName=null; userLabel=null;
-  ['sai_t','sai_u','sai_n','sai_lb'].forEach(k=>localStorage.removeItem(k));
-}
-function saveLikedCart(){
-  localStorage.setItem('sai_lk',JSON.stringify([...likedSet]));
-  localStorage.setItem('sai_ct',JSON.stringify([...cartMap.entries()]));
-}
-function loadLikedCart(){
-  try{likedSet=new Set(JSON.parse(localStorage.getItem('sai_lk')||'[]'));}catch(e){}
-  try{cartMap=new Map(JSON.parse(localStorage.getItem('sai_ct')||'[]'));}catch(e){}
-}
-function merge(list){
-  list.forEach(p=>{
-    const id=p.product_id||p.id;
-    catalog[id]={...(catalog[id]||{}),...p,id};
-  });
-}
+// ── STORAGE ─────────────────────────────────────────────────────────────────
+function saveSession(t,uid,name){token=t;userId=uid;userName=name;localStorage.setItem("sai_t",t);localStorage.setItem("sai_u",uid);localStorage.setItem("sai_n",name);}
+function loadSession(){token=localStorage.getItem("sai_t");userId=localStorage.getItem("sai_u");userName=localStorage.getItem("sai_n");}
+function clearSession(){token=null;userId=null;userName=null;userLabel=null;["sai_t","sai_u","sai_n","sai_lb"].forEach(k=>localStorage.removeItem(k));}
+function saveLikedCart(){localStorage.setItem("sai_lk",JSON.stringify([...likedSet]));localStorage.setItem("sai_ct",JSON.stringify([...cartMap.entries()]));}
+function loadLikedCart(){try{likedSet=new Set(JSON.parse(localStorage.getItem("sai_lk")||"[]"));}catch(e){}try{cartMap=new Map(JSON.parse(localStorage.getItem("sai_ct")||"[]"));}catch(e){}}
+function merge(list){list.forEach(p=>{const id=p.product_id||p.id;catalog[id]={...(catalog[id]||{}),...p,id};});}
 function getP(id){return catalog[id]||null;}
 
-let tt;
-function toast(msg,type=''){
-  const el=document.getElementById('toast');
+// ── TOAST ────────────────────────────────────────────────────────────────────
+let _tt;
+function toast(msg,type=""){
+  const el=document.getElementById("toast");
   el.textContent=msg;
-  el.style.borderColor=type==='ok'?'rgba(76,175,130,.4)':type==='err'?'rgba(224,90,43,.4)':'var(--border)';
-  el.style.color=type==='ok'?'var(--green)':type==='err'?'var(--red)':'var(--text)';
-  el.classList.add('show');
-  clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('show'),2600);
+  el.style.borderColor=type==="ok"?"rgba(76,175,130,.4)":type==="err"?"rgba(224,90,43,.4)":"var(--border)";
+  el.style.color=type==="ok"?"var(--green)":type==="err"?"var(--red)":"var(--text)";
+  el.classList.add("show");clearTimeout(_tt);_tt=setTimeout(()=>el.classList.remove("show"),2500);
 }
 
-// ─── PROFIL ETİKETİ ───────────────────────────────────────────────────────
+// ── PROFIL ───────────────────────────────────────────────────────────────────
 async function fetchProfile(){
   if(!token)return;
   try{
-    const r=await fetch('/api/v1/users/me',{headers:{Authorization:`Bearer ${token}`}});
+    const r=await fetch("/api/v1/users/me",{headers:{Authorization:"Bearer "+token}});
     if(!r.ok)return;
     const d=await r.json();
     userLabel=d.label||null;
-    localStorage.setItem('sai_lb',userLabel||'');
-    const lbl=document.getElementById('plabel');
-    if(lbl) lbl.textContent=userLabel||'';
-    const desc=document.getElementById('heroDesc');
-    if(desc) desc.textContent=userLabel
-      ? `${userLabel} olarak tanımlandınız. Beğeni ve sepet hareketlerinize göre öneriler güncelleniyor.`
-      : 'Beğendiğiniz ve sepete eklediğiniz ürünlere göre AI önerileriniz kişiselleşir.';
+    localStorage.setItem("sai_lb",userLabel||"");
+    const lbl=document.getElementById("plabel");if(lbl)lbl.textContent=userLabel||"";
+    const desc=document.getElementById("heroDesc");
+    if(desc)desc.textContent=userLabel
+      ?`${userLabel} olarak tanımlandınız. Beğeni ve sepet hareketlerinize göre öneriler güncelleniyor.`
+      :"Beğendiğiniz ve sepete eklediğiniz ürünlere göre AI önerileriniz kişiselleşir.";
   }catch(e){}
 }
 
+// ── AUTH AREA ────────────────────────────────────────────────────────────────
 function renderAuth(){
-  const el=document.getElementById('authArea');
+  const el=document.getElementById("authArea");
   if(token&&userName){
-    const ini=userName.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
-    el.innerHTML=`<div class="chip-user" onclick="openPanel('liked')">
-      <div class="chip-av">${ini}</div>${esc(userName)}
-    </div>`;
-    document.getElementById('logoutBtn').style.display='';
-    document.getElementById('pname').textContent=userName;
-    document.getElementById('pav').textContent=ini;
-    const lbl=document.getElementById('plabel');
-    if(lbl) lbl.textContent=userLabel||'';
+    const ini=userName.split(" ").map(w=>w[0]).join("").toUpperCase().slice(0,2);
+    el.innerHTML=`<div class="chip-user" onclick="openPanel('liked')"><div class="chip-av">${ini}</div><span class="chip-name">${esc(userName)}</span></div>`;
+    document.getElementById("logoutBtn").style.display="";
+    document.getElementById("pname").textContent=userName;
+    document.getElementById("pav").textContent=ini;
+    const lbl=document.getElementById("plabel");if(lbl)lbl.textContent=userLabel||"";
   } else {
-    el.innerHTML=`<button class="btn-auth" onclick="openAuth()">Giriş Yap</button>`;
-    document.getElementById('logoutBtn').style.display='none';
-    document.getElementById('pname').textContent='Misafir';
-    document.getElementById('pav').textContent='?';
+    el.innerHTML=`<div class="hdr-auth"><button class="btn-login" onclick="openAuth('login')">Giriş Yap</button><button class="btn-register" onclick="openAuth('register')">Kayıt Ol</button></div>`;
+    document.getElementById("logoutBtn").style.display="none";
+    document.getElementById("pname").textContent="Misafir";
+    document.getElementById("pav").textContent="?";
+    const lbl=document.getElementById("plabel");if(lbl)lbl.textContent="";
   }
 }
 
-function openAuth(){document.getElementById('authOv').classList.add('active');}
-function closeAuth(){document.getElementById('authOv').classList.remove('active');}
-function switchAuth(tab,btn){
-  document.querySelectorAll('.atab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('fLogin').style.display=tab==='login'?'flex':'none';
-  document.getElementById('fReg').style.display=tab==='register'?'flex':'none';
-  document.getElementById('lErr').textContent='';
-  document.getElementById('rErr').textContent='';
+// ── AUTH MODAL ───────────────────────────────────────────────────────────────
+function openAuth(tab="login"){
+  document.getElementById("authOv").classList.add("active");
+  switchAuth(tab);
+  setTimeout(()=>{
+    const f=tab==="login"?document.getElementById("lEmail"):document.getElementById("rName");
+    if(f)f.focus();
+  },250);
+}
+function closeAuth(){document.getElementById("authOv").classList.remove("active");}
+function switchAuth(tab){
+  // Tab butonları
+  document.getElementById("tabLogin").classList.toggle("active",tab==="login");
+  document.getElementById("tabReg").classList.toggle("active",tab==="register");
+  // Formlar
+  document.getElementById("fLogin").style.display=tab==="login"?"flex":"none";
+  document.getElementById("fReg").style.display=tab==="register"?"flex":"none";
+  // Hata temizle
+  document.getElementById("lErr").textContent="";
+  document.getElementById("rErr").textContent="";
 }
 
 async function doLogin(){
-  const email=document.getElementById('lEmail').value.trim();
-  const pass=document.getElementById('lPass').value;
-  const btn=document.getElementById('lBtn');
-  document.getElementById('lErr').textContent='';
-  if(!email||!pass)return;
-  btn.disabled=true; btn.textContent='Giriş yapılıyor...';
+  const email=document.getElementById("lEmail").value.trim();
+  const pass=document.getElementById("lPass").value;
+  const btn=document.getElementById("lBtn");
+  document.getElementById("lErr").textContent="";
+  if(!email||!pass){document.getElementById("lErr").textContent="E-posta ve şifre gerekli.";return;}
+  btn.disabled=true;btn.textContent="Giriş yapılıyor...";
   try{
-    const r=await fetch('/api/v1/auth/login',{method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email,password:pass})});
+    const r=await fetch("/api/v1/auth/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email,password:pass})});
     const d=await r.json();
-    if(!r.ok)throw new Error(d.detail||'Giriş başarısız');
+    if(!r.ok)throw new Error(d.detail||"Giriş başarısız");
     saveSession(d.token,d.user_id,d.name);
-    closeAuth(); renderAuth();
-    toast(`Hoş geldin, ${d.name}! 👋`,'ok');
-    await Promise.all([loadAll(), fetchProfile()]);
-  }catch(e){document.getElementById('lErr').textContent=e.message;}
-  finally{btn.disabled=false; btn.textContent='Giriş Yap';}
+    closeAuth();renderAuth();
+    toast(`Hoş geldin, ${d.name}! 👋`,"ok");
+    await Promise.all([loadAll(),fetchProfile()]);
+  }catch(e){document.getElementById("lErr").textContent=e.message;}
+  finally{btn.disabled=false;btn.textContent="Giriş Yap";}
 }
 
 async function doRegister(){
-  const name=document.getElementById('rName').value.trim();
-  const email=document.getElementById('rEmail').value.trim();
-  const pass=document.getElementById('rPass').value;
-  const btn=document.getElementById('rBtn');
-  document.getElementById('rErr').textContent='';
-  if(!name||!email||!pass){document.getElementById('rErr').textContent='Tüm alanları doldurun.';return;}
-  if(pass.length<6){document.getElementById('rErr').textContent='Şifre en az 6 karakter.';return;}
-  btn.disabled=true; btn.textContent='Kayıt oluşturuluyor...';
+  const name=document.getElementById("rName").value.trim();
+  const email=document.getElementById("rEmail").value.trim();
+  const pass=document.getElementById("rPass").value;
+  const btn=document.getElementById("rBtn");
+  document.getElementById("rErr").textContent="";
+  if(!name||!email||!pass){document.getElementById("rErr").textContent="Tüm alanları doldurun.";return;}
+  if(pass.length<6){document.getElementById("rErr").textContent="Şifre en az 6 karakter.";return;}
+  btn.disabled=true;btn.textContent="Kayıt oluşturuluyor...";
   try{
-    const r=await fetch('/api/v1/auth/register',{method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({name,email,password:pass})});
+    const r=await fetch("/api/v1/auth/register",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email,password:pass})});
     const d=await r.json();
-    if(!r.ok)throw new Error(d.detail||'Kayıt başarısız');
+    if(!r.ok)throw new Error(d.detail||"Kayıt başarısız");
     saveSession(d.token,d.user_id,d.name);
-    closeAuth(); renderAuth();
-    await loadAll();
-    showWelcome(d.name);
-  }catch(e){document.getElementById('rErr').textContent=e.message;}
-  finally{btn.disabled=false; btn.textContent='Kayıt Ol';}
+    closeAuth();renderAuth();
+    await loadAll();showWelcome(d.name);
+  }catch(e){
+    document.getElementById("rErr").textContent=e.message;
+    // E-posta zaten kayıtlıysa login tab'a geç
+    if(e.message.includes("kayıtlı")||e.message.includes("409")){
+      setTimeout(()=>{
+        switchAuth("login");
+        document.getElementById("lEmail").value=email;
+        document.getElementById("lErr").textContent="Bu e-posta kayıtlı — giriş yapın.";
+      },600);
+    }
+  }
+  finally{btn.disabled=false;btn.textContent="Kayıt Ol";}
 }
 
 function doLogout(){
-  clearSession(); likedSet.clear(); cartMap.clear(); saveLikedCart();
-  renderAuth(); closePanel(); updateBadges();
-  document.getElementById('recSection').style.display='none';
-  document.getElementById('heroTag').textContent='✦ YAPAY ZEKA DESTEKLİ';
-  const desc=document.getElementById('heroDesc');
-  if(desc) desc.textContent='Beğendiğiniz ve sepete eklediğiniz ürünlere göre AI önerileriniz kişiselleşir.';
-  loadAllProducts();
-  toast('Çıkış yapıldı.');
+  clearSession();likedSet.clear();cartMap.clear();saveLikedCart();
+  renderAuth();closePanel();updateBadges();
+  document.getElementById("recSection").style.display="none";
+  document.getElementById("heroTag").textContent="✦ YAPAY ZEKA DESTEKLİ";
+  const desc=document.getElementById("heroDesc");
+  if(desc)desc.textContent="Beğendiğiniz ve sepete eklediğiniz ürünlere göre AI önerileriniz kişiselleşir.";
+  loadAllProducts();toast("Çıkış yapıldı.");
 }
 
-function showWelcome(name){
-  document.getElementById('welName').textContent=name.split(' ')[0];
-  document.getElementById('welOv').classList.add('active');
-}
-function closeWelcome(){document.getElementById('welOv').classList.remove('active');}
+function showWelcome(name){document.getElementById("welName").textContent=name.split(" ")[0];document.getElementById("welOv").classList.add("active");}
+function closeWelcome(){document.getElementById("welOv").classList.remove("active");}
 
-async function loadAllProducts(cat=''){
-  const grid=document.getElementById('allGrid');
+// ── ÜRÜNLER ──────────────────────────────────────────────────────────────────
+async function loadAllProducts(cat=""){
+  const grid=document.getElementById("allGrid");
   grid.innerHTML='<div class="loading"><div class="spinner"></div><span>Yükleniyor...</span></div>';
   try{
-    const url=cat?`/api/v1/products?category=${encodeURIComponent(cat)}&limit=200`:'/api/v1/products?limit=200';
-    const r=await fetch(url,token?{headers:{Authorization:`Bearer ${token}`}}:{});
-    const d=await r.json();
-    const list=d.products||d||[];
+    const url=cat?`/api/v1/products?category=${encodeURIComponent(cat)}&limit=200`:"/api/v1/products?limit=200";
+    const r=await fetch(url,token?{headers:{Authorization:"Bearer "+token}}:{});
+    const d=await r.json();const list=d.products||d||[];
     merge(list);
-    document.getElementById('allTitle').textContent=cat||'Tüm Ürünler';
-    document.getElementById('allBadge').textContent=`${list.length} ürün`;
-    grid.innerHTML=list.length
-      ?list.map((p,i)=>cardHtml(p,i,'all')).join('')
-      :'<div class="empty">Bu kategoride ürün bulunamadı.</div>';
-  }catch(e){
-    grid.innerHTML='<div class="empty">⚠️ Ürünler yüklenemedi.</div>';
-  }
+    document.getElementById("allTitle").textContent=cat||"Tüm Ürünler";
+    document.getElementById("allBadge").textContent=`${list.length} ürün`;
+    grid.innerHTML=list.length?list.map((p,i)=>cardHtml(p,i,"all")).join(""):"<div class='empty'>Bu kategoride ürün bulunamadı.</div>";
+  }catch(e){grid.innerHTML="<div class='empty'>⚠️ Ürünler yüklenemedi.</div>";}
 }
 
-// ─── KİŞİSEL ÖNERİLER — silent=true → mevcut içerik korunur, sadece güncellenir ───
 async function loadPersonalized(silent=false){
-  if(!token||!userId){
-    document.getElementById('recSection').style.display='none';
-    return;
-  }
-  document.getElementById('recSection').style.display='';
-  const grid=document.getElementById('recGrid');
-  const updBadge=document.getElementById('recUpdating');
-
-  if(!silent){
-    grid.innerHTML='<div class="loading"><div class="spinner"></div><span>Öneriler hazırlanıyor...</span></div>';
-  } else {
-    if(updBadge) updBadge.style.display='';
-    grid.style.opacity='0.5';
-    grid.style.pointerEvents='none';
-  }
-
+  if(!token||!userId){document.getElementById("recSection").style.display="none";return;}
+  document.getElementById("recSection").style.display="";
+  const grid=document.getElementById("recGrid");
+  const updBadge=document.getElementById("recUpdating");
+  if(!silent){grid.innerHTML='<div class="loading"><div class="spinner"></div><span>Öneriler hazırlanıyor...</span></div>';}
+  else{if(updBadge)updBadge.style.display="";grid.style.opacity="0.5";grid.style.pointerEvents="none";}
   try{
-    const r=await fetch('/api/v1/recommendations/me/personalized',
-      {headers:{Authorization:`Bearer ${token}`}});
+    const r=await fetch("/api/v1/recommendations/me/personalized",{headers:{Authorization:"Bearer "+token}});
     if(!r.ok)throw new Error();
-    const d=await r.json();
-    const list=d.recommendations||d.products||d||[];
+    const d=await r.json();const list=d.recommendations||d.products||d||[];
     merge(list);
-    if(!list.length){
-      grid.innerHTML='<div class="empty">Ürünleri beğen veya sepete ekle — sana özel öneriler göreceğiz! ❤️</div>';
-      document.getElementById('recBadge').textContent='Kişiselleştirilmiş';
-      return;
-    }
+    if(!list.length){grid.innerHTML="<div class='empty'>Ürünleri beğen veya sepete ekle — sana özel öneriler göreceğiz! ❤️</div>";document.getElementById("recBadge").textContent="Kişiselleştirilmiş";return;}
     const cats=[...new Set(list.map(p=>p.category).filter(Boolean))];
-    document.getElementById('recBadge').textContent=`${list.length} öneri · ${cats.join(', ')}`;
-    document.getElementById('heroTag').textContent=`✦ ${list.length} KİŞİSEL ÖNERİ`;
-    grid.innerHTML=list.map((p,i)=>cardHtml(p,i,'rec')).join('');
-  }catch(e){
-    if(!silent) document.getElementById('recSection').style.display='none';
-  }finally{
-    grid.style.opacity='1';
-    grid.style.pointerEvents='';
-    if(updBadge) updBadge.style.display='none';
-  }
+    document.getElementById("recBadge").textContent=`${list.length} öneri · ${cats.join(", ")}`;
+    document.getElementById("heroTag").textContent=`✦ ${list.length} KİŞİSEL ÖNERİ`;
+    grid.innerHTML=list.map((p,i)=>cardHtml(p,i,"rec")).join("");
+  }catch(e){if(!silent)document.getElementById("recSection").style.display="none";}
+  finally{grid.style.opacity="1";grid.style.pointerEvents="";if(updBadge)updBadge.style.display="none";}
 }
 
-// ─── REFRESH ZAMANLAYICI — beğeni/sepet ekle/çıkar sonrası çağrılır ───────
-function scheduleRefresh(){
-  if(!token)return;
-  clearTimeout(refreshTimer);
-  refreshTimer=setTimeout(()=>loadPersonalized(true), 500);
-}
+function scheduleRefresh(){if(!token)return;clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>loadPersonalized(true),500);}
 
 async function loadCategories(){
   try{
-    const r=await fetch('/api/v1/categories');
-    const d=await r.json();
-    const cats=d.categories||d||[];
-    const bar=document.getElementById('catBar');
+    const r=await fetch("/api/v1/categories");const d=await r.json();const cats=d.categories||d||[];
+    const bar=document.getElementById("catBar");
     bar.innerHTML=`<button class="cat-pill active" onclick="selectCat('')">Tümü</button>`+
-      cats.map(c=>`<button class="cat-pill" onclick="selectCat('${esc(c)}')">${emo(c)} ${esc(c)}</button>`).join('');
+      cats.map(c=>`<button class="cat-pill" onclick="selectCat('${esc(c)}')">${emo(c)} ${esc(c)}</button>`).join("");
   }catch(e){}
 }
-
 function selectCat(cat){
-  document.querySelectorAll('.cat-pill').forEach(p=>{
-    p.classList.toggle('active',cat===''?p.textContent.trim()==='Tümü':p.textContent.includes(cat));
-  });
+  document.querySelectorAll(".cat-pill").forEach(p=>p.classList.toggle("active",cat===""?p.textContent.trim()==="Tümü":p.textContent.includes(cat)));
   loadAllProducts(cat);
 }
 
 function cardHtml(p,i,src){
-  const id=p.product_id||p.id;
-  const liked=likedSet.has(id);
-  const score=p.similarity_score&&src==='rec'
-    ?`<div class="score-badge">%${Math.round(p.similarity_score*100)} Eşleşme</div>`:'';
-  const img=p.image_url
-    ?`<img src="${p.image_url}" alt="${esc(p.name)}" loading="lazy"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`:'';
-  const fall=`<span style="display:${p.image_url?'none':'flex'};font-size:2.8rem;align-items:center;justify-content:center;width:100%;height:100%">${emo(p.category)}</span>`;
-  return `<div class="card" onclick="openProd(${id})" style="animation-delay:${Math.min(i,12)*.05}s">
+  const id=p.product_id||p.id;const liked=likedSet.has(id);
+  const score=p.similarity_score&&src==="rec"?`<div class="score-badge">%${Math.round(p.similarity_score*100)} Eşleşme</div>`:"";
+  const img=p.image_url?`<img src="${p.image_url}" alt="${esc(p.name)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`:"";
+  const fall=`<span style="display:${p.image_url?"none":"flex"};font-size:2.2rem;align-items:center;justify-content:center;width:100%;height:100%">${emo(p.category)}</span>`;
+  return `<div class="card" onclick="openProd(${id})" style="animation-delay:${Math.min(i,10)*.05}s">
     <div class="card-img">${img}${fall}</div>
     <div class="card-body">
-      <div class="card-top">
-        <div class="card-cat">${esc(p.category||'Ürün')}</div>${score}
-      </div>
+      <div class="card-top"><div class="card-cat">${esc(p.category||"Ürün")}</div>${score}</div>
       <div class="card-name">${esc(p.name)}</div>
       <div class="card-price">${fmt(p.price)}</div>
       <div class="card-actions">
         <button class="btn-cart" onclick="event.stopPropagation();addToCart(${id})">🛒 Sepete Ekle</button>
-        <button class="btn-like${liked?' on':''}" id="lbtn-${id}" onclick="event.stopPropagation();toggleLike(${id},this)">${liked?'♥':'♡'}</button>
+        <button class="btn-like${liked?" on":""}" id="lbtn-${id}" onclick="event.stopPropagation();toggleLike(${id},this)">${liked?"♥":"♡"}</button>
       </div>
     </div>
   </div>`;
 }
 
-// ─── BEĞEN / BEĞEN KALDIR — her ikisinde de öneri güncellenir ─────────────
+// ── BEĞEN ────────────────────────────────────────────────────────────────────
 async function toggleLike(id,btn){
-  if(!token){toast('Beğenmek için giriş yapın.','err');openAuth();return;}
+  if(!token){toast("Beğenmek için giriş yapın.","err");openAuth("login");return;}
   const adding=!likedSet.has(id);
   if(adding){likedSet.add(id);}else{likedSet.delete(id);}
-  // Tüm kartlardaki butonları güncelle
-  document.querySelectorAll(`[id="lbtn-${id}"]`).forEach(b=>{
-    b.textContent=adding?'♥':'♡'; b.classList.toggle('on',adding);
-  });
-  toast(adding?'Beğendiklere eklendi ♥':'Beğendiklerden çıkarıldı');
-  saveLikedCart(); updateBadges(); renderPanel();
-  if(adding) await interact(id,'like');
-  scheduleRefresh(); // Hem eklemede hem çıkarmada güncelle
-  setTimeout(fetchProfile,600);
+  document.querySelectorAll(`[id="lbtn-${id}"]`).forEach(b=>{b.textContent=adding?"♥":"♡";b.classList.toggle("on",adding);});
+  toast(adding?"Beğendiklere eklendi ♥":"Beğendiklerden çıkarıldı");
+  saveLikedCart();updateBadges();renderPanel();
+  if(adding)await interact(id,"like");
+  scheduleRefresh();setTimeout(fetchProfile,600);
 }
-
 function toggleLikeFromModal(){
   if(!modalId)return;
   const adding=!likedSet.has(modalId);
   toggleLike(modalId,null);
-  const btn=document.getElementById('pLikeBtn');
-  btn.textContent=adding?'♥':'♡';
-  btn.classList.toggle('on',adding);
+  const btn=document.getElementById("pLikeBtn");
+  btn.textContent=adding?"♥":"♡";btn.classList.toggle("on",adding);
 }
 
-// ─── SEPET — ekle/çıkar/güncelle her durumda öneri güncellenir ────────────
+// ── SEPET ────────────────────────────────────────────────────────────────────
 async function addToCart(id){
-  if(!token){toast('Sepete eklemek için giriş yapın.','err');openAuth();return;}
+  if(!token){toast("Sepete eklemek için giriş yapın.","err");openAuth("login");return;}
   cartMap.set(id,(cartMap.get(id)||0)+1);
-  toast('Sepete eklendi 🛒','ok');
-  saveLikedCart(); updateBadges(); renderPanel();
-  await interact(id,'cart');
-  scheduleRefresh();
+  toast("Sepete eklendi 🛒","ok");saveLikedCart();updateBadges();renderPanel();
+  await interact(id,"cart");scheduleRefresh();
 }
 function addToCartFromModal(){if(modalId)addToCart(modalId);}
-
 function updateQty(id,delta){
   const qty=(cartMap.get(id)||0)+delta;
-  if(qty<=0){
-    cartMap.delete(id);
-    toast('Sepetten çıkarıldı.');
-  } else {
-    cartMap.set(id,qty);
-  }
-  saveLikedCart(); updateBadges(); renderPanel();
-  scheduleRefresh(); // Sepetten çıkarmada da güncelle
+  if(qty<=0){cartMap.delete(id);toast("Sepetten çıkarıldı.");}else{cartMap.set(id,qty);}
+  saveLikedCart();updateBadges();renderPanel();scheduleRefresh();
 }
-
 function removeLiked(id){
   likedSet.delete(id);
-  document.querySelectorAll(`[id="lbtn-${id}"]`).forEach(b=>{
-    b.textContent='♡'; b.classList.remove('on');
-  });
-  saveLikedCart(); updateBadges(); renderPanel();
-  toast('Beğendiklerden çıkarıldı.');
-  scheduleRefresh(); // Beğeni kaldırılınca da güncelle
+  document.querySelectorAll(`[id="lbtn-${id}"]`).forEach(b=>{b.textContent="♡";b.classList.remove("on");});
+  saveLikedCart();updateBadges();renderPanel();toast("Beğendiklerden çıkarıldı.");scheduleRefresh();
 }
-
 function updateBadges(){
-  const lb=document.getElementById('likedBadge'),cb=document.getElementById('cartBadge');
-  lb.textContent=likedSet.size; lb.style.display=likedSet.size?'':'none';
-  cb.textContent=cartMap.size;  cb.style.display=cartMap.size?'':'none';
+  const lb=document.getElementById("likedBadge"),cb=document.getElementById("cartBadge");
+  lb.textContent=likedSet.size;lb.style.display=likedSet.size?"":"none";
+  cb.textContent=cartMap.size;cb.style.display=cartMap.size?"":"none";
 }
 
-function openPanel(tab){
-  document.getElementById('panel').classList.add('open');
-  document.getElementById('pback').classList.add('open');
-  switchTab(tab); renderPanel();
-}
-function closePanel(){
-  document.getElementById('panel').classList.remove('open');
-  document.getElementById('pback').classList.remove('open');
-}
+// ── PANEL ────────────────────────────────────────────────────────────────────
+function openPanel(tab){document.getElementById("panel").classList.add("open");document.getElementById("pback").classList.add("open");switchTab(tab);renderPanel();}
+function closePanel(){document.getElementById("panel").classList.remove("open");document.getElementById("pback").classList.remove("open");}
 function switchTab(tab){
-  ['tabLiked','tabCart'].forEach(id=>{
-    document.getElementById(id).classList.toggle('active',
-      (tab==='liked'&&id==='tabLiked')||(tab==='cart'&&id==='tabCart'));
-  });
-  ['tcLiked','tcCart'].forEach(id=>{
-    document.getElementById(id).classList.toggle('active',
-      (tab==='liked'&&id==='tcLiked')||(tab==='cart'&&id==='tcCart'));
-  });
+  ["tabLiked","tabCart"].forEach(id=>document.getElementById(id).classList.toggle("active",(tab==="liked"&&id==="tabLiked")||(tab==="cart"&&id==="tabCart")));
+  ["tcLiked","tcCart"].forEach(id=>document.getElementById(id).classList.toggle("active",(tab==="liked"&&id==="tcLiked")||(tab==="cart"&&id==="tcCart")));
 }
-
-function thumb(p){
-  const prod=getP(p.product_id||p.id||p)||p;
-  if(prod&&prod.image_url)
-    return `<div class="pthumb"><img src="${prod.image_url}" alt=""></div>`;
-  return `<div class="pthumb">${emo(prod&&prod.category)}</div>`;
-}
-
+function thumb(p){const prod=getP(p.product_id||p.id||p)||p;if(prod&&prod.image_url)return`<div class="pthumb"><img src="${prod.image_url}" alt=""></div>`;return`<div class="pthumb">${emo(prod&&prod.category)}</div>`;}
 function renderPanel(){
   const likedIds=[...likedSet];
-  document.getElementById('lcnt').textContent=`(${likedIds.length})`;
-  document.getElementById('tcLiked').innerHTML=likedIds.length
-    ?likedIds.map(id=>{
-        const p=getP(id); if(!p)return'';
-        return`<div class="pitem" onclick="closePanel();setTimeout(()=>openProd(${id}),60)">
-          ${thumb(p)}
-          <div class="pinfo">
-            <div class="piname">${esc(p.name)}</div>
-            <div class="piprice">${fmt(p.price)}</div>
-          </div>
-          <button class="prem" onclick="event.stopPropagation();removeLiked(${id})">✕</button>
-        </div>`;
-      }).filter(Boolean).join('')
-    :'<div class="pempty">Henüz beğendiğiniz ürün yok.</div>';
-
+  document.getElementById("lcnt").textContent=`(${likedIds.length})`;
+  document.getElementById("tcLiked").innerHTML=likedIds.length
+    ?likedIds.map(id=>{const p=getP(id);if(!p)return"";return`<div class="pitem" onclick="closePanel();setTimeout(()=>openProd(${id}),60)">${thumb(p)}<div class="pinfo"><div class="piname">${esc(p.name)}</div><div class="piprice">${fmt(p.price)}</div></div><button class="prem" onclick="event.stopPropagation();removeLiked(${id})">✕</button></div>`;}).filter(Boolean).join("")
+    :"<div class="pempty">Henüz beğendiğiniz ürün yok.</div>";
   const entries=[...cartMap.entries()];
-  document.getElementById('ccnt').textContent=`(${entries.length})`;
-  if(!entries.length){
-    document.getElementById('tcCart').innerHTML='<div class="pempty">Sepetiniz boş.</div>';
-    document.getElementById('cartFtr').style.display='none';
-    return;
-  }
+  document.getElementById("ccnt").textContent=`(${entries.length})`;
+  if(!entries.length){document.getElementById("tcCart").innerHTML="<div class="pempty">Sepetiniz boş.</div>";document.getElementById("cartFtr").style.display="none";return;}
   let total=0;
-  document.getElementById('tcCart').innerHTML=entries.map(([id,qty])=>{
-    const p=getP(id); if(!p)return'';
-    total+=Number(p.price)*qty;
-    return`<div class="pitem" onclick="closePanel();setTimeout(()=>openProd(${id}),60)">
-      ${thumb(p)}
-      <div class="pinfo">
-        <div class="piname">${esc(p.name)}</div>
-        <div class="piprice">${fmt(p.price)}</div>
-        <div class="qty-row" onclick="event.stopPropagation()">
-          <button class="qty-btn" onclick="updateQty(${id},-1)">−</button>
-          <span class="qty-val">${qty}</span>
-          <button class="qty-btn" onclick="updateQty(${id},+1)">+</button>
-        </div>
-      </div>
-      <button class="prem" onclick="event.stopPropagation();updateQty(${id},-999)">✕</button>
-    </div>`;
-  }).filter(Boolean).join('');
-  document.getElementById('totalPrice').textContent=fmt(total);
-  document.getElementById('cartFtr').style.display='';
+  document.getElementById("tcCart").innerHTML=entries.map(([id,qty])=>{const p=getP(id);if(!p)return"";total+=Number(p.price)*qty;return`<div class="pitem" onclick="closePanel();setTimeout(()=>openProd(${id}),60)">${thumb(p)}<div class="pinfo"><div class="piname">${esc(p.name)}</div><div class="piprice">${fmt(p.price)}</div><div class="qty-row" onclick="event.stopPropagation()"><button class="qty-btn" onclick="updateQty(${id},-1)">−</button><span class="qty-val">${qty}</span><button class="qty-btn" onclick="updateQty(${id},+1)">+</button></div></div><button class="prem" onclick="event.stopPropagation();updateQty(${id},-999)">✕</button></div>`;}).filter(Boolean).join("");
+  document.getElementById("totalPrice").textContent=fmt(total);document.getElementById("cartFtr").style.display="";
 }
 
-// ─── ÜRÜN MODAL — benzer ürünler dahil ───────────────────────────────────
+// ── ÜRÜN MODAL ───────────────────────────────────────────────────────────────
 async function openProd(id){
-  const p=getP(id); if(!p)return;
-  modalId=id;
-  const liked=likedSet.has(id);
-  document.getElementById('pimgWrap').innerHTML=p.image_url
-    ?`<img class="pimg" src="${p.image_url}" alt="${esc(p.name)}">`
-    :`<div class="pimg-ph">${emo(p.category)}</div>`;
-  document.getElementById('pCat').textContent=p.category||'Ürün';
-  document.getElementById('pTitle').textContent=p.name;
-  document.getElementById('pPrice').textContent=fmt(p.price);
-  const lb=document.getElementById('pLikeBtn');
-  lb.textContent=liked?'♥':'♡'; lb.classList.toggle('on',liked);
-
-  // Benzer ürünler bölümünü sıfırla
-  const simDiv=document.getElementById('pSimilar');
-  if(simDiv) simDiv.style.display='none';
-  document.getElementById('prodOv').classList.add('active');
-  interact(id,'view');
-
-  // Benzer ürünleri API'den çek
+  const p=getP(id);if(!p)return;
+  modalId=id;const liked=likedSet.has(id);
+  document.getElementById("pimgWrap").innerHTML=p.image_url?`<img class="pimg" src="${p.image_url}" alt="${esc(p.name)}">`:`<div class="pimg-ph">${emo(p.category)}</div>`;
+  document.getElementById("pCat").textContent=p.category||"Ürün";
+  document.getElementById("pTitle").textContent=p.name;
+  document.getElementById("pPrice").textContent=fmt(p.price);
+  const lb=document.getElementById("pLikeBtn");lb.textContent=liked?"♥":"♡";lb.classList.toggle("on",liked);
+  const simDiv=document.getElementById("pSimilar");if(simDiv)simDiv.style.display="none";
+  document.getElementById("prodOv").classList.add("active");
+  interact(id,"view");
   try{
     const r=await fetch(`/api/v1/products/${id}`);
-    if(r.ok){
-      const d=await r.json();
-      if(d.similar_products&&d.similar_products.length&&simDiv){
-        merge(d.similar_products);
-        document.getElementById('pSimilarList').innerHTML=d.similar_products.map(s=>`
-          <div onclick="closeProd();setTimeout(()=>openProd(${s.product_id}),60)"
-               style="background:var(--surface);border:1px solid var(--border);border-radius:9px;
-                      padding:7px 10px;cursor:pointer;font-size:.72rem;font-weight:600;
-                      transition:border-color .2s;white-space:nowrap;max-width:140px;overflow:hidden;text-overflow:ellipsis;"
-               onmouseover="this.style.borderColor='rgba(240,192,64,.4)'"
-               onmouseout="this.style.borderColor='var(--border)'">
-            ${s.image_url?`<img src="${s.image_url}" style="width:100%;height:60px;object-fit:cover;border-radius:6px;margin-bottom:5px;" onerror="this.style.display='none'">`:`<div style="font-size:1.5rem;text-align:center">${emo(s.category)}</div>`}
-            <div style="overflow:hidden;text-overflow:ellipsis;">${esc(s.urun_adi||s.name||'')}</div>
-            <div style="color:var(--accent)">${fmt(s.price)}</div>
-          </div>`).join('');
-        simDiv.style.display='';
-      }
-    }
+    if(r.ok){const d=await r.json();if(d.similar_products&&d.similar_products.length&&simDiv){merge(d.similar_products);document.getElementById("pSimilarList").innerHTML=d.similar_products.map(s=>`<div onclick="closeProd();setTimeout(()=>openProd(${s.product_id}),60)" style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:6px 9px;cursor:pointer;font-size:.7rem;font-weight:600;transition:border-color .2s;max-width:120px;" onmouseover="this.style.borderColor='rgba(240,192,64,.4)'" onmouseout="this.style.borderColor='var(--border)'">${s.image_url?`<img src="${s.image_url}" style="width:100%;height:50px;object-fit:cover;border-radius:5px;margin-bottom:4px;" onerror="this.style.display='none'">`:`<div style="font-size:1.2rem;text-align:center">${emo(s.category)}</div>`}<div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(s.urun_adi||s.name||"")}</div><div style="color:var(--accent)">${fmt(s.price)}</div></div>`).join("");simDiv.style.display="";}}
   }catch(e){}
 }
-function closeProd(){
-  document.getElementById('prodOv').classList.remove('active');
-  modalId=null;
-}
+function closeProd(){document.getElementById("prodOv").classList.remove("active");modalId=null;}
 
+// ── CHECKOUT ─────────────────────────────────────────────────────────────────
 function openCheckout(){
-  if(!token){openAuth();return;}
-  const entries=[...cartMap.entries()];
-  if(!entries.length){toast('Sepetiniz boş.');return;}
+  if(!token){openAuth("login");return;}
+  const entries=[...cartMap.entries()];if(!entries.length){toast("Sepetiniz boş.");return;}
   let total=0;
-  document.getElementById('coItems').innerHTML=entries.map(([id,qty])=>{
-    const p=getP(id); if(!p)return'';
-    const sub=Number(p.price)*qty; total+=sub;
-    return`<div class="co-item"><span>${esc(p.name)} x${qty}</span><span>${fmt(sub)}</span></div>`;
-  }).join('');
-  document.getElementById('coTotal').textContent=`Toplam: ${fmt(total)}`;
-  document.getElementById('coOv').classList.add('active');
+  document.getElementById("coItems").innerHTML=entries.map(([id,qty])=>{const p=getP(id);if(!p)return"";const sub=Number(p.price)*qty;total+=sub;return`<div class="co-item"><span>${esc(p.name)} x${qty}</span><span>${fmt(sub)}</span></div>`;}).join("");
+  document.getElementById("coTotal").textContent=`Toplam: ${fmt(total)}`;
+  document.getElementById("coOv").classList.add("active");
 }
-function closeCheckout(){document.getElementById('coOv').classList.remove('active');}
-
+function closeCheckout(){document.getElementById("coOv").classList.remove("active");}
 async function confirmCheckout(){
-  const address=document.getElementById('coAddr').value.trim();
-  if(!address){toast('Lütfen teslimat adresi girin.','err');return;}
+  const address=document.getElementById("coAddr").value.trim();
+  if(!address){toast("Lütfen teslimat adresi girin.","err");return;}
   const items=[...cartMap.entries()].map(([product_id,quantity])=>({product_id,quantity}));
   try{
-    const r=await fetch('/api/v1/orders/checkout',{method:'POST',
-      headers:{'Content-Type':'application/json',Authorization:`Bearer ${token}`},
-      body:JSON.stringify({items,address})});
+    const r=await fetch("/api/v1/orders/checkout",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+token},body:JSON.stringify({items,address})});
     if(!r.ok)throw new Error();
-    cartMap.clear(); saveLikedCart(); updateBadges(); renderPanel();
-    closeCheckout();
-    toast('🎉 Siparişiniz alındı!','ok');
-    setTimeout(()=>loadPersonalized(true),800);
-  }catch{toast('Sipariş oluşturulamadı.','err');}
+    cartMap.clear();saveLikedCart();updateBadges();renderPanel();closeCheckout();
+    toast("🎉 Siparişiniz alındı!","ok");setTimeout(()=>loadPersonalized(true),800);
+  }catch{toast("Sipariş oluşturulamadı.","err");}
 }
 
-async function interact(productId,type){
-  if(!token)return;
-  try{
-    await fetch('/api/v1/interactions',{method:'POST',
-      headers:{'Content-Type':'application/json',Authorization:`Bearer ${token}`},
-      body:JSON.stringify({product_id:productId,interaction_type:type})
-    });
-  }catch(e){}
-}
+async function interact(productId,type){if(!token)return;try{await fetch("/api/v1/interactions",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+token},body:JSON.stringify({product_id:productId,interaction_type:type})});}catch(e){}}
 
 async function loadAll(){
   renderAuth();
-  if(token){
-    document.getElementById('heroTag').textContent=`✦ HOŞ GELDİN, ${userName.split(' ')[0].toUpperCase()}!`;
-    document.getElementById('recSection').style.display='';
-    loadPersonalized(false);
-    fetchProfile();
-  } else {
-    document.getElementById('recSection').style.display='none';
-    document.getElementById('heroTag').textContent='✦ YAPAY ZEKA DESTEKLİ';
-  }
+  if(token){document.getElementById("heroTag").textContent=`✦ HOŞ GELDİN, ${userName.split(" ")[0].toUpperCase()}!`;document.getElementById("recSection").style.display="";loadPersonalized(false);fetchProfile();}
+  else{document.getElementById("recSection").style.display="none";document.getElementById("heroTag").textContent="✦ YAPAY ZEKA DESTEKLİ";}
   loadAllProducts();
 }
 
-(async function init(){
-  loadSession(); loadLikedCart();
-  await loadCategories();
-  renderAuth(); updateBadges();
-  await loadAll();
-})();
-
+(async function init(){loadSession();loadLikedCart();await loadCategories();renderAuth();updateBadges();await loadAll();})();
 </script>
 </body>
 </html>
