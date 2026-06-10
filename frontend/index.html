@@ -257,16 +257,41 @@
     .btn-logout:hover{border-color:var(--red);color:var(--red);}
 
     /* ── CHECKOUT ── */
-    .co-items{max-height:160px;overflow-y:auto;margin-bottom:12px;}
-    .co-item{display:flex;justify-content:space-between;padding:6px 0;
-      border-bottom:1px solid var(--border);font-size:.8rem;}
+    .co-mbox{max-width:520px;}
+    .co-title{font-family:"Syne",sans-serif;font-weight:800;margin-bottom:16px;font-size:1.2rem;}
+    .co-columns{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .co-col{display:flex;flex-direction:column;gap:8px;}
+    .co-field{display:flex;flex-direction:column;gap:3px;}
+    .co-field label{font-size:.72rem;font-weight:600;color:var(--muted);}
+    .co-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+    .co-err{color:var(--red);font-size:.78rem;text-align:center;min-height:20px;}
+    .co-items{max-height:160px;overflow-y:auto;margin-bottom:8px;}
+    .co-item{display:flex;justify-content:space-between;padding:5px 0;
+      border-bottom:1px solid var(--border);font-size:.78rem;}
     .co-item:last-child{border:none;}
     .co-addr{width:100%;background:var(--surface);border:1px solid var(--border);
-      color:var(--text);padding:10px 12px;border-radius:10px;
+      color:var(--text);padding:9px 11px;border-radius:9px;
       font-family:"DM Sans",sans-serif;font-size:.84rem;
-      resize:none;outline:none;transition:border-color .2s;margin-bottom:10px;}
+      resize:none;outline:none;transition:border-color .2s;}
     .co-addr:focus{border-color:var(--accent);}
-    .co-total{font-size:.95rem;font-weight:700;text-align:right;margin-bottom:12px;color:var(--accent);}
+    .co-total{font-size:.95rem;font-weight:700;text-align:right;margin-bottom:10px;color:var(--accent);}
+    .co-summary-title{font-family:"Syne",sans-serif;font-weight:700;font-size:.88rem;margin-bottom:4px;}
+
+    /* ── 3D CARD PREVIEW ── */
+    .card-preview-wrap{perspective:800px;margin-bottom:16px;display:flex;justify-content:center;}
+    .credit-card{width:100%;max-width:290px;height:170px;position:relative;transform-style:preserve-3d;transition:transform .5s;border-radius:14px;cursor:default;}
+    .credit-card.flipped{transform:rotateY(180deg);}
+    .card-face{position:absolute;inset:0;border-radius:14px;backface-visibility:hidden;padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;}
+    .card-front{background:linear-gradient(135deg,#6a44b8,#308ca0);color:#fff;border:1px solid rgba(255,255,255,.15);}
+    .card-back{background:linear-gradient(135deg,#3d266b,#175461);color:#fff;transform:rotateY(180deg);padding:0;}
+    .card-strip{height:36px;background:#1a1a1a;margin-top:18px;}
+    .card-signature{background:rgba(255,255,255,.88);height:30px;margin:10px 14px;border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding:0 10px;}
+    .card-cvv{color:#1a1a1a;font-weight:700;font-size:.9rem;font-family:monospace;letter-spacing:2px;}
+    .card-brand{font-weight:800;font-size:.85rem;letter-spacing:1px;text-align:right;opacity:.9;}
+    .card-number{font-family:monospace;font-size:1.2rem;letter-spacing:2.5px;text-align:center;word-spacing:4px;text-shadow:0 1px 3px rgba(0,0,0,.3);}
+    .card-row{display:flex;justify-content:space-between;gap:8px;}
+    .card-label{font-size:.55rem;opacity:.7;letter-spacing:1px;margin-bottom:1px;}
+    .card-value{font-size:.78rem;font-weight:600;}
 
     /* ── WELCOME ── */
     .welbox{text-align:center;}
@@ -359,6 +384,7 @@
       .mbox{border-radius:20px 20px 0 0;max-height:95vh;}
 
       /* Checkout */
+      .co-mbox{max-width:100%;}.co-columns{grid-template-columns:1fr;}
       .co-items{max-height:130px;}
 
       /* Footer */
@@ -501,13 +527,54 @@
 
 <!-- CHECKOUT MODAL -->
 <div class="overlay" id="coOv" onclick="if(event.target===this)closeCheckout()">
-  <div class="mbox">
+  <div class="mbox co-mbox">
     <button class="mclose" onclick="closeCheckout()">✕</button>
-    <h2 style="font-family:'Syne',sans-serif;font-weight:800;margin-bottom:16px">Siparişi Tamamla</h2>
-    <div class="co-items" id="coItems"></div>
-    <textarea class="co-addr" id="coAddr" rows="3" placeholder="Teslimat adresi..."></textarea>
-    <div class="co-total" id="coTotal"></div>
-    <button class="asubmit" onclick="confirmCheckout()">Siparişi Onayla ✓</button>
+    <h2 class="co-title">Siparişi Tamamla</h2>
+
+    <!-- 3D Card Preview -->
+    <div class="card-preview-wrap">
+      <div class="credit-card" id="cardPreview">
+        <div class="card-face card-front">
+          <div class="card-brand" id="cardBrand">KART</div>
+          <div class="card-number" id="cardPreviewNo">•••• •••• •••• ••••</div>
+          <div class="card-row">
+            <div class="card-field">
+              <div class="card-label">KART SAHİBİ</div>
+              <div class="card-value" id="cardPreviewHolder">AD SOYAD</div>
+            </div>
+            <div class="card-field">
+              <div class="card-label">SON KUL.</div>
+              <div class="card-value" id="cardPreviewExpiry">AA/YY</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-face card-back">
+          <div class="card-strip"></div>
+          <div class="card-signature">
+            <div class="card-cvv" id="cardPreviewCvv">•••</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="co-columns">
+      <div class="co-col">
+        <div class="co-field"><label>Ad Soyad</label><input class="ainput" id="coName" placeholder="Kart üzerindeki ad" oninput="updateCardPreview()" /></div>
+        <div class="co-field"><label>Kart Numarası</label><input class="ainput" id="coCardNo" placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric" oninput="formatCardNo(this);updateCardPreview()" /></div>
+        <div class="co-row">
+          <div class="co-field"><label>Son Kullanma</label><input class="ainput" id="coExpiry" placeholder="AA/YY" maxlength="5" oninput="formatExpiry(this);updateCardPreview()" /></div>
+          <div class="co-field"><label>CVV</label><input class="ainput" id="coCvv" placeholder="***" maxlength="4" inputmode="numeric" onfocus="flipCard(true)" onblur="flipCard(false)" oninput="updateCardPreview()" /></div>
+        </div>
+        <div class="co-field"><label>Teslimat Adresi</label><textarea class="co-addr" id="coAddr" rows="2" placeholder="Adres..."></textarea></div>
+        <div class="co-err" id="coErr"></div>
+      </div>
+      <div class="co-col">
+        <div class="co-summary-title">Sipariş Özeti</div>
+        <div class="co-items" id="coItems"></div>
+        <div class="co-total" id="coTotal"></div>
+        <button class="asubmit" onclick="confirmCheckout()">Ödemeyi Tamamla ✓</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -867,15 +934,64 @@ function openCheckout(){
   let total=0;
   document.getElementById("coItems").innerHTML=entries.map(([id,qty])=>{const p=getP(id);if(!p)return"";const sub=Number(p.price)*qty;total+=sub;return`<div class="co-item"><span>${esc(p.name)} x${qty}</span><span>${fmt(sub)}</span></div>`;}).join("");
   document.getElementById("coTotal").textContent=`Toplam: ${fmt(total)}`;
+  document.getElementById("coErr").textContent="";
   document.getElementById("coOv").classList.add("active");
+  setTimeout(()=>document.getElementById("coName").focus(),300);
+  // Reset card preview
+  document.getElementById("cardPreviewNo").textContent="•••• •••• •••• ••••";
+  document.getElementById("cardPreviewHolder").textContent="AD SOYAD";
+  document.getElementById("cardPreviewExpiry").textContent="AA/YY";
+  document.getElementById("cardPreviewCvv").textContent="•••";
+  document.getElementById("cardBrand").textContent="KART";
+  document.getElementById("cardPreview").classList.remove("flipped");
 }
-function closeCheckout(){document.getElementById("coOv").classList.remove("active");}
+function closeCheckout(){
+  document.getElementById("coOv").classList.remove("active");
+}
+function formatCardNo(el){
+  let v=el.value.replace(/\D/g,"");
+  let f="";
+  for(let i=0;i<v.length;i++){if(i>0&&i%4===0)f+=" ";f+=v[i];}
+  el.value=f;
+}
+function formatExpiry(el){
+  let v=el.value.replace(/\D/g,"");
+  if(v.length>2)el.value=v.substring(0,2)+"/"+v.substring(2,4);
+  else el.value=v;
+}
+function flipCard(flip){document.getElementById("cardPreview").classList.toggle("flipped",flip);}
+function updateCardPreview(){
+  const name=document.getElementById("coName").value.trim().toUpperCase()||"AD SOYAD";
+  document.getElementById("cardPreviewHolder").textContent=name;
+  const no=document.getElementById("coCardNo").value.replace(/\s/g,"");
+  document.getElementById("cardPreviewNo").textContent=no.padEnd(16,"•").replace(/(.{4})/g,"$1 ").trim()||"•••• •••• •••• ••••";
+  const first=no[0];
+  const brand=document.getElementById("cardBrand");
+  if(first==="4")brand.textContent="VISA";
+  else if(first==="5")brand.textContent="MASTERCARD";
+  else if(first==="3")brand.textContent="AMEX";
+  else brand.textContent="KART";
+  const expiry=document.getElementById("coExpiry").value||"AA/YY";
+  document.getElementById("cardPreviewExpiry").textContent=expiry;
+  const cvv=document.getElementById("coCvv").value||"•••";
+  document.getElementById("cardPreviewCvv").textContent=cvv;
+}
 async function confirmCheckout(){
+  const name=document.getElementById("coName").value.trim();
+  const cardNo=document.getElementById("coCardNo").value.replace(/\s/g,"");
+  const expiry=document.getElementById("coExpiry").value.trim();
+  const cvv=document.getElementById("coCvv").value.trim();
   const address=document.getElementById("coAddr").value.trim();
-  if(!address){toast("Lütfen teslimat adresi girin.","err");return;}
+  const errDiv=document.getElementById("coErr");
+  errDiv.textContent="";
+  if(!name){errDiv.textContent="Lütfen kart sahibinin adını girin.";return;}
+  if(cardNo.length<16){errDiv.textContent="Geçerli bir kart numarası girin (16 hane).";return;}
+  if(!/^\d{2}\/\d{2}$/.test(expiry)){errDiv.textContent="Son kullanma tarihi AA/YY formatında olmalı.";return;}
+  if(cvv.length<3){errDiv.textContent="CVV kodu en az 3 hane olmalı.";return;}
+  if(!address){errDiv.textContent="Lütfen teslimat adresini girin.";return;}
   const items=[...cartMap.entries()].map(([product_id,quantity])=>({product_id,quantity}));
   try{
-    const r=await fetch("/api/v1/orders/checkout",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+token},body:JSON.stringify({items,address})});
+    const r=await fetch("/api/v1/orders/checkout",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+token},body:JSON.stringify({items,address,card_holder:name,card_number:cardNo,card_expiry:expiry,card_cvv:cvv})});
     if(!r.ok)throw new Error();
     cartMap.clear();saveLikedCart();updateBadges();renderPanel();closeCheckout();
     toast("🎉 Siparişiniz alındı!","ok");setTimeout(()=>loadPersonalized(true),800);

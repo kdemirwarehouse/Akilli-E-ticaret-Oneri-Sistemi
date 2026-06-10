@@ -75,8 +75,12 @@ class OrderItemModel(BaseModel):
     quantity:   int
 
 class CheckoutRequest(BaseModel):
-    items:   List[OrderItemModel]
-    address: str = ""
+    items:       List[OrderItemModel]
+    address:     str = ""
+    card_holder: str = ""
+    card_number: str = ""
+    card_expiry: str = ""
+    card_cvv:    str = ""
 
 # ─────────────────────────────── JWT (sıfırdan, kütüphane yok) ──────────── #
 def _b64url(data: bytes) -> str:
@@ -627,6 +631,16 @@ def my_profile(user: dict = Depends(get_current_user)):
 def checkout(body: CheckoutRequest, user: dict = Depends(get_current_user)):
     if not body.items:
         raise HTTPException(status_code=400, detail="Sepet boş.")
+
+    # Ödeme bilgilerini doğrula
+    if not body.card_holder or len(body.card_holder.strip()) < 2:
+        raise HTTPException(status_code=422, detail="Kart sahibi adı geçersiz.")
+    card_no_clean = body.card_number.replace(" ", "")
+    if len(card_no_clean) < 16 or not card_no_clean.isdigit():
+        raise HTTPException(status_code=422, detail="Kart numarası geçersiz (16 hane).")
+    if not body.card_expiry or not body.card_cvv or len(body.card_cvv) < 3:
+        raise HTTPException(status_code=422, detail="Son kullanma tarihi veya CVV geçersiz.")
+
     conn = get_conn()
     cur  = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
     try:
