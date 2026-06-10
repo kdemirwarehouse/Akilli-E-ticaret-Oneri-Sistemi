@@ -643,16 +643,17 @@ async function doLogin(){
     const d=await r.json();
     if(!r.ok)throw new Error(d.detail||"Giriş başarısız");
     saveSession(d.token,d.user_id,d.name);
-    // Giriş sonrası DB'deki beğenileri local'e ekle (mevcut local data kaybolmaz)
+    // Giriş sonrası: local sıfırla, DB'deki gerçek veriyi yükle
+    likedSet.clear();cartMap.clear();
     try{
       const ir=await fetch("/api/v1/interactions/me",{headers:{Authorization:"Bearer "+d.token}});
       if(ir.ok){
         const id=await ir.json();
         (id.interactions||[]).forEach(i=>{
-          if(i.interaction_type==="like")likedSet.add(i.product_id);
-          if(i.interaction_type==="cart"&&!cartMap.has(i.product_id))cartMap.set(i.product_id,1);
+          if(i.interaction_type==="like")likedSet.add(Number(i.product_id));
+          if(i.interaction_type==="cart"&&!cartMap.has(Number(i.product_id)))cartMap.set(Number(i.product_id),1);
         });
-        saveLikedCart();
+        saveLikedCart();updateBadges();
       }
     }catch(_){}
     closeAuth();renderAuth();
@@ -694,7 +695,7 @@ async function doRegister(){
 
 function doLogout(){
   clearSession();
-  // Liked ve cart local'de kalıyor — giriş yapınca geri yüklenir
+  likedSet.clear();cartMap.clear();saveLikedCart();
   renderAuth();closePanel();updateBadges();
   document.getElementById("recSection").style.display="none";
   // heroTag h1 sabit kalıyor
