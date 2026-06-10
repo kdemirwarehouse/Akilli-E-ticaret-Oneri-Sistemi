@@ -130,6 +130,15 @@ def init_db():
     conn = get_conn()
     cur  = conn.cursor()
     try:
+        # Advisory lock: aynı anda sadece bir worker çalışsın
+        conn.autocommit = True
+        cur.execute("SELECT pg_try_advisory_lock(20260610)")
+        locked = cur.fetchone()[0]
+        conn.autocommit = False
+        if not locked:
+            print("[DB] init_db: başka worker çalıştırıyor, atlandı.")
+            return
+
         # ── Tablolar ──────────────────────────────────────────────────────
         cur.execute("""
             CREATE TABLE IF NOT EXISTS users (
@@ -183,19 +192,16 @@ def init_db():
         cur.execute("CREATE INDEX IF NOT EXISTS idx_orders_user_id         ON orders(user_id);")
         cur.execute("CREATE INDEX IF NOT EXISTS idx_interactions_user_prod ON interactions(user_id, product_id);")
 
+        # ── Migrasyon ─────────────────────────────────────────────────────
+        try:
+            cur.execute("ALTER TABLE products ADD COLUMN IF NOT EXISTS image_url TEXT;")
+            cur.execute("ALTER TABLE products ALTER COLUMN name TYPE VARCHAR(250);")
+        except Exception:
+            conn.rollback()
+
         # ── Ürün seed ─────────────────────────────────────────────────────
         cur.execute("SELECT COUNT(*) FROM products;")
         existing = cur.fetchone()[0]
-        # image_url kolonu varsa ekle (mevcut DB'lerde olmayabilir)
-        cur.execute("""
-            ALTER TABLE products ADD COLUMN IF NOT EXISTS image_url TEXT;
-        """)
-        # name kolonu uzunluğunu artır
-        cur.execute("""
-            ALTER TABLE products ALTER COLUMN name TYPE VARCHAR(250);
-        """)
-
-        # Resim URL'si olmayan eski katalog varsa veya sayı farklıysa yeniden seed et
         cur.execute("SELECT COUNT(*) FROM products WHERE image_url IS NOT NULL;")
         with_images = cur.fetchone()[0]
         needs_reseed = (existing == 0 or existing != len(PRODUCT_CATALOG) or with_images == 0)
