@@ -13,8 +13,6 @@
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;}
-
-    /* ── HEADER ── */
     header{padding:18px 48px;display:flex;align-items:center;justify-content:space-between;
       border-bottom:1px solid var(--border);position:sticky;top:0;
       background:rgba(10,10,15,0.96);backdrop-filter:blur(16px);z-index:100;}
@@ -30,8 +28,7 @@
       font-size:.6rem;font-weight:700;min-width:16px;height:16px;border-radius:8px;
       padding:0 4px;display:flex;align-items:center;justify-content:center;}
     .btn-auth{background:var(--accent);color:#0a0a0f;border:none;padding:9px 20px;
-      border-radius:100px;font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;
-      cursor:pointer;transition:opacity .2s;}
+      border-radius:100px;font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;cursor:pointer;transition:opacity .2s;}
     .btn-auth:hover{opacity:.85;}
     .chip-user{background:var(--surface);border:1px solid var(--border);padding:7px 14px;
       border-radius:100px;font-size:.82rem;color:var(--text);cursor:pointer;
@@ -39,8 +36,6 @@
     .chip-user:hover{border-color:var(--accent);}
     .chip-av{width:22px;height:22px;background:var(--accent);border-radius:50%;
       display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#0a0a0f;}
-
-    /* ── HERO ── */
     .hero{padding:56px 48px 36px;max-width:1200px;margin:0 auto;}
     .hero-tag{display:inline-flex;align-items:center;gap:8px;
       background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.25);
@@ -50,32 +45,22 @@
       font-weight:800;line-height:1.1;letter-spacing:-.04em;max-width:680px;}
     .hero h1 span{color:var(--accent);}
     .hero p{color:var(--muted);font-size:1rem;margin-top:14px;max-width:480px;line-height:1.7;}
-
-    /* ── CATEGORY BAR ── */
     .cat-bar{max-width:1200px;margin:0 auto;padding:0 48px 28px;display:flex;gap:8px;flex-wrap:wrap;}
     .cat-pill{background:var(--surface);border:1px solid var(--border);color:var(--muted);
       padding:7px 16px;border-radius:100px;font-size:.82rem;font-weight:500;cursor:pointer;transition:all .2s;}
     .cat-pill:hover{border-color:var(--accent);color:var(--text);}
     .cat-pill.active{background:var(--accent);border-color:var(--accent);color:#0a0a0f;font-weight:700;}
-
-    /* ── SECTION ── */
     .section{max-width:1200px;margin:0 auto;padding:0 48px 64px;}
-    .sec-hdr{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+    .sec-hdr{display:flex;align-items:center;gap:14px;margin-bottom:24px;flex-wrap:wrap;}
     .sec-title{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;letter-spacing:-.02em;}
     .sec-badge{font-size:.75rem;color:var(--muted);background:var(--surface);
       border:1px solid var(--border);padding:3px 10px;border-radius:100px;}
-    .sec-badge.ai{background:rgba(240,192,64,.1);border-color:rgba(240,192,64,.3);
-      color:var(--accent);}
-
-    /* ── GRID ── */
+    .sec-badge.ai{background:rgba(240,192,64,.1);border-color:rgba(240,192,64,.3);color:var(--accent);}
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;}
-
-    /* ── CARD ── */
     .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
       overflow:hidden;cursor:pointer;transition:transform .25s,border-color .25s,box-shadow .25s;
       animation:fadeUp .45s ease both;}
-    .card:hover{transform:translateY(-5px);border-color:rgba(240,192,64,.35);
-      box-shadow:0 20px 50px rgba(0,0,0,.5);}
+    .card:hover{transform:translateY(-5px);border-color:rgba(240,192,64,.35);box-shadow:0 20px 50px rgba(0,0,0,.5);}
     .card-img{width:100%;aspect-ratio:4/3;overflow:hidden;background:#1a1a2e;
       display:flex;align-items:center;justify-content:center;font-size:2.8rem;position:relative;}
     .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
@@ -96,44 +81,34 @@
     .btn-like{background:var(--surface);border:1px solid var(--border);color:var(--muted);
       width:34px;height:34px;border-radius:10px;cursor:pointer;font-size:.95rem;transition:all .2s;}
     .btn-like:hover,.btn-like.on{border-color:var(--red);color:var(--red);}
-
-    /* ── LOADING / EMPTY ── */
     .loading,.empty{display:flex;flex-direction:column;align-items:center;gap:14px;
-      padding:60px 20px;color:var(--muted);font-size:.88rem;grid-column:1/-1;}
+      padding:60px 20px;color:var(--muted);font-size:.88rem;grid-column:1/-1;text-align:center;}
     .spinner{width:32px;height:32px;border:3px solid var(--border);
       border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;}
-
-    /* ── TOAST ── */
     #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);
       background:var(--card);border:1px solid var(--border);border-radius:100px;
       padding:11px 22px;font-size:.86rem;z-index:9999;
       transition:transform .3s,opacity .3s;opacity:0;pointer-events:none;white-space:nowrap;}
     #toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
-
-    /* ── OVERLAY BASE ── */
     .overlay{position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(8px);
       z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;
       opacity:0;pointer-events:none;transition:opacity .25s;}
     .overlay.active{opacity:1;pointer-events:all;}
     .mbox{background:var(--card);border:1px solid var(--border);border-radius:22px;
       max-width:460px;width:100%;padding:30px;
-      transform:translateY(18px);transition:transform .25s;}
+      transform:translateY(18px);transition:transform .25s;max-height:90vh;overflow-y:auto;}
     .overlay.active .mbox{transform:translateY(0);}
     .mclose{float:right;background:var(--surface);border:1px solid var(--border);
       color:var(--muted);width:30px;height:30px;border-radius:50%;cursor:pointer;
       font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:color .2s;}
     .mclose:hover{color:var(--text);}
-
-    /* ── AUTH ── */
-    .auth-tabs{display:flex;border:1px solid var(--border);border-radius:11px;
-      overflow:hidden;margin-bottom:22px;}
+    .auth-tabs{display:flex;border:1px solid var(--border);border-radius:11px;overflow:hidden;margin-bottom:22px;}
     .atab{flex:1;padding:9px;text-align:center;font-size:.84rem;font-weight:600;
       cursor:pointer;color:var(--muted);background:transparent;border:none;transition:all .2s;}
     .atab.active{background:var(--accent);color:#0a0a0f;}
     .aform{display:flex;flex-direction:column;gap:11px;}
     .ainput{background:var(--surface);border:1px solid var(--border);color:var(--text);
-      padding:11px 15px;border-radius:11px;font-size:.88rem;
-      font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;}
+      padding:11px 15px;border-radius:11px;font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;}
     .ainput:focus{border-color:var(--accent);}
     .ainput::placeholder{color:var(--muted);}
     .aerr{color:var(--red);font-size:.8rem;text-align:center;min-height:16px;}
@@ -141,45 +116,38 @@
       border-radius:11px;font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;
       cursor:pointer;transition:opacity .2s;margin-top:4px;}
     .asubmit:hover{opacity:.88;}
-
-    /* ── PRODUCT MODAL ── */
+    .asubmit:disabled{opacity:.5;cursor:not-allowed;}
     .pmbox{max-width:520px;}
     .pimg{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:13px;margin-bottom:18px;}
     .pimg-ph{width:100%;aspect-ratio:4/3;background:#1a1a2e;border-radius:13px;
       margin-bottom:18px;display:flex;align-items:center;justify-content:center;font-size:4rem;}
-    .pcat{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-      color:var(--accent);margin-bottom:7px;}
-    .ptitle{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;
-      letter-spacing:-.03em;margin-bottom:8px;}
+    .pcat{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:7px;}
+    .ptitle{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:-.03em;margin-bottom:8px;}
     .pprice{font-size:1.4rem;font-weight:700;color:var(--accent);margin-bottom:18px;}
     .pacts{display:flex;gap:10px;}
     .btn-addcart{flex:1;background:var(--accent);color:#0a0a0f;border:none;padding:12px;
-      border-radius:11px;font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;
-      cursor:pointer;transition:opacity .2s;}
+      border-radius:11px;font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;cursor:pointer;transition:opacity .2s;}
     .btn-addcart:hover{opacity:.88;}
     .btn-plike{background:var(--surface);border:1px solid var(--border);color:var(--muted);
       padding:12px 15px;border-radius:11px;font-size:1.1rem;cursor:pointer;transition:all .2s;}
     .btn-plike:hover,.btn-plike.on{border-color:var(--red);color:var(--red);}
-
-    /* ── PROFILE PANEL ── */
     #panel{position:fixed;top:0;right:0;bottom:0;width:360px;background:var(--card);
       border-left:1px solid var(--border);z-index:500;
-      transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);
-      display:flex;flex-direction:column;}
+      transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;}
     #panel.open{transform:translateX(0);}
-    #pback{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:499;
-      opacity:0;pointer-events:none;transition:opacity .35s;}
+    #pback{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:499;opacity:0;pointer-events:none;transition:opacity .35s;}
     #pback.open{opacity:1;pointer-events:all;}
-    .phdr{padding:20px 18px 14px;border-bottom:1px solid var(--border);
-      display:flex;align-items:center;justify-content:space-between;}
+    .phdr{padding:20px 18px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
     .pusr{display:flex;align-items:center;gap:11px;}
     .pav{width:38px;height:38px;background:var(--accent);border-radius:50%;
       display:flex;align-items:center;justify-content:center;
       font-family:'Syne',sans-serif;font-weight:700;color:#0a0a0f;font-size:.95rem;}
     .pname{font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;}
+    .plabel{font-size:.7rem;color:var(--accent);margin-top:2px;}
     .pemail{font-size:.72rem;color:var(--muted);}
     .pcls{background:var(--surface);border:1px solid var(--border);color:var(--muted);
-      width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:.9rem;}
+      width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:.9rem;
+      display:flex;align-items:center;justify-content:center;}
     .ptabs{display:flex;border-bottom:1px solid var(--border);}
     .ptab{flex:1;padding:11px;text-align:center;font-size:.8rem;font-weight:600;
       color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;}
@@ -187,16 +155,14 @@
     .pbody{flex:1;overflow-y:auto;padding:14px;}
     .ptc{display:none;} .ptc.active{display:block;}
     .pempty{text-align:center;color:var(--muted);font-size:.83rem;padding:36px 16px;}
-    .pitem{display:flex;gap:11px;padding:11px;background:var(--surface);
-      border:1px solid var(--border);border-radius:11px;margin-bottom:9px;
-      cursor:pointer;transition:border-color .2s;}
+    .pitem{display:flex;gap:11px;padding:11px;background:var(--surface);border:1px solid var(--border);
+      border-radius:11px;margin-bottom:9px;cursor:pointer;transition:border-color .2s;align-items:center;}
     .pitem:hover{border-color:rgba(240,192,64,.3);}
     .pthumb{width:54px;height:54px;border-radius:8px;background:#1a1a2e;flex-shrink:0;
       display:flex;align-items:center;justify-content:center;font-size:1.4rem;overflow:hidden;}
     .pthumb img{width:100%;height:100%;object-fit:cover;border-radius:8px;}
     .pinfo{flex:1;min-width:0;}
-    .piname{font-size:.8rem;font-weight:600;line-height:1.3;white-space:nowrap;
-      overflow:hidden;text-overflow:ellipsis;margin-bottom:3px;}
+    .piname{font-size:.8rem;font-weight:600;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px;}
     .piprice{font-size:.84rem;font-weight:700;color:var(--accent);}
     .qty-row{display:flex;align-items:center;gap:7px;margin-top:5px;}
     .qty-btn{background:var(--card);border:1px solid var(--border);color:var(--text);
@@ -204,41 +170,29 @@
       display:flex;align-items:center;justify-content:center;transition:border-color .2s;}
     .qty-btn:hover{border-color:var(--accent);color:var(--accent);}
     .qty-val{font-size:.82rem;font-weight:700;min-width:18px;text-align:center;}
-    .prem{background:none;border:none;color:var(--muted);cursor:pointer;
-      font-size:.85rem;padding:3px;transition:color .2s;flex-shrink:0;}
+    .prem{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.85rem;padding:3px;transition:color .2s;flex-shrink:0;}
     .prem:hover{color:var(--red);}
     .pftr{padding:14px;border-top:1px solid var(--border);}
-    .ptotal{display:flex;justify-content:space-between;font-weight:700;
-      font-size:.92rem;margin-bottom:11px;}
-    .btn-pay{width:100%;background:var(--accent);color:#0a0a0f;border:none;
-      padding:12px;border-radius:11px;font-family:'Syne',sans-serif;font-weight:700;
-      font-size:.92rem;cursor:pointer;transition:opacity .2s;}
+    .ptotal{display:flex;justify-content:space-between;font-weight:700;font-size:.92rem;margin-bottom:11px;}
+    .btn-pay{width:100%;background:var(--accent);color:#0a0a0f;border:none;padding:12px;
+      border-radius:11px;font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;cursor:pointer;transition:opacity .2s;}
     .btn-pay:hover{opacity:.88;}
-    .btn-logout{width:100%;margin-top:8px;background:transparent;
-      border:1px solid var(--border);color:var(--muted);padding:9px;border-radius:11px;
-      font-size:.83rem;cursor:pointer;transition:all .2s;}
+    .btn-logout{width:100%;margin-top:8px;background:transparent;border:1px solid var(--border);
+      color:var(--muted);padding:9px;border-radius:11px;font-size:.83rem;cursor:pointer;transition:all .2s;}
     .btn-logout:hover{border-color:var(--red);color:var(--red);}
-
-    /* ── CHECKOUT ── */
     .co-items{max-height:180px;overflow-y:auto;margin-bottom:14px;}
-    .co-item{display:flex;justify-content:space-between;padding:7px 0;
-      border-bottom:1px solid var(--border);font-size:.83rem;}
+    .co-item{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:.83rem;}
     .co-item:last-child{border:none;}
-    .co-addr{width:100%;background:var(--surface);border:1px solid var(--border);
-      color:var(--text);padding:11px 13px;border-radius:11px;font-family:'DM Sans',sans-serif;
-      font-size:.86rem;resize:none;outline:none;transition:border-color .2s;margin-bottom:11px;}
+    .co-addr{width:100%;background:var(--surface);border:1px solid var(--border);color:var(--text);
+      padding:11px 13px;border-radius:11px;font-family:'DM Sans',sans-serif;font-size:.86rem;
+      resize:none;outline:none;transition:border-color .2s;margin-bottom:11px;}
     .co-addr:focus{border-color:var(--accent);}
     .co-total{font-size:1rem;font-weight:700;text-align:right;margin-bottom:14px;color:var(--accent);}
-
-    /* ── WELCOME ── */
     .welbox{text-align:center;}
     .welbox .we{font-size:2.8rem;margin-bottom:14px;}
     .welbox h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:8px;}
     .welbox p{color:var(--muted);font-size:.9rem;line-height:1.65;margin-bottom:22px;}
-
-    footer{border-top:1px solid var(--border);padding:26px 48px;
-      text-align:center;color:var(--muted);font-size:.8rem;}
-
+    footer{border-top:1px solid var(--border);padding:26px 48px;text-align:center;color:var(--muted);font-size:.8rem;}
     @keyframes spin{to{transform:rotate(360deg);}}
     @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.4);}}
     @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
@@ -247,11 +201,10 @@
       .hero{padding-top:36px;}
       #panel{width:100%;}
     }
-  </style>
+</style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
   <div class="logo" onclick="scrollTo(0,0)"><div class="logo-dot"></div>ShopAI</div>
   <div class="hdr-right">
@@ -265,30 +218,27 @@
   </div>
 </header>
 
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-tag" id="heroTag">✦ YAPAY ZEKA DESTEKLİ</div>
+  <div class="hero-tag" id="heroTag">✶ YAPAY ZEKA DESTEKLİ</div>
   <h1>Size Özel <span>Ürün Önerileri</span></h1>
-  <p>Alışveriş geçmişiniz ve ilgi alanlarınıza göre kişiselleştirilmiş ürünleri keşfedin.</p>
+  <p id="heroDesc">Beğendiğiniz ve sepete eklediğiniz ürünlere göre AI önerileriniz kişişelleşir.</p>
 </div>
 
-<!-- CATEGORY PILLS -->
 <div class="cat-bar" id="catBar">
   <button class="cat-pill active" onclick="selectCat('')">Tümü</button>
 </div>
 
-<!-- PERSONALIZED SECTION (giriş yapıldığında görünür) -->
 <div class="section" id="recSection" style="display:none">
   <div class="sec-hdr">
-    <div class="sec-title">Size Özel Öneriler</div>
-    <div class="sec-badge ai" id="recBadge">Kişiselleştirilmiş</div>
+    <div class="sec-title">🤖 Size Özel Öneriler</div>
+    <div class="sec-badge ai" id="recBadge">Kişişelleştirilmiş</div>
+    <div class="sec-badge" id="recUpdating" style="display:none">↻ Güncelleniyor...</div>
   </div>
   <div class="grid" id="recGrid">
     <div class="loading"><div class="spinner"></div><span>Öneriler hazırlanıyor...</span></div>
   </div>
 </div>
 
-<!-- ALL PRODUCTS SECTION -->
 <div class="section">
   <div class="sec-hdr">
     <div class="sec-title" id="allTitle">Tüm Ürünler</div>
@@ -303,14 +253,13 @@
 <div id="toast"></div>
 <div id="pback" onclick="closePanel()"></div>
 
-<!-- PROFILE PANEL -->
 <div id="panel">
   <div class="phdr">
     <div class="pusr">
       <div class="pav" id="pav">?</div>
       <div>
         <div class="pname" id="pname">Misafir</div>
-        <div class="pemail" id="pemail"></div>
+        <div class="plabel" id="plabel"></div>
       </div>
     </div>
     <button class="pcls" onclick="closePanel()">✕</button>
@@ -332,30 +281,28 @@
   </div>
 </div>
 
-<!-- AUTH MODAL -->
 <div class="overlay" id="authOv" onclick="if(event.target===this)closeAuth()">
   <div class="mbox">
     <div class="auth-tabs">
-      <button class="atab active" onclick="switchAuth('login',this)">Giriş Yap</button>
+      <button class="atab active" onclick="switchAuth('login',this">Giriş Yap</button>
       <button class="atab" onclick="switchAuth('register',this)">Kayıt Ol</button>
     </div>
     <div class="aform" id="fLogin">
-      <input class="ainput" type="email" id="lEmail" placeholder="E-posta" autocomplete="email"/>
-      <input class="ainput" type="password" id="lPass" placeholder="Şifre"/>
+      <input class="ainput" type="email" id="lEmail" placeholder="E-posta" autocomplete="email" onkeydown="if(event.key==='Enter')doLogin()"/>
+      <input class="ainput" type="password" id="lPass" placeholder="Şifre" onkeydown="if(event.key==='Enter')doLogin()"/>
       <div class="aerr" id="lErr"></div>
-      <button class="asubmit" onclick="doLogin()">Giriş Yap</button>
+      <button class="asubmit" id="lBtn" onclick="doLogin()">Giriş Yap</button>
     </div>
     <div class="aform" id="fReg" style="display:none">
-      <input class="ainput" type="text" id="rName" placeholder="Ad Soyad"/>
-      <input class="ainput" type="email" id="rEmail" placeholder="E-posta" autocomplete="email"/>
-      <input class="ainput" type="password" id="rPass" placeholder="Şifre"/>
+      <input class="ainput" type="text" id="rName" placeholder="Ad Soyad" onkeydown="if(event.key==='Enter')doRegister()"/>
+      <input class="ainput" type="email" id="rEmail" placeholder="E-posta" autocomplete="email" onkeydown="if(event.key==='Enter')doRegister()"/>
+      <input class="ainput" type="password" id="rPass" placeholder="Şifre (min 6 karakter)" onkeydown="if(event.key==='Enter')doRegister()"/>
       <div class="aerr" id="rErr"></div>
-      <button class="asubmit" onclick="doRegister()">Kayıt Ol</button>
+      <button class="asubmit" id="rBtn" onclick="doRegister()">Kayıt Ol</button>
     </div>
   </div>
 </div>
 
-<!-- PRODUCT MODAL -->
 <div class="overlay" id="prodOv" onclick="if(event.target===this)closeProd()">
   <div class="mbox pmbox">
     <button class="mclose" onclick="closeProd()">✕</button>
@@ -363,6 +310,10 @@
     <div class="pcat" id="pCat"></div>
     <div class="ptitle" id="pTitle"></div>
     <div class="pprice" id="pPrice"></div>
+    <div id="pSimilar" style="margin-bottom:16px;display:none">
+      <div style="font-size:.78rem;color:var(--muted);margin-bottom:8px;font-weight:600;">Benzer Ürünler</div>
+      <div id="pSimilarList" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
+    </div>
     <div class="pacts">
       <button class="btn-addcart" onclick="addToCartFromModal()">🛒 Sepete Ekle</button>
       <button class="btn-plike" id="pLikeBtn" onclick="toggleLikeFromModal()">♡</button>
@@ -370,7 +321,6 @@
   </div>
 </div>
 
-<!-- CHECKOUT MODAL -->
 <div class="overlay" id="coOv" onclick="if(event.target===this)closeCheckout()">
   <div class="mbox">
     <button class="mclose" onclick="closeCheckout()">✕</button>
@@ -382,7 +332,6 @@
   </div>
 </div>
 
-<!-- WELCOME MODAL -->
 <div class="overlay" id="welOv">
   <div class="mbox welbox">
     <div class="we">🎉</div>
@@ -393,11 +342,12 @@
 </div>
 
 <script>
-// ── STATE ──────────────────────────────────────────────────────────────────
-let token=null,userId=null,userName=null;
-let catalog={};          // id -> product (tam katalog)
+
+// ════════════════════════════════ STATE ════════════════════════════════════
+let token=null, userId=null, userName=null, userLabel=null;
+let catalog={};
 let likedSet=new Set();
-let cartMap=new Map();   // id -> qty
+let cartMap=new Map();
 let modalId=null;
 let refreshTimer=null;
 
@@ -412,9 +362,8 @@ const emo=c=>EMOJI[c]||'📦';
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=n=>`₺${Number(n).toLocaleString('tr-TR',{minimumFractionDigits:2})}`;
 
-// ── STORAGE ────────────────────────────────────────────────────────────────
 function saveSession(t,uid,name){
-  token=t;userId=uid;userName=name;
+  token=t; userId=uid; userName=name;
   localStorage.setItem('sai_t',t);
   localStorage.setItem('sai_u',uid);
   localStorage.setItem('sai_n',name);
@@ -425,8 +374,8 @@ function loadSession(){
   userName=localStorage.getItem('sai_n');
 }
 function clearSession(){
-  token=null;userId=null;userName=null;
-  ['sai_t','sai_u','sai_n'].forEach(k=>localStorage.removeItem(k));
+  token=null; userId=null; userName=null; userLabel=null;
+  ['sai_t','sai_u','sai_n','sai_lb'].forEach(k=>localStorage.removeItem(k));
 }
 function saveLikedCart(){
   localStorage.setItem('sai_lk',JSON.stringify([...likedSet]));
@@ -436,8 +385,6 @@ function loadLikedCart(){
   try{likedSet=new Set(JSON.parse(localStorage.getItem('sai_lk')||'[]'));}catch(e){}
   try{cartMap=new Map(JSON.parse(localStorage.getItem('sai_ct')||'[]'));}catch(e){}
 }
-
-// ── CATALOG ────────────────────────────────────────────────────────────────
 function merge(list){
   list.forEach(p=>{
     const id=p.product_id||p.id;
@@ -446,15 +393,34 @@ function merge(list){
 }
 function getP(id){return catalog[id]||null;}
 
-// ── TOAST ──────────────────────────────────────────────────────────────────
 let tt;
-function toast(msg){
+function toast(msg,type=''){
   const el=document.getElementById('toast');
-  el.textContent=msg;el.classList.add('show');
+  el.textContent=msg;
+  el.style.borderColor=type==='ok'?'rgba(76,175,130,.4)':type==='err'?'rgba(224,90,43,.4)':'var(--border)';
+  el.style.color=type==='ok'?'var(--green)':type==='err'?'var(--red)':'var(--text)';
+  el.classList.add('show');
   clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('show'),2600);
 }
 
-// ── AUTH AREA ──────────────────────────────────────────────────────────────
+// ─── PROFIL ETİKETİ ───────────────────────────────────────────────────────
+async function fetchProfile(){
+  if(!token)return;
+  try{
+    const r=await fetch('/api/v1/users/me',{headers:{Authorization:`Bearer ${token}`}});
+    if(!r.ok)return;
+    const d=await r.json();
+    userLabel=d.label||null;
+    localStorage.setItem('sai_lb',userLabel||'');
+    const lbl=document.getElementById('plabel');
+    if(lbl) lbl.textContent=userLabel||'';
+    const desc=document.getElementById('heroDesc');
+    if(desc) desc.textContent=userLabel
+      ? `${userLabel} olarak tanımlandınız. Beğeni ve sepet hareketlerinize göre öneriler güncelleniyor.`
+      : 'Beğendiğiniz ve sepete eklediğiniz ürünlere göre AI önerileriniz kişiselleşir.';
+  }catch(e){}
+}
+
 function renderAuth(){
   const el=document.getElementById('authArea');
   if(token&&userName){
@@ -465,6 +431,8 @@ function renderAuth(){
     document.getElementById('logoutBtn').style.display='';
     document.getElementById('pname').textContent=userName;
     document.getElementById('pav').textContent=ini;
+    const lbl=document.getElementById('plabel');
+    if(lbl) lbl.textContent=userLabel||'';
   } else {
     el.innerHTML=`<button class="btn-auth" onclick="openAuth()">Giriş Yap</button>`;
     document.getElementById('logoutBtn').style.display='none';
@@ -473,7 +441,6 @@ function renderAuth(){
   }
 }
 
-// ── AUTH MODAL ─────────────────────────────────────────────────────────────
 function openAuth(){document.getElementById('authOv').classList.add('active');}
 function closeAuth(){document.getElementById('authOv').classList.remove('active');}
 function switchAuth(tab,btn){
@@ -488,7 +455,10 @@ function switchAuth(tab,btn){
 async function doLogin(){
   const email=document.getElementById('lEmail').value.trim();
   const pass=document.getElementById('lPass').value;
+  const btn=document.getElementById('lBtn');
   document.getElementById('lErr').textContent='';
+  if(!email||!pass)return;
+  btn.disabled=true; btn.textContent='Giriş yapılıyor...';
   try{
     const r=await fetch('/api/v1/auth/login',{method:'POST',
       headers:{'Content-Type':'application/json'},
@@ -496,17 +466,22 @@ async function doLogin(){
     const d=await r.json();
     if(!r.ok)throw new Error(d.detail||'Giriş başarısız');
     saveSession(d.token,d.user_id,d.name);
-    closeAuth();renderAuth();
-    toast(`Hoş geldin, ${d.name}!`);
-    await loadAll();
+    closeAuth(); renderAuth();
+    toast(`Hoş geldin, ${d.name}! 👋`,'ok');
+    await Promise.all([loadAll(), fetchProfile()]);
   }catch(e){document.getElementById('lErr').textContent=e.message;}
+  finally{btn.disabled=false; btn.textContent='Giriş Yap';}
 }
 
 async function doRegister(){
   const name=document.getElementById('rName').value.trim();
   const email=document.getElementById('rEmail').value.trim();
   const pass=document.getElementById('rPass').value;
+  const btn=document.getElementById('rBtn');
   document.getElementById('rErr').textContent='';
+  if(!name||!email||!pass){document.getElementById('rErr').textContent='Tüm alanları doldurun.';return;}
+  if(pass.length<6){document.getElementById('rErr').textContent='Şifre en az 6 karakter.';return;}
+  btn.disabled=true; btn.textContent='Kayıt oluşturuluyor...';
   try{
     const r=await fetch('/api/v1/auth/register',{method:'POST',
       headers:{'Content-Type':'application/json'},
@@ -514,29 +489,30 @@ async function doRegister(){
     const d=await r.json();
     if(!r.ok)throw new Error(d.detail||'Kayıt başarısız');
     saveSession(d.token,d.user_id,d.name);
-    closeAuth();renderAuth();
+    closeAuth(); renderAuth();
     await loadAll();
     showWelcome(d.name);
   }catch(e){document.getElementById('rErr').textContent=e.message;}
+  finally{btn.disabled=false; btn.textContent='Kayıt Ol';}
 }
 
 function doLogout(){
-  clearSession();likedSet.clear();cartMap.clear();saveLikedCart();
-  renderAuth();closePanel();updateBadges();
+  clearSession(); likedSet.clear(); cartMap.clear(); saveLikedCart();
+  renderAuth(); closePanel(); updateBadges();
   document.getElementById('recSection').style.display='none';
   document.getElementById('heroTag').textContent='✦ YAPAY ZEKA DESTEKLİ';
+  const desc=document.getElementById('heroDesc');
+  if(desc) desc.textContent='Beğendiğiniz ve sepete eklediğiniz ürünlere göre AI önerileriniz kişiselleşir.';
   loadAllProducts();
   toast('Çıkış yapıldı.');
 }
 
-// ── WELCOME ────────────────────────────────────────────────────────────────
 function showWelcome(name){
   document.getElementById('welName').textContent=name.split(' ')[0];
   document.getElementById('welOv').classList.add('active');
 }
 function closeWelcome(){document.getElementById('welOv').classList.remove('active');}
 
-// ── LOAD ALL PRODUCTS (alt bölüm) ─────────────────────────────────────────
 async function loadAllProducts(cat=''){
   const grid=document.getElementById('allGrid');
   grid.innerHTML='<div class="loading"><div class="spinner"></div><span>Yükleniyor...</span></div>';
@@ -556,19 +532,24 @@ async function loadAllProducts(cat=''){
   }
 }
 
-// ── LOAD PERSONALIZED (üst bölüm) ─────────────────────────────────────────
-async function loadPersonalized(){
+// ─── KİŞİSEL ÖNERİLER — silent=true → mevcut içerik korunur, sadece güncellenir ───
+async function loadPersonalized(silent=false){
   if(!token||!userId){
     document.getElementById('recSection').style.display='none';
     return;
   }
   document.getElementById('recSection').style.display='';
   const grid=document.getElementById('recGrid');
-  const isFirstLoad=grid.innerHTML.includes('spinner')||grid.innerHTML.trim()==='';
-  // İlk yüklemede spinner, sonraki güncellemelerde mevcut içeriği koru
-  if(isFirstLoad){
+  const updBadge=document.getElementById('recUpdating');
+
+  if(!silent){
     grid.innerHTML='<div class="loading"><div class="spinner"></div><span>Öneriler hazırlanıyor...</span></div>';
+  } else {
+    if(updBadge) updBadge.style.display='';
+    grid.style.opacity='0.5';
+    grid.style.pointerEvents='none';
   }
+
   try{
     const r=await fetch('/api/v1/recommendations/me/personalized',
       {headers:{Authorization:`Bearer ${token}`}});
@@ -577,29 +558,30 @@ async function loadPersonalized(){
     const list=d.recommendations||d.products||d||[];
     merge(list);
     if(!list.length){
-      grid.innerHTML='<div class="empty">Ürünleri beğen veya sepete ekle — sana özel öneriler göreceğiz!</div>';
+      grid.innerHTML='<div class="empty">Ürünleri beğen veya sepete ekle — sana özel öneriler göreceğiz! ❤️</div>';
       document.getElementById('recBadge').textContent='Kişiselleştirilmiş';
-      document.getElementById('heroTag').textContent='✦ YAPAY ZEKA DESTEKLİ';
       return;
     }
     const cats=[...new Set(list.map(p=>p.category).filter(Boolean))];
-    document.getElementById('recBadge').textContent=`${list.length} öneri • ${cats.length} kategori`;
-    document.getElementById('heroTag').textContent=`✦ ${list.length} YÜKSEK EŞLEŞME`;
+    document.getElementById('recBadge').textContent=`${list.length} öneri · ${cats.join(', ')}`;
+    document.getElementById('heroTag').textContent=`✦ ${list.length} KİŞİSEL ÖNERİ`;
     grid.innerHTML=list.map((p,i)=>cardHtml(p,i,'rec')).join('');
-  }catch{
-    if(isFirstLoad) document.getElementById('recSection').style.display='none';
+  }catch(e){
+    if(!silent) document.getElementById('recSection').style.display='none';
+  }finally{
+    grid.style.opacity='1';
+    grid.style.pointerEvents='';
+    if(updBadge) updBadge.style.display='none';
   }
 }
 
-// ── SCHEDULE REFRESH ───────────────────────────────────────────────────────
-// interact() tamamlandıktan sonra çağrılır, ekstra 400ms DB commit için bekler
+// ─── REFRESH ZAMANLAYICI — beğeni/sepet ekle/çıkar sonrası çağrılır ───────
 function scheduleRefresh(){
   if(!token)return;
   clearTimeout(refreshTimer);
-  refreshTimer=setTimeout(loadPersonalized,400);
+  refreshTimer=setTimeout(()=>loadPersonalized(true), 500);
 }
 
-// ── CATEGORIES ─────────────────────────────────────────────────────────────
 async function loadCategories(){
   try{
     const r=await fetch('/api/v1/categories');
@@ -618,7 +600,6 @@ function selectCat(cat){
   loadAllProducts(cat);
 }
 
-// ── CARD HTML ──────────────────────────────────────────────────────────────
 function cardHtml(p,i,src){
   const id=p.product_id||p.id;
   const liked=likedSet.has(id);
@@ -638,22 +619,26 @@ function cardHtml(p,i,src){
       <div class="card-price">${fmt(p.price)}</div>
       <div class="card-actions">
         <button class="btn-cart" onclick="event.stopPropagation();addToCart(${id})">🛒 Sepete Ekle</button>
-        <button class="btn-like${liked?' on':''}" onclick="event.stopPropagation();toggleLike(${id},this)">${liked?'♥':'♡'}</button>
+        <button class="btn-like${liked?' on':''}" id="lbtn-${id}" onclick="event.stopPropagation();toggleLike(${id},this)">${liked?'♥':'♡'}</button>
       </div>
     </div>
   </div>`;
 }
 
-// ── LIKE ───────────────────────────────────────────────────────────────────
+// ─── BEĞEN / BEĞEN KALDIR — her ikisinde de öneri güncellenir ─────────────
 async function toggleLike(id,btn){
+  if(!token){toast('Beğenmek için giriş yapın.','err');openAuth();return;}
   const adding=!likedSet.has(id);
   if(adding){likedSet.add(id);}else{likedSet.delete(id);}
-  if(btn){btn.textContent=adding?'♥':'♡';btn.classList.toggle('on',adding);}
+  // Tüm kartlardaki butonları güncelle
+  document.querySelectorAll(`[id="lbtn-${id}"]`).forEach(b=>{
+    b.textContent=adding?'♥':'♡'; b.classList.toggle('on',adding);
+  });
   toast(adding?'Beğendiklere eklendi ♥':'Beğendiklerden çıkarıldı');
-  saveLikedCart();updateBadges();renderPanel();
-  // Interaction DB'ye yazılsın, sonra öneriyi yenile
+  saveLikedCart(); updateBadges(); renderPanel();
   if(adding) await interact(id,'like');
-  scheduleRefresh();
+  scheduleRefresh(); // Hem eklemede hem çıkarmada güncelle
+  setTimeout(fetchProfile,600);
 }
 
 function toggleLikeFromModal(){
@@ -665,12 +650,12 @@ function toggleLikeFromModal(){
   btn.classList.toggle('on',adding);
 }
 
-// ── CART ───────────────────────────────────────────────────────────────────
+// ─── SEPET — ekle/çıkar/güncelle her durumda öneri güncellenir ────────────
 async function addToCart(id){
+  if(!token){toast('Sepete eklemek için giriş yapın.','err');openAuth();return;}
   cartMap.set(id,(cartMap.get(id)||0)+1);
-  toast('Sepete eklendi 🛒');
-  saveLikedCart();updateBadges();renderPanel();
-  // Interaction DB'ye yazılsın, sonra öneriyi yenile
+  toast('Sepete eklendi 🛒','ok');
+  saveLikedCart(); updateBadges(); renderPanel();
   await interact(id,'cart');
   scheduleRefresh();
 }
@@ -678,28 +663,36 @@ function addToCartFromModal(){if(modalId)addToCart(modalId);}
 
 function updateQty(id,delta){
   const qty=(cartMap.get(id)||0)+delta;
-  if(qty<=0)cartMap.delete(id);else cartMap.set(id,qty);
-  saveLikedCart();updateBadges();renderPanel();
-  scheduleRefresh();
+  if(qty<=0){
+    cartMap.delete(id);
+    toast('Sepetten çıkarıldı.');
+  } else {
+    cartMap.set(id,qty);
+  }
+  saveLikedCart(); updateBadges(); renderPanel();
+  scheduleRefresh(); // Sepetten çıkarmada da güncelle
 }
 
 function removeLiked(id){
   likedSet.delete(id);
-  saveLikedCart();updateBadges();renderPanel();
-  scheduleRefresh();
+  document.querySelectorAll(`[id="lbtn-${id}"]`).forEach(b=>{
+    b.textContent='♡'; b.classList.remove('on');
+  });
+  saveLikedCart(); updateBadges(); renderPanel();
+  toast('Beğendiklerden çıkarıldı.');
+  scheduleRefresh(); // Beğeni kaldırılınca da güncelle
 }
 
 function updateBadges(){
   const lb=document.getElementById('likedBadge'),cb=document.getElementById('cartBadge');
-  lb.textContent=likedSet.size;lb.style.display=likedSet.size?'':'none';
-  cb.textContent=cartMap.size;cb.style.display=cartMap.size?'':'none';
+  lb.textContent=likedSet.size; lb.style.display=likedSet.size?'':'none';
+  cb.textContent=cartMap.size;  cb.style.display=cartMap.size?'':'none';
 }
 
-// ── PANEL ──────────────────────────────────────────────────────────────────
 function openPanel(tab){
   document.getElementById('panel').classList.add('open');
   document.getElementById('pback').classList.add('open');
-  switchTab(tab);renderPanel();
+  switchTab(tab); renderPanel();
 }
 function closePanel(){
   document.getElementById('panel').classList.remove('open');
@@ -717,20 +710,18 @@ function switchTab(tab){
 }
 
 function thumb(p){
-  const id=p.product_id||p.id||p;
-  const prod=getP(id)||p;
+  const prod=getP(p.product_id||p.id||p)||p;
   if(prod&&prod.image_url)
     return `<div class="pthumb"><img src="${prod.image_url}" alt=""></div>`;
   return `<div class="pthumb">${emo(prod&&prod.category)}</div>`;
 }
 
 function renderPanel(){
-  // Liked
   const likedIds=[...likedSet];
   document.getElementById('lcnt').textContent=`(${likedIds.length})`;
   document.getElementById('tcLiked').innerHTML=likedIds.length
     ?likedIds.map(id=>{
-        const p=getP(id);if(!p)return'';
+        const p=getP(id); if(!p)return'';
         return`<div class="pitem" onclick="closePanel();setTimeout(()=>openProd(${id}),60)">
           ${thumb(p)}
           <div class="pinfo">
@@ -742,7 +733,6 @@ function renderPanel(){
       }).filter(Boolean).join('')
     :'<div class="pempty">Henüz beğendiğiniz ürün yok.</div>';
 
-  // Cart
   const entries=[...cartMap.entries()];
   document.getElementById('ccnt').textContent=`(${entries.length})`;
   if(!entries.length){
@@ -752,7 +742,7 @@ function renderPanel(){
   }
   let total=0;
   document.getElementById('tcCart').innerHTML=entries.map(([id,qty])=>{
-    const p=getP(id);if(!p)return'';
+    const p=getP(id); if(!p)return'';
     total+=Number(p.price)*qty;
     return`<div class="pitem" onclick="closePanel();setTimeout(()=>openProd(${id}),60)">
       ${thumb(p)}
@@ -772,9 +762,9 @@ function renderPanel(){
   document.getElementById('cartFtr').style.display='';
 }
 
-// ── PRODUCT MODAL ──────────────────────────────────────────────────────────
-function openProd(id){
-  const p=getP(id);if(!p)return;
+// ─── ÜRÜN MODAL — benzer ürünler dahil ───────────────────────────────────
+async function openProd(id){
+  const p=getP(id); if(!p)return;
   modalId=id;
   const liked=likedSet.has(id);
   document.getElementById('pimgWrap').innerHTML=p.image_url
@@ -784,21 +774,50 @@ function openProd(id){
   document.getElementById('pTitle').textContent=p.name;
   document.getElementById('pPrice').textContent=fmt(p.price);
   const lb=document.getElementById('pLikeBtn');
-  lb.textContent=liked?'♥':'♡';lb.classList.toggle('on',liked);
+  lb.textContent=liked?'♥':'♡'; lb.classList.toggle('on',liked);
+
+  // Benzer ürünler bölümünü sıfırla
+  const simDiv=document.getElementById('pSimilar');
+  if(simDiv) simDiv.style.display='none';
   document.getElementById('prodOv').classList.add('active');
   interact(id,'view');
-}
-function closeProd(){document.getElementById('prodOv').classList.remove('active');}
 
-// ── CHECKOUT ───────────────────────────────────────────────────────────────
+  // Benzer ürünleri API'den çek
+  try{
+    const r=await fetch(`/api/v1/products/${id}`);
+    if(r.ok){
+      const d=await r.json();
+      if(d.similar_products&&d.similar_products.length&&simDiv){
+        merge(d.similar_products);
+        document.getElementById('pSimilarList').innerHTML=d.similar_products.map(s=>`
+          <div onclick="closeProd();setTimeout(()=>openProd(${s.product_id}),60)"
+               style="background:var(--surface);border:1px solid var(--border);border-radius:9px;
+                      padding:7px 10px;cursor:pointer;font-size:.72rem;font-weight:600;
+                      transition:border-color .2s;white-space:nowrap;max-width:140px;overflow:hidden;text-overflow:ellipsis;"
+               onmouseover="this.style.borderColor='rgba(240,192,64,.4)'"
+               onmouseout="this.style.borderColor='var(--border)'">
+            ${s.image_url?`<img src="${s.image_url}" style="width:100%;height:60px;object-fit:cover;border-radius:6px;margin-bottom:5px;" onerror="this.style.display='none'">`:`<div style="font-size:1.5rem;text-align:center">${emo(s.category)}</div>`}
+            <div style="overflow:hidden;text-overflow:ellipsis;">${esc(s.urun_adi||s.name||'')}</div>
+            <div style="color:var(--accent)">${fmt(s.price)}</div>
+          </div>`).join('');
+        simDiv.style.display='';
+      }
+    }
+  }catch(e){}
+}
+function closeProd(){
+  document.getElementById('prodOv').classList.remove('active');
+  modalId=null;
+}
+
 function openCheckout(){
   if(!token){openAuth();return;}
   const entries=[...cartMap.entries()];
   if(!entries.length){toast('Sepetiniz boş.');return;}
   let total=0;
   document.getElementById('coItems').innerHTML=entries.map(([id,qty])=>{
-    const p=getP(id);if(!p)return'';
-    const sub=Number(p.price)*qty;total+=sub;
+    const p=getP(id); if(!p)return'';
+    const sub=Number(p.price)*qty; total+=sub;
     return`<div class="co-item"><span>${esc(p.name)} x${qty}</span><span>${fmt(sub)}</span></div>`;
   }).join('');
   document.getElementById('coTotal').textContent=`Toplam: ${fmt(total)}`;
@@ -808,21 +827,20 @@ function closeCheckout(){document.getElementById('coOv').classList.remove('activ
 
 async function confirmCheckout(){
   const address=document.getElementById('coAddr').value.trim();
-  if(!address){toast('Lütfen teslimat adresi girin.');return;}
+  if(!address){toast('Lütfen teslimat adresi girin.','err');return;}
   const items=[...cartMap.entries()].map(([product_id,quantity])=>({product_id,quantity}));
   try{
     const r=await fetch('/api/v1/orders/checkout',{method:'POST',
       headers:{'Content-Type':'application/json',Authorization:`Bearer ${token}`},
       body:JSON.stringify({items,address})});
     if(!r.ok)throw new Error();
-    cartMap.clear();saveLikedCart();updateBadges();renderPanel();
-    closeCheckout();toast('🎉 Siparişiniz alındı!');
-    setTimeout(loadPersonalized,800);
-  }catch{toast('Sipariş oluşturulamadı.');}
+    cartMap.clear(); saveLikedCart(); updateBadges(); renderPanel();
+    closeCheckout();
+    toast('🎉 Siparişiniz alındı!','ok');
+    setTimeout(()=>loadPersonalized(true),800);
+  }catch{toast('Sipariş oluşturulamadı.','err');}
 }
 
-// ── INTERACTIONS ───────────────────────────────────────────────────────────
-// Promise döner — await ile interaction tamamlanmadan refresh tetiklenmiyor
 async function interact(productId,type){
   if(!token)return;
   try{
@@ -833,13 +851,13 @@ async function interact(productId,type){
   }catch(e){}
 }
 
-// ── INIT ───────────────────────────────────────────────────────────────────
 async function loadAll(){
   renderAuth();
   if(token){
     document.getElementById('heroTag').textContent=`✦ HOŞ GELDİN, ${userName.split(' ')[0].toUpperCase()}!`;
     document.getElementById('recSection').style.display='';
-    loadPersonalized();
+    loadPersonalized(false);
+    fetchProfile();
   } else {
     document.getElementById('recSection').style.display='none';
     document.getElementById('heroTag').textContent='✦ YAPAY ZEKA DESTEKLİ';
@@ -848,11 +866,12 @@ async function loadAll(){
 }
 
 (async function init(){
-  loadSession();loadLikedCart();
+  loadSession(); loadLikedCart();
   await loadCategories();
-  renderAuth();updateBadges();
+  renderAuth(); updateBadges();
   await loadAll();
 })();
+
 </script>
 </body>
 </html>
