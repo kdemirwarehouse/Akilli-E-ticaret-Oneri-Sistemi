@@ -564,7 +564,11 @@ async function loadPersonalized(){
   }
   document.getElementById('recSection').style.display='';
   const grid=document.getElementById('recGrid');
-  grid.innerHTML='<div class="loading"><div class="spinner"></div><span>Öneriler güncelleniyor...</span></div>';
+  const isFirstLoad=grid.innerHTML.includes('spinner')||grid.innerHTML.trim()==='';
+  // İlk yüklemede spinner, sonraki güncellemelerde mevcut içeriği koru
+  if(isFirstLoad){
+    grid.innerHTML='<div class="loading"><div class="spinner"></div><span>Öneriler hazırlanıyor...</span></div>';
+  }
   try{
     const r=await fetch('/api/v1/recommendations/me/personalized',
       {headers:{Authorization:`Bearer ${token}`}});
@@ -573,28 +577,26 @@ async function loadPersonalized(){
     const list=d.recommendations||d.products||d||[];
     merge(list);
     if(!list.length){
-      grid.innerHTML='<div class="empty">Henüz öneri oluşturulmadı. Ürünleri beğenmeye başla!</div>';
+      grid.innerHTML='<div class="empty">Ürünleri beğen veya sepete ekle — sana özel öneriler göreceğiz!</div>';
       document.getElementById('recBadge').textContent='Kişiselleştirilmiş';
       document.getElementById('heroTag').textContent='✦ YAPAY ZEKA DESTEKLİ';
       return;
     }
-    // Kaç farklı kategoriden geldiğini göster
-    const cats=[...new Set(list.map(p=>p.category||p.cat))].filter(Boolean);
-    const matchPct=list[0]&&list[0].similarity_score?Math.round(list[0].similarity_score*100):null;
+    const cats=[...new Set(list.map(p=>p.category).filter(Boolean))];
     document.getElementById('recBadge').textContent=`${list.length} öneri • ${cats.length} kategori`;
-    document.getElementById('heroTag').textContent=
-      matchPct?`✦ ${list.length} YÜKSEK EŞLEŞME`:'✦ KİŞİSELLEŞTİRİLMİŞ';
+    document.getElementById('heroTag').textContent=`✦ ${list.length} YÜKSEK EŞLEŞME`;
     grid.innerHTML=list.map((p,i)=>cardHtml(p,i,'rec')).join('');
   }catch{
-    document.getElementById('recSection').style.display='none';
+    if(isFirstLoad) document.getElementById('recSection').style.display='none';
   }
 }
 
 // ── SCHEDULE REFRESH ───────────────────────────────────────────────────────
+// interact() tamamlandıktan sonra çağrılır, ekstra 400ms DB commit için bekler
 function scheduleRefresh(){
   if(!token)return;
   clearTimeout(refreshTimer);
-  refreshTimer=setTimeout(loadPersonalized,1000);
+  refreshTimer=setTimeout(loadPersonalized,400);
 }
 
 // ── CATEGORIES ─────────────────────────────────────────────────────────────
@@ -643,13 +645,14 @@ function cardHtml(p,i,src){
 }
 
 // ── LIKE ───────────────────────────────────────────────────────────────────
-function toggleLike(id,btn){
+async function toggleLike(id,btn){
   const adding=!likedSet.has(id);
   if(adding){likedSet.add(id);}else{likedSet.delete(id);}
   if(btn){btn.textContent=adding?'♥':'♡';btn.classList.toggle('on',adding);}
   toast(adding?'Beğendiklere eklendi ♥':'Beğendiklerden çıkarıldı');
-  if(adding)interact(id,'like');
   saveLikedCart();updateBadges();renderPanel();
+  // Interaction DB'ye yazılsın, sonra öneriyi yenile
+  if(adding) await interact(id,'like');
   scheduleRefresh();
 }
 
@@ -663,11 +666,12 @@ function toggleLikeFromModal(){
 }
 
 // ── CART ───────────────────────────────────────────────────────────────────
-function addToCart(id){
+async function addToCart(id){
   cartMap.set(id,(cartMap.get(id)||0)+1);
   toast('Sepete eklendi 🛒');
-  interact(id,'cart');
   saveLikedCart();updateBadges();renderPanel();
+  // Interaction DB'ye yazılsın, sonra öneriyi yenile
+  await interact(id,'cart');
   scheduleRefresh();
 }
 function addToCartFromModal(){if(modalId)addToCart(modalId);}
@@ -818,12 +822,15 @@ async function confirmCheckout(){
 }
 
 // ── INTERACTIONS ───────────────────────────────────────────────────────────
-function interact(productId,type){
+// Promise döner — await ile interaction tamamlanmadan refresh tetiklenmiyor
+async function interact(productId,type){
   if(!token)return;
-  fetch('/api/v1/interactions',{method:'POST',
-    headers:{'Content-Type':'application/json',Authorization:`Bearer ${token}`},
-    body:JSON.stringify({product_id:productId,interaction_type:type})
-  }).catch(()=>{});
+  try{
+    await fetch('/api/v1/interactions',{method:'POST',
+      headers:{'Content-Type':'application/json',Authorization:`Bearer ${token}`},
+      body:JSON.stringify({product_id:productId,interaction_type:type})
+    });
+  }catch(e){}
 }
 
 // ── INIT ───────────────────────────────────────────────────────────────────
