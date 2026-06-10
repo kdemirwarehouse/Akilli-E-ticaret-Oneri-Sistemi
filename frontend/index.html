@@ -697,8 +697,7 @@ function doLogout(){
   // Liked ve cart local'de kalıyor — giriş yapınca geri yüklenir
   renderAuth();closePanel();updateBadges();
   document.getElementById("recSection").style.display="none";
-  const htag=document.getElementById("heroTag");
-  if(htag)htag.textContent="Size Özel Ürün Önerileri";
+  // heroTag h1 sabit kalıyor
   const desc=document.getElementById("heroDesc");
   if(desc)desc.textContent="Beğendiğiniz ve sepete eklediğiniz ürünlere göre AI önerileriniz kişiselleşir.";
   loadAllProducts();toast("Çıkış yapıldı.");
@@ -737,7 +736,7 @@ async function loadPersonalized(silent=false){
     if(!list.length){grid.innerHTML='<div class="empty">Ürünleri beğen veya sepete ekle — sana özel öneriler göreceğiz! ❤️</div>';document.getElementById("recBadge").textContent="Kişiselleştirilmiş";return;}
     const cats=[...new Set(list.map(p=>p.category).filter(Boolean))];
     document.getElementById("recBadge").textContent=`${list.length} öneri · ${cats.join(", ")}`;
-    document.getElementById("heroTag").textContent=`✦ ${list.length} KİŞİSEL ÖNERİ`;
+    document.getElementById("recBadge").textContent=`${list.length} öneri · ${cats.join(", ")}`;
     grid.innerHTML=list.map((p,i)=>cardHtml(p,i,"rec")).join("");
   }catch(e){if(!silent)document.getElementById("recSection").style.display="none";}
   finally{grid.style.opacity="1";grid.style.pointerEvents="";if(updBadge)updBadge.style.display="none";}
@@ -886,8 +885,13 @@ async function interact(productId,type){if(!token)return;try{await fetch("/api/v
 
 async function loadAll(){
   renderAuth();
-  if(token){document.getElementById("heroTag").textContent=`✦ HOŞ GELDİN, ${userName.split(" ")[0].toUpperCase()}!`;document.getElementById("recSection").style.display="";loadPersonalized(false);fetchProfile();}
-  else{document.getElementById("recSection").style.display="none";document.getElementById("heroTag").textContent="✦ YAPAY ZEKA DESTEKLİ";}
+  if(token){
+    document.getElementById("recSection").style.display="";
+    loadPersonalized(false);
+    fetchProfile();
+  } else {
+    document.getElementById("recSection").style.display="none";
+  }
   loadAllProducts();
 }
 
