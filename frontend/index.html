@@ -285,7 +285,10 @@
     @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.4);}}
     @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 
-    /* ── RESPONSIVE ── */
+    /* ── GLOBAL OVERFLOW FIX ── */
+    html,body{overflow-x:hidden;width:100%;}
+
+    /* ── RESPONSIVE: TABLET+ (640px ve üzeri) ── */
     @media(min-width:640px){
       header{padding:16px 48px;}
       .hero{padding:52px 48px 32px;}
@@ -295,9 +298,85 @@
       .card-body{padding:13px 14px 14px;}
       .card-name{font-size:.9rem;}
     }
+
+    /* ── RESPONSIVE: MOBİL (639px ve altı) ── */
+    @media(max-width:639px){
+      /* Header — hiçbir şey taşmasın */
+      header{
+        padding:10px 14px;
+        gap:8px;
+        min-height:54px;
+      }
+      .logo{font-size:1.05rem;gap:7px;}
+      .logo-dot{width:7px;height:7px;}
+      .hdr-right{gap:6px;}
+      .icon-btn{width:32px;height:32px;font-size:.85rem;}
+
+      /* Auth butonları — dar ekranda sadece ikonlar */
+      .btn-login{padding:6px 10px;font-size:.74rem;}
+      .btn-register{padding:6px 10px;font-size:.74rem;}
+
+      /* Giriş yapıldıysa chip küçülsün */
+      .chip-user{max-width:110px;padding:5px 9px;font-size:.74rem;}
+      .chip-av{width:20px;height:20px;font-size:.58rem;}
+
+      /* Hero */
+      .hero{padding:28px 16px 20px;}
+      .hero h1{font-size:clamp(1.5rem,7vw,2.2rem);letter-spacing:-.02em;}
+      .hero p{font-size:.84rem;max-width:100%;}
+      .hero-tag{font-size:.68rem;padding:4px 11px;}
+
+      /* Kategori barı */
+      .cat-bar{padding:0 16px 18px;gap:6px;}
+      .cat-pill{padding:5px 12px;font-size:.74rem;}
+
+      /* Section */
+      .section{padding:0 16px 40px;}
+      .sec-title{font-size:1.05rem;}
+
+      /* Grid — 2 kolon mobilde */
+      .grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+      }
+
+      /* Kart boyutları küçülsün */
+      .card-body{padding:9px 10px 11px;}
+      .card-name{font-size:.78rem;min-height:2.4em;}
+      .card-price{font-size:.82rem;margin-bottom:8px;}
+      .card-cat{font-size:.58rem;}
+      .score-badge{font-size:.58rem;padding:2px 5px;}
+      .btn-cart{font-size:.68rem;padding:6px 4px;min-height:30px;}
+      .btn-like{width:30px;min-width:30px;height:30px;font-size:.82rem;}
+
+      /* Panel tam ekran */
+      #panel{width:100vw;}
+
+      /* Modal tam uyum */
+      .mbox{padding:18px;border-radius:16px;}
+      .pmbox{max-width:100%;}
+      .ptitle{font-size:1.1rem;}
+      .pprice{font-size:1.1rem;}
+
+      /* Overlay padding artır — telefon keyboard */
+      .overlay{padding:12px;align-items:flex-end;}
+      .mbox{border-radius:20px 20px 0 0;max-height:95vh;}
+
+      /* Checkout */
+      .co-items{max-height:130px;}
+
+      /* Footer */
+      footer{padding:18px 16px;font-size:.74rem;}
+
+      /* Toast — dar ekran */
+      #toast{font-size:.78rem;padding:9px 16px;bottom:16px;}
+    }
+
+    /* ── ÇOK DAR EKRAN (380px ve altı) ── */
     @media(max-width:380px){
-      .grid{grid-template-columns:repeat(2,1fr);gap:10px;}
       .btn-register{display:none;}
+      .grid{gap:8px;}
+      .card-name{font-size:.74rem;}
     }
   </style>
 </head>
